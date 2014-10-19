@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 //sg
@@ -17,7 +18,9 @@ public class ExtractFromPath {
 	public static final Integer POP = 8;
 	public static final Integer DIESEL = 8;
 	
-	static String keywords[][] = {
+	public static final Integer NUM_RELATIONS = 9;
+	static String relName[] = {"AGL", "FDI", "GOODS", "ELEC", "CO2", "INF", "INTERNET", "GDP", "LIFE", "POP", "DIESEL"};
+	static String KEYWORDS[][] = {
 		{"area", "land", "land area"},
 		{"Foreign", "FDI"},
 		{"goods"},
@@ -31,7 +34,13 @@ public class ExtractFromPath {
 		{"diesel"},
 	};
 	static String modifiers[] = {"change", "increase", "decrease", "decreased", "increased", "changed"};
-	static boolean isExtraction(ArrayList<String> path) {
+	/**
+	 * Checks whether the given dependency path is an extraction for the relation defined by the given 
+	 * keywords
+	 * @param path
+	 * @return
+	 */
+	static boolean isExtraction(ArrayList<String> path, String keywords[]) {
 		boolean keywordPresent = false;
 		boolean modifierPresent = false;
 
@@ -44,5 +53,20 @@ public class ExtractFromPath {
 		}
 		System.out.println("kw : " + keywordPresent + ", mod: " + modifierPresent);
 		return keywordPresent && !modifierPresent;
+	}
+	
+	/*
+	 * iterates over all the relations and checks whether the given path is a possible 
+	 * extraction
+	 */
+	
+	public static ArrayList<String> getExtractions(ArrayList<String> path) {
+		ArrayList<String> res = new ArrayList<String>();
+		for(int i = 0; i < NUM_RELATIONS; i++) {
+			if(isExtraction(path, KEYWORDS[i])) {
+				res.add(relName[i]);
+			}
+		}
+		return res;
 	}
 }

@@ -45,8 +45,7 @@ public class Graph {
 		ArrayList<Integer> path = BFS.getPath(this, srcNode, desNode);
 		ArrayList<String> res = new ArrayList<String>();
 		for(Integer node : path) {
-			
-			res.add(nodeWordMap.get(node));
+			res.add(nodeWordMap.get(node).trim());
 		}
 		return res;
 	}

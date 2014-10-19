@@ -91,8 +91,10 @@ public class RuleBased {
 
 	static void getExtractions(Graph depGraph, ArrayList<CountryNumberPair> pairs) {
 		for(CountryNumberPair pair : pairs) {
-			System.out.println(pair.country);
-			System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
+		//	System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
+			if(ExtractFromPath.isExtraction(depGraph.getWordsOnPath(pair.country, pair.number))) {
+				System.out.println("(" + pair.country + ", " + pair.number + ")");
+			}
 		}
 	}
 	static Graph makeDepGraph(Iterator<TypedDependency> tdi) {

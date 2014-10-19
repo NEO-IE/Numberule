@@ -16,13 +16,13 @@ public class ExtractFromPath {
 	public static final Integer GDP = 7;
 	public static final Integer LIFE = 8;
 	public static final Integer POP = 8;
-	public static final Integer DIESEL = 8;
+	public static final Integer DIESEL = 9;
 	
-	public static final Integer NUM_RELATIONS = 9;
+	public static final Integer NUM_RELATIONS = 10;
 	static String relName[] = {"AGL", "FDI", "GOODS", "ELEC", "CO2", "INF", "INTERNET", "GDP", "LIFE", "POP", "DIESEL"};
 	static String KEYWORDS[][] = {
 		{"area", "land", "land area"},
-		{"Foreign", "FDI"},
+		{"foreign", "FDI", "direct", "investments"},
 		{"goods"},
 		{"Electricity"},
 		{"Carbon", "Carbon Emission", "CO2"},
@@ -45,13 +45,13 @@ public class ExtractFromPath {
 		boolean modifierPresent = false;
 
 		for(String kw : keywords) {
-			keywordPresent = keywordPresent || path.contains(kw);
+			keywordPresent = keywordPresent || path.contains(kw.toLowerCase());
 		}
 		if(!keywordPresent) return false;
 		for(String mod : modifiers) {
 			modifierPresent = modifierPresent || path.contains(mod);
 		}
-		System.out.println("kw : " + keywordPresent + ", mod: " + modifierPresent);
+		//System.out.println("kw : " + keywordPresent + ", mod: " + modifierPresent);
 		return keywordPresent && !modifierPresent;
 	}
 	
@@ -61,6 +61,7 @@ public class ExtractFromPath {
 	 */
 	
 	public static ArrayList<String> getExtractions(ArrayList<String> path) {
+		System.out.println(path);
 		ArrayList<String> res = new ArrayList<String>();
 		for(int i = 0; i < NUM_RELATIONS; i++) {
 			if(isExtraction(path, KEYWORDS[i])) {

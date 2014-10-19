@@ -113,7 +113,7 @@ public class RuleBased {
 			depGraph.addNode(govNode.index(), govNode.value());
 			depGraph.addEdge(depNode.index(), govNode.index());
 			depGraph.addEdge(govNode.index(), depNode.index());
-
+			//System.out.println(govNode.value() + " -> " + depNode.value());
 		}
 		return depGraph;
 

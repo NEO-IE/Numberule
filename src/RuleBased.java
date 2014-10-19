@@ -35,12 +35,12 @@ import edu.stanford.nlp.util.CoreMap;
 public class RuleBased {
 	Properties prop;
 	StanfordCoreNLP pipeline;
-	Pattern numberPat;
+	static Pattern numberPat;
 	HashSet<String> countryList;
 	private static final String countriesFileName = "/mnt/a99/d0/aman/MultirExperiments/data/numericalkb/countries_list";
 
 	RuleBased() {
-		numberPat = Pattern.compile("^[\\+-]?\\d+([,\\.]\\d+)?([eE]-?\\d+)?$");
+		numberPat = Pattern.compile("^[\\+-]?\\d+([,\\.]\\d+)*([eE]-?\\d+)?$");
 		prop = new Properties();
 		prop.put("annotators", "tokenize, ssplit, pos, lemma , parse");
 		pipeline = new StanfordCoreNLP(prop);
@@ -67,26 +67,31 @@ public class RuleBased {
 	 */
 	public static void main(String args[]) throws IOException {
 		RuleBased dprsr = new RuleBased();
+		System.out.println(isNumber("2959164"));
 		String fileString = FileUtils.readFileToString(new File("sampleInput"));
 		Annotation doc = new Annotation(fileString);
 		dprsr.pipeline.annotate(doc);
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
+		
 			Tree tree = sentence.get(TreeAnnotation.class);
 			TreebankLanguagePack tlp = new PennTreebankLanguagePack();
 			GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
 			GrammaticalStructure gs = gsf.newGrammaticalStructure(tree);
 			Collection<TypedDependency> td = gs.typedDependenciesCollapsed();
 			Iterator<TypedDependency> tdi = td.iterator();
+			
 			Graph depGraph = makeDepGraph(tdi);
 			ArrayList<CountryNumberPair> pairs = dprsr.getPairs(sentence);
+			
 			getExtractions(depGraph, pairs);
 		}
 	}
 
 	static void getExtractions(Graph depGraph, ArrayList<CountryNumberPair> pairs) {
 		for(CountryNumberPair pair : pairs) {
+			System.out.println(pair.country);
 			System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
 		}
 	}
@@ -96,10 +101,7 @@ public class RuleBased {
 		/**
 		 * Add nodes to the graph
 		 */
-		ArrayList<Integer> adjA = depGraph.getNbr(1);
-		for (Integer n : adjA) {
-			System.out.println(n);
-		}
+		
 		while (tdi.hasNext()) {
 			TypedDependency td1 = tdi.next();
 			TreeGraphNode depNode = td1.dep();
@@ -118,7 +120,7 @@ public class RuleBased {
 		return countryList.contains(token.toLowerCase());
 	}
 
-	private boolean isNumber(String token) {
+	private static boolean isNumber(String token) {
 		return numberPat.matcher(token.toString()).matches();
 	}
 

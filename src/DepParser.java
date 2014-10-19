@@ -1,7 +1,10 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -11,8 +14,6 @@ import org.apache.commons.io.FileUtils;
 
 import util.CountryNumberPair;
 import util.Graph;
-import edu.stanford.nlp.ling.CoreAnnotations.NamedEntityTagAnnotation;
-import edu.stanford.nlp.ling.CoreAnnotations.PartOfSpeechAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
@@ -34,12 +35,30 @@ public class DepParser {
 	Properties prop;
 	StanfordCoreNLP pipeline;
 	Pattern numberPat;
+	HashSet<String> countryList;
+	private static final String countriesFileName = "data/numericalkb/countries_list";
 
+	
 	DepParser() {
 		numberPat = Pattern.compile("^[\\+-]?\\d+([,\\.]\\d+)?([eE]-?\\d+)?$");
 		prop = new Properties();
 		prop.put("annotators", "tokenize, ssplit, pos, lemma , parse");
 		pipeline = new StanfordCoreNLP(prop);
+		
+		//Read the countries file
+
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader(countriesFileName));
+			String countryName = null;
+			countryList = new HashSet<>();
+			while ((countryName = br.readLine()) != null) {
+				countryList.add(countryName.toLowerCase());
+			}
+			br.close();
+		} catch (IOException e) {
+			System.err.println(e);
+		}
 	}
 
 	public static void main(String args[]) throws IOException {
@@ -88,25 +107,33 @@ public class DepParser {
 	
 
 
-	private bool isCountry() {
-		return false;
+	private boolean isCountry(String token) {
+		return countryList.contains(token);
 	}
 	
-	private bool isNumber(String token) {
+	private boolean isNumber(String token) {
 		return numberPat.matcher(token.toString()).matches();
 	}
 	
-ArrayList<CountryNumberPair> getcnpair(CoreMap sentence) {
-	ArrayList<String> countries;
-	ArrayList<String> number;
+ArrayList<CountryNumberPair> getPairs(CoreMap sentence) {
+	ArrayList<String> countries = new ArrayList<String>();
+	ArrayList<String> number = new ArrayList<String>();
 	for (CoreLabel token: sentence.get(TokensAnnotation.class)) {
 	        // this is the text of the token
 	        String word = token.get(TextAnnotation.class);
-	        // this is the POS tag of the token
-	        String pos = token.get(PartOfSpeechAnnotation.class);
-	        // this is the NER label of the token
-	        String ne = token.get(NamedEntityTagAnnotation.class);       
+	        if(isCountry(word)) {
+	        	countries.add(word);
+	        }
+	        if(isNumber(word)) {
+	        	number.add(word);
+	        }
 	 }
+	for(int i = 0, lc = countries.size(); i < lc; i++) {
+		for(int j = 0, ln = number.size(); j < ln; j++) {
+			
+		}
+	}
+	return null;
 
 }
 }

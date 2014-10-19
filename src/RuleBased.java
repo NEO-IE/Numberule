@@ -67,14 +67,14 @@ public class RuleBased {
 	 */
 	public static void main(String args[]) throws IOException {
 		RuleBased dprsr = new RuleBased();
-		System.out.println(isNumber("2959164"));
 		String fileString = FileUtils.readFileToString(new File("sampleInput"));
 		Annotation doc = new Annotation(fileString);
 		dprsr.pipeline.annotate(doc);
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
+		int sentId = 1;
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
-		
+			System.out.println(sentId++ + "->");
 			Tree tree = sentence.get(TreeAnnotation.class);
 			TreebankLanguagePack tlp = new PennTreebankLanguagePack();
 			GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
@@ -91,7 +91,7 @@ public class RuleBased {
 
 	static void getExtractions(Graph depGraph, ArrayList<CountryNumberPair> pairs) {
 		for(CountryNumberPair pair : pairs) {
-		//	System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
+			//System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
 			ArrayList<String> rels = ExtractFromPath.getExtractions(depGraph.getWordsOnPath(pair.country, pair.number));
 			for(String rel : rels) {
 				System.out.println(rel + "( " + pair.country + ", " + pair.number + ")");

@@ -24,16 +24,16 @@ public class ExtractFromPath {
 		{"area", "land", "land area"},
 		{"foreign", "FDI", "direct", "investments"},
 		{"goods"},
-		{"Electricity"},
+		{"Electricity", "kilowatthors", "Terawatt"},
 		{"Carbon", "Carbon Emission", "CO2"},
 		{"Inflation", "Price Rise"},
-		{"Internet"},
+		{"Internet", "users"},
 		{"Gross domestic", "GDP"},
 		{"life", "life expectancy"},
 		{"population", "people"},
 		{"diesel"},
 	};
-	static String modifiers[] = {"change", "increase", "decrease", "decreased", "increased", "changed"};
+	static String modifiers[] = {"change", "up", "down", "males", "females", "male", "female", "growth", "increase", "decrease", "decreased", "increased", "changed"};
 	/**
 	 * Checks whether the given dependency path is an extraction for the relation defined by the given 
 	 * keywords
@@ -61,7 +61,7 @@ public class ExtractFromPath {
 	 */
 	
 	public static ArrayList<String> getExtractions(ArrayList<String> path) {
-		System.out.println(path);
+		//System.out.println(path);
 		ArrayList<String> res = new ArrayList<String>();
 		for(int i = 0; i < NUM_RELATIONS; i++) {
 			if(isExtraction(path, KEYWORDS[i])) {

@@ -13,12 +13,9 @@ public class BFS {
 			q.add(src);
 			visited[src] = true;
 			while (!q.isEmpty()) {
-				
 				int curr = q.poll();
-			
 				for (int nbr : g.getNbr(curr)) {
 					if (!visited[nbr]) {
-			
 						q.add(nbr);
 						visited[nbr] = true;
 						par[nbr] = curr;
@@ -34,7 +31,6 @@ public class BFS {
 			res.add(dest);
 			int at = dest;
 			while (at != src) {
-				
 				at = par[at];
 				res.add(at);
 			}

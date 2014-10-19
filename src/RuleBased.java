@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 
 import util.CountryNumberPair;
-import util.Graph;
+import util.graph.Graph;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;

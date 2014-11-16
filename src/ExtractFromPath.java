@@ -30,7 +30,7 @@ public class ExtractFromPath {
 		{"Internet", "users"},
 		{"Gross domestic", "GDP"},
 		{"life", "life expectancy"},
-		{"population", "people"},
+		{"population", "people", "inhabitants", "natives"},
 		{"diesel"},
 	};
 	static String modifiers[] = {"change", "up", "down", "males", "females", "male", "female", "growth", "increase", "decrease", "decreased", "increased", "changed"};
@@ -46,10 +46,16 @@ public class ExtractFromPath {
 
 		for(String kw : keywords) {
 			keywordPresent = keywordPresent || path.contains(kw.toLowerCase());
+			if(keywordPresent) {
+				break;
+			}
 		}
 		if(!keywordPresent) return false;
 		for(String mod : modifiers) {
 			modifierPresent = modifierPresent || path.contains(mod);
+			if(modifierPresent) {
+				break;
+			}
 		}
 		//System.out.println("kw : " + keywordPresent + ", mod: " + modifierPresent);
 		return keywordPresent && !modifierPresent;

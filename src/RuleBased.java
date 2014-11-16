@@ -38,7 +38,7 @@ public class RuleBased {
 	static Pattern numberPat;
 	HashSet<String> countryList;
 	private static final String countriesFileName = "/mnt/a99/d0/aman/MultirExperiments/data/numericalkb/countries_list";
-
+	
 	RuleBased() {
 		numberPat = Pattern.compile("^[\\+-]?\\d+([,\\.]\\d+)*([eE]-?\\d+)?$");
 		prop = new Properties();
@@ -67,7 +67,7 @@ public class RuleBased {
 	 */
 	public static void main(String args[]) throws IOException {
 		RuleBased dprsr = new RuleBased();
-		String fileString = FileUtils.readFileToString(new File("sampleInput"));
+		String fileString = FileUtils.readFileToString(new File("debug"));
 		Annotation doc = new Annotation(fileString);
 		dprsr.pipeline.annotate(doc);
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
@@ -104,17 +104,23 @@ public class RuleBased {
 		/**
 		 * Add nodes to the graph
 		 */
-		
 		while (tdi.hasNext()) {
 			TypedDependency td1 = tdi.next();
+			
 			TreeGraphNode depNode = td1.dep();
 			TreeGraphNode govNode = td1.gov();
+			
 			depGraph.addNode(depNode.index(), depNode.value());
 			depGraph.addNode(govNode.index(), govNode.value());
 			depGraph.addEdge(depNode.index(), govNode.index());
 			depGraph.addEdge(govNode.index(), depNode.index());
+			if(td1.reln().toString().equals("amod")) {
+				System.out.println("dep : " + depNode.value() + " gove : " + govNode.value());
+				depGraph.addModifier(govNode.index(), govNode.value(), depNode.value());
+			}
 			//System.out.println(govNode.value() + " -> " + depNode.value());
 		}
+		depGraph.listModifiers();
 		return depGraph;
 
 	}
@@ -147,6 +153,5 @@ public class RuleBased {
 			}
 		}
 		return res;
-
 	}
 }

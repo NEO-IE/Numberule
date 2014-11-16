@@ -3,6 +3,8 @@ package util.graph;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import util.Pair;
+
 /*
  * An unweighted, undirected graph
  */
@@ -12,7 +14,9 @@ public class Graph {
 													// the word
 	private HashMap<String, Integer> wordNodeMap; // map from node number to
 	// the word
-
+	
+	private HashMap<Pair<Integer, String>, String> modifierMap; //given a string, checks if there is a modifier
+	
 	public final static int MAX = 1000;
 
 	public Graph() {
@@ -22,6 +26,7 @@ public class Graph {
 		}
 		nodeWordMap = new HashMap<Integer, String>();
 		wordNodeMap = new HashMap<String, Integer>();
+		modifierMap = new HashMap<>(); 
 	}
 
 	// undirected graph
@@ -52,5 +57,15 @@ public class Graph {
 	
 	public String getLabel(int num) {
 		return nodeWordMap.get(num);
+	}
+
+	public void addModifier(int modifiedIdx, String modifiedVal, String modifier) {
+		modifierMap.put(new Pair<Integer, String> (modifiedIdx, modifiedVal), modifier);
+	}
+	
+	public void listModifiers() {
+		for(Pair<Integer, String> op : modifierMap.keySet()) {
+			System.err.println(op.second + " -> " + modifierMap.get(op));
+		}
 	}
 }

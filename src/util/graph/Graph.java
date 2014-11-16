@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import util.Pair;
+import util.Word;
 
 /*
  * An unweighted, undirected graph
@@ -44,13 +45,13 @@ public class Graph {
 		wordNodeMap.put(word, pos);
 	}
 	
-	public ArrayList<String> getWordsOnPath(String src, String des) {
+	public ArrayList<Word> getWordsOnPath(String src, String des) {
 		int srcNode = wordNodeMap.get(src);
 		int desNode = wordNodeMap.get(des);
 		ArrayList<Integer> path = BFS.getPath(this, srcNode, desNode);
-		ArrayList<String> res = new ArrayList<String>();
+		ArrayList<Word> res = new ArrayList<Word>();
 		for(Integer node : path) {
-			res.add(nodeWordMap.get(node).trim().toLowerCase());
+			res.add(new Word(node, nodeWordMap.get(node).trim().toLowerCase()));
 		}
 		return res;
 	}

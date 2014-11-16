@@ -92,7 +92,7 @@ public class RuleBased {
 	static void getExtractions(Graph depGraph, ArrayList<CountryNumberPair> pairs) {
 		for(CountryNumberPair pair : pairs) {
 			//System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
-			ArrayList<String> rels = ExtractFromPath.getExtractions(depGraph.getWordsOnPath(pair.country, pair.number));
+			ArrayList<Word> rels = ExtractFromPath.getExtractions(depGraph.getWordsOnPath(pair.country, pair.number));
 			for(String rel : rels) {
 				System.out.println(rel + "( " + pair.country + ", " + pair.number + ")");
 			}

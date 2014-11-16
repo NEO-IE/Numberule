@@ -1,6 +1,8 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import util.Word;
+
 //sg
 
 //The path should have one of the keywords, and should not have any 
@@ -40,7 +42,7 @@ public class ExtractFromPath {
 	 * @param path
 	 * @return
 	 */
-	static boolean isExtraction(ArrayList<String> path, String keywords[]) {
+	static boolean isExtraction(ArrayList<Word> path, String keywords[]) {
 		boolean keywordPresent = false;
 		boolean modifierPresent = false;
 
@@ -66,8 +68,9 @@ public class ExtractFromPath {
 	 * extraction
 	 */
 	
-	public static ArrayList<String> getExtractions(ArrayList<String> path) {
+	public static ArrayList<String> getExtractions(ArrayList<Word> path) {
 		//System.out.println(path);
+		//for fast searching, we will first create a map 
 		ArrayList<String> res = new ArrayList<String>();
 		for(int i = 0; i < NUM_RELATIONS; i++) {
 			if(isExtraction(path, KEYWORDS[i])) {

@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import util.Word;
@@ -9,7 +8,7 @@ import util.Word;
 //modifying words
 public class ExtractFromPath {
 	public static final Integer AGL = 0;
-	public static final Integer FDI = 1;
+	public static final Integer FDI 	= 1;
 	public static final Integer GOODS = 2;
 	public static final Integer ELEC = 3;
 	public static final Integer CO2 = 4;

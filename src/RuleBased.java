@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -37,9 +36,9 @@ public class RuleBased {
 	StanfordCoreNLP pipeline;
 	static Pattern numberPat;
 	HashSet<String> countryList;
-	private static final String countriesFileName = "/mnt/a99/d0/aman/MultirExperiments/data/numericalkb/countries_list";
+	private static final String countriesFileName = "/home/aman/depbased/data/countries_list";
 	
-	RuleBased() {
+	RuleBased() {		
 		numberPat = Pattern.compile("^[\\+-]?\\d+([,\\.]\\d+)*([eE]-?\\d+)?$");
 		prop = new Properties();
 		prop.put("annotators", "tokenize, ssplit, pos, lemma , parse");
@@ -92,7 +91,7 @@ public class RuleBased {
 	static void getExtractions(Graph depGraph, ArrayList<CountryNumberPair> pairs) {
 		for(CountryNumberPair pair : pairs) {
 			//System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
-			ArrayList<Word> rels = ExtractFromPath.getExtractions(depGraph.getWordsOnPath(pair.country, pair.number));
+			ArrayList<String> rels = ExtractFromPath.getExtractions(depGraph.getWordsOnPath(pair.country, pair.number));
 			for(String rel : rels) {
 				System.out.println(rel + "( " + pair.country + ", " + pair.number + ")");
 			}
@@ -115,7 +114,7 @@ public class RuleBased {
 			depGraph.addEdge(depNode.index(), govNode.index());
 			depGraph.addEdge(govNode.index(), depNode.index());
 			if(td1.reln().toString().equals("amod")) {
-				System.out.println("dep : " + depNode.value() + " gove : " + govNode.value());
+				System.out.println("dep : " + depNode.value() + " gov : " + govNode.value());
 				depGraph.addModifier(govNode.index(), govNode.value(), depNode.value());
 			}
 			//System.out.println(govNode.value() + " -> " + depNode.value());

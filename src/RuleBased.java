@@ -93,9 +93,12 @@ public class RuleBased {
 		for(Pair<Country, Number> pair : pairs) {
 			//System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
 			ArrayList<String> rels = ExtractFromPath.getExtractions(depGraph.getWordsOnPath(pair.first, pair.second));
-		
+			/**
+			 * TODO : check if the rel extracted is compatible with the unit of the number
+			 * 
+			 */
 			for(String rel : rels) {
-				System.out.println(rel + "( " + pair.first + ", " + pair.second + ")");
+				System.out.println(rel + "(" + pair.first.val + ", " + pair.second.val + ")");
 			}
 			
 		}

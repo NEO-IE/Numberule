@@ -12,4 +12,8 @@ public class Word {
 		this.idx = idx;
 		this.val = str;
 	}
+	@Override
+	public String toString() {
+		return val + ", " + idx.toString();
+	}
 }

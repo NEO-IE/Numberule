@@ -14,9 +14,7 @@ import org.apache.commons.io.FileUtils;
 
 import util.Country;
 import util.Number;
-import util.CountryNumberPair;
 import util.Pair;
-import util.Word;
 import util.graph.Graph;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
@@ -76,7 +74,7 @@ public class RuleBased {
 		int sentId = 1;
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
-			System.out.println(sentId++ + "->");
+			
 			Tree tree = sentence.get(TreeAnnotation.class);
 			TreebankLanguagePack tlp = new PennTreebankLanguagePack();
 			GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
@@ -85,20 +83,21 @@ public class RuleBased {
 			Iterator<TypedDependency> tdi = td.iterator();
 			
 			Graph depGraph = Graph.makeDepGraph(tdi);
-			ArrayList<CountryNumberPair> pairs = dprsr.getPairs(sentence);
-			
+			ArrayList< Pair<Country, Number>> pairs = dprsr.getPairs(depGraph, sentence);
+			System.out.println(pairs.size());
 			getExtractions(depGraph, pairs);
 		}
 	}
 
-	static void getExtractions(Graph depGraph, ArrayList<CountryNumberPair> pairs) {
-		for(CountryNumberPair pair : pairs) {
+	static void getExtractions(Graph depGraph, ArrayList< Pair<Country, Number> > pairs) {
+		for(Pair<Country, Number> pair : pairs) {
 			//System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
-			ArrayList<Word> rels = ExtractFromPath.getExtractions(depGraph.getWordsOnPath(pair.country, pair.number));
-			//System.out.println(depGraph.getModifier(pair.country));
-			for(Word rel : rels) {
-				System.out.println(rel + "( " + pair.country + ", " + pair.number + ")");
+			ArrayList<String> rels = ExtractFromPath.getExtractions(depGraph.getWordsOnPath(pair.first, pair.second));
+		
+			for(String rel : rels) {
+				System.out.println(rel + "( " + pair.first + ", " + pair.second + ")");
 			}
+			
 		}
 	}
 	
@@ -111,25 +110,38 @@ public class RuleBased {
 		return numberPat.matcher(token.toString()).matches();
 	}
 
-	ArrayList<CountryNumberPair> getPairs(CoreMap sentence) {
+	/**
+	 * Returns the list of country number pairs in the graph
+	 * Uses the indexes defined by the dependency graph which is passed as an argument
+	 * @param depGraph
+	 * @param sentence
+	 * @return
+	 */
+	ArrayList< Pair<Country, Number> > getPairs(Graph depGraph, CoreMap sentence) {
 		ArrayList<Country> countries = new ArrayList<Country>();
 		ArrayList<Number> numbers = new ArrayList<Number>();
 		ArrayList< Pair<Country, Number> > res = new ArrayList< Pair<Country, Number> >();
+		int tokenPos = 0;
 		for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
 			// this is the text of the token
 			String word = token.get(TextAnnotation.class);
+
 			if (isCountry(word)) {
-				countries.add(new Country(token.index(), word));
+				countries.add(new Country(depGraph.getIdx(word), word));
+				
 			}
 			if (isNumber(word)) {
-				numbers.add(new Number(token.index(), word));
+				numbers.add(new Number(depGraph.getIdx(word), word));
+				
 			}
+		
 		}
 		for (int i = 0, lc = countries.size(); i < lc; i++) {
 			for (int j = 0, ln = numbers.size(); j < ln; j++) {
 				res.add(new Pair<Country, Number>(countries.get(i), numbers.get(j)));
 			}
 		}
+		
 		return res;
 	}
 }

@@ -55,7 +55,7 @@ public class Graph {
 			
 			//System.out.println(govNode.value() + " -> " + depNode.value());
 		}
-		depGraph.listModifiers();
+		//depGraph.listModifiers();
 		return depGraph;
 
 	}
@@ -69,7 +69,13 @@ public class Graph {
 		return adj.get(curr);
 	}
 	
+	/**
+	 * All the words are always stored in lower case
+	 * @param pos
+	 * @param word
+	 */
 	public void addNode(int pos, String word) {
+		word = word.toLowerCase();
 		nodeWordMap.put(pos, word);
 		wordNodeMap.put(word, pos);
 	}
@@ -77,18 +83,23 @@ public class Graph {
 	public ArrayList<Word> getWordsOnPath(Word src, Word des) {
 		int srcNode = src.idx; //wordNodeMap.get(src);
 		int desNode = des.idx;//wordNodeMap.get(des);
+		
 		ArrayList<Integer> path = BFS.getPath(this, srcNode, desNode);
 		ArrayList<Word> res = new ArrayList<Word>();
 		for(Integer node : path) {
 			res.add(new Word(node, nodeWordMap.get(node).trim().toLowerCase()));
-			}
+		}
 		return res;
 	}
 	
 	public String getLabel(int num) {
 		return nodeWordMap.get(num);
 	}
-
+	
+	public Integer getIdx(String word) {
+		return wordNodeMap.get(word.toLowerCase());
+	}
+	
 	public void addModifier(int modifiedIdx, String modifiedVal, String modifier) {
 		modifierMap.put(new Pair<Integer, String> (modifiedIdx, modifiedVal), modifier);
 	}

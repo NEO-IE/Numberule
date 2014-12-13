@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 import util.Country;
@@ -11,6 +12,8 @@ import util.Number;
 //The path should have one of the keywords, and should not have any 
 //modifying words
 public class ExtractFromPath {
+
+	
 	public static final Integer AGL = 0;
 	public static final Integer FDI 	= 1;
 	public static final Integer GOODS = 2;
@@ -25,6 +28,7 @@ public class ExtractFromPath {
 	
 	public static final Integer NUM_RELATIONS = 11;
 	static String relName[] = {"AGL", "FDI", "GOODS", "ELEC", "CO2", "INF", "INTERNET", "GDP", "LIFE", "POP", "DIESEL"};
+	/*
 	static String KEYWORDS[][] = {
 		{"area", "land", "land area"},
 		{"foreign", "FDI", "direct", "investments"},
@@ -39,16 +43,20 @@ public class ExtractFromPath {
 		{"diesel"},
 	};
 	static String modifiers[] = {"change", "up", "down", "males", "females", "male", "female", "growth", "increase", "decrease", "decreased", "increased", "changed"};
+	*/
+	
 	/**
 	 * Checks whether the given dependency path is an extraction for the relation defined by the given 
 	 * keywords. If a keyword is present, also sets the value of keyword to it
 	 * @param path
 	 * @return
 	 */
-	static boolean isExtraction(ArrayList<Word> path, String keywords[], Word keyword) {
+
+	static boolean isExtraction(ArrayList<Word> path, ArrayList<String> keywords, String[] modifiers, Word keyword) {
+
 		boolean keywordPresent = false;
 		boolean modifierPresent = false;
-
+	
 		for(String kw : keywords) {
 			keyword = hasKeyword(path, kw.toLowerCase());
 			keywordPresent = (keyword != null);
@@ -83,6 +91,7 @@ public class ExtractFromPath {
 	}
 
 	
+
 	/**
 	 * Returns all the relations that can exist between the argPair, path is the list of words
 	 * that appear in the dependency graph between the argPair
@@ -91,12 +100,17 @@ public class ExtractFromPath {
 	 * @return
 	 */
 	public static ArrayList<Relation> getExtractions(Pair<Country, Number> argPair, ArrayList<Word> path) {
-		//System.out.println(path);
-		//for fast searching, we will first create a map 
+		KeywordData kwd = null;
+		try {
+			kwd = new KeywordData();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Relation> res = new ArrayList<Relation>();
 		Word keyword = null;
-		for(int i = 0; i < NUM_RELATIONS; i++) {
-			if(isExtraction(path, KEYWORDS[i], keyword)) {
+		for(int i = 0; i < kwd.NUM_RELATIONS; i++) {
+			if(isExtraction(path, kwd.KEYWORDS.get(i), kwd.modifiers, keyword)) {
 				assert(keyword != null);
 				res.add(new Relation(argPair.first, argPair.second, keyword, relName[i]));
 			}

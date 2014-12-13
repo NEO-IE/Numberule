@@ -39,7 +39,7 @@ public class RuleBasedDriver {
 	StanfordCoreNLP pipeline;
 	static Pattern numberPat;
 	HashSet<String> countryList;
-	private static final String countriesFileName = "/home/aman/depbased/data/countries_list";
+	private static final String countriesFileName = "data/countries_list";
 	
 	RuleBasedDriver() {		
 		numberPat = Pattern.compile("^[\\+-]?\\d+([,\\.]\\d+)*([eE]-?\\d+)?$");
@@ -97,7 +97,7 @@ public class RuleBasedDriver {
 		}
 	}
 
-	static void getExtractions(Graph depGraph, ArrayList< Pair<Country, Number> > pairs) {
+	static void getExtractions(Graph depGraph, ArrayList< Pair<Country, Number> > pairs) throws IOException {
 		for(Pair<Country, Number> pair : pairs) {
 			//System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
 			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(pair.first, pair.second);

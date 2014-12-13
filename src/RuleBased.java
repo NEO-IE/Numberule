@@ -12,7 +12,10 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 
+import util.Country;
+import util.Number;
 import util.CountryNumberPair;
+import util.Pair;
 import util.Word;
 import util.graph.Graph;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
@@ -109,22 +112,22 @@ public class RuleBased {
 	}
 
 	ArrayList<CountryNumberPair> getPairs(CoreMap sentence) {
-		ArrayList<Word> countries = new ArrayList<Word>();
-		ArrayList<Word> numbers = new ArrayList<Word>();
-		ArrayList<CountryNumberPair> res = new ArrayList<CountryNumberPair>();
+		ArrayList<Country> countries = new ArrayList<Country>();
+		ArrayList<Number> numbers = new ArrayList<Number>();
+		ArrayList< Pair<Country, Number> > res = new ArrayList< Pair<Country, Number> >();
 		for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
 			// this is the text of the token
 			String word = token.get(TextAnnotation.class);
 			if (isCountry(word)) {
-				countries.add(new Word(token.index(), word));
+				countries.add(new Country(token.index(), word));
 			}
 			if (isNumber(word)) {
-				numbers.add(new Word(token.index(), word));
+				numbers.add(new Number(token.index(), word));
 			}
 		}
 		for (int i = 0, lc = countries.size(); i < lc; i++) {
 			for (int j = 0, ln = numbers.size(); j < ln; j++) {
-				res.add(new CountryNumberPair(countries.get(i), numbers.get(j)));
+				res.add(new Pair<Country, Number>(countries.get(i), numbers.get(j)));
 			}
 		}
 		return res;

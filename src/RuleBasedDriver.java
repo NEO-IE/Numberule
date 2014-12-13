@@ -16,6 +16,7 @@ import util.Country;
 import util.Number;
 import util.Pair;
 import util.Relation;
+import util.Word;
 import util.graph.Graph;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
@@ -99,14 +100,15 @@ public class RuleBasedDriver {
 	static void getExtractions(Graph depGraph, ArrayList< Pair<Country, Number> > pairs) {
 		for(Pair<Country, Number> pair : pairs) {
 			//System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
-			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair, depGraph.getWordsOnPath(pair.first, pair.second));
+			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(pair.first, pair.second);
+			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair, wordsOnDependencyGraphPath);
 			/**
 			 * TODO : check if the rel extracted is compatible with the unit of the number
 			 * 
 			 */
 			
 			for(Relation rel : rels) {
-				System.out.println(rel + "(" + pair.first.val + ", " + pair.second.val + ")");
+				System.out.println(rel);
 			}
 			
 		}

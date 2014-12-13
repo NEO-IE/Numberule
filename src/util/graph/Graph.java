@@ -2,7 +2,10 @@
 package util.graph;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import edu.stanford.nlp.trees.TreeGraphNode;
+import edu.stanford.nlp.trees.TypedDependency;
 import util.Pair;
 import util.Word;
 
@@ -20,7 +23,7 @@ public class Graph {
 	
 	public final static int MAX = 1000;
 
-	public Graph() {
+	private Graph() {
 		adj = new ArrayList<ArrayList<Integer>>();
 		for(int i = 0; i < MAX; i++) {
 			adj.add(new ArrayList<Integer>());
@@ -30,6 +33,31 @@ public class Graph {
 		modifierMap = new HashMap<>(); 
 	}
 
+	public static Graph makeDepGraph(Iterator<TypedDependency> tdi) {
+		Graph depGraph = new Graph();
+
+		/**
+		 * Add nodes to the graph
+		 */
+		while (tdi.hasNext()) {
+			TypedDependency td1 = tdi.next();
+			
+			TreeGraphNode depNode = td1.dep();
+			TreeGraphNode govNode = td1.gov();
+			
+			depGraph.addNode(depNode.index(), depNode.value());
+			depGraph.addNode(govNode.index(), govNode.value());
+			depGraph.addEdge(depNode.index(), govNode.index());
+			depGraph.addEdge(govNode.index(), depNode.index());
+			//System.out.println("dep : " + depNode.value() + " gov : " + govNode.value());
+			depGraph.addModifier(govNode.index(), govNode.value(), depNode.value());
+			
+			//System.out.println(govNode.value() + " -> " + depNode.value());
+		}
+		depGraph.listModifiers();
+		return depGraph;
+
+	}
 	// undirected graph
 	public void addEdge(int i, int j) {
 	

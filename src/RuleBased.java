@@ -81,7 +81,7 @@ public class RuleBased {
 			Collection<TypedDependency> td = gs.typedDependenciesCollapsed();
 			Iterator<TypedDependency> tdi = td.iterator();
 			
-			Graph depGraph = makeDepGraph(tdi);
+			Graph depGraph = Graph.makeDepGraph(tdi);
 			ArrayList<CountryNumberPair> pairs = dprsr.getPairs(sentence);
 			
 			getExtractions(depGraph, pairs);
@@ -97,32 +97,7 @@ public class RuleBased {
 			}
 		}
 	}
-	static Graph makeDepGraph(Iterator<TypedDependency> tdi) {
-		Graph depGraph = new Graph();
-
-		/**
-		 * Add nodes to the graph
-		 */
-		while (tdi.hasNext()) {
-			TypedDependency td1 = tdi.next();
-			
-			TreeGraphNode depNode = td1.dep();
-			TreeGraphNode govNode = td1.gov();
-			
-			depGraph.addNode(depNode.index(), depNode.value());
-			depGraph.addNode(govNode.index(), govNode.value());
-			depGraph.addEdge(depNode.index(), govNode.index());
-			depGraph.addEdge(govNode.index(), depNode.index());
-			if(td1.reln().toString().equals("amod")) {
-				System.out.println("dep : " + depNode.value() + " gov : " + govNode.value());
-				depGraph.addModifier(govNode.index(), govNode.value(), depNode.value());
-			}
-			//System.out.println(govNode.value() + " -> " + depNode.value());
-		}
-		depGraph.listModifiers();
-		return depGraph;
-
-	}
+	
 
 	private boolean isCountry(String token) {
 		return countryList.contains(token.toLowerCase());

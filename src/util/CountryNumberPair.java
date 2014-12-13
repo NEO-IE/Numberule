@@ -8,5 +8,4 @@ public class CountryNumberPair {
 	}
 	public String country;
 	public String number;
-
 }

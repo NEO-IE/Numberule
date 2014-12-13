@@ -6,8 +6,8 @@ package util;
  *
  */
 public class Word {
-	String val; //the string content of the word
-	Integer idx; //the index of the word in that sentence
+	public String val; //the string content of the word
+	public Integer idx; //the index of the word in that sentence
 	public Word(Integer idx, String str) {
 		this.idx = idx;
 		this.val = str;

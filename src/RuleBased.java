@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 
 import util.CountryNumberPair;
+import util.Word;
 import util.graph.Graph;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
@@ -25,7 +26,6 @@ import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.PennTreebankLanguagePack;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
-import edu.stanford.nlp.trees.TreeGraphNode;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
@@ -91,8 +91,9 @@ public class RuleBased {
 	static void getExtractions(Graph depGraph, ArrayList<CountryNumberPair> pairs) {
 		for(CountryNumberPair pair : pairs) {
 			//System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
-			ArrayList<String> rels = ExtractFromPath.getExtractions(depGraph.getWordsOnPath(pair.country, pair.number));
-			for(String rel : rels) {
+			ArrayList<Word> rels = ExtractFromPath.getExtractions(depGraph.getWordsOnPath(pair.country, pair.number));
+			//System.out.println(depGraph.getModifier(pair.country));
+			for(Word rel : rels) {
 				System.out.println(rel + "( " + pair.country + ", " + pair.number + ")");
 			}
 		}
@@ -108,17 +109,17 @@ public class RuleBased {
 	}
 
 	ArrayList<CountryNumberPair> getPairs(CoreMap sentence) {
-		ArrayList<String> countries = new ArrayList<String>();
-		ArrayList<String> numbers = new ArrayList<String>();
+		ArrayList<Word> countries = new ArrayList<Word>();
+		ArrayList<Word> numbers = new ArrayList<Word>();
 		ArrayList<CountryNumberPair> res = new ArrayList<CountryNumberPair>();
 		for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
 			// this is the text of the token
 			String word = token.get(TextAnnotation.class);
 			if (isCountry(word)) {
-				countries.add(word);
+				countries.add(new Word(token.index(), word));
 			}
 			if (isNumber(word)) {
-				numbers.add(word);
+				numbers.add(new Word(token.index(), word));
 			}
 		}
 		for (int i = 0, lc = countries.size(); i < lc; i++) {

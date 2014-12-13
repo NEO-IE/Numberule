@@ -50,6 +50,7 @@ public class Graph {
 			depGraph.addEdge(depNode.index(), govNode.index());
 			depGraph.addEdge(govNode.index(), depNode.index());
 			//System.out.println("dep : " + depNode.value() + " gov : " + govNode.value());
+			//governor is being modified
 			depGraph.addModifier(govNode.index(), govNode.value(), depNode.value());
 			
 			//System.out.println(govNode.value() + " -> " + depNode.value());
@@ -73,14 +74,14 @@ public class Graph {
 		wordNodeMap.put(word, pos);
 	}
 	
-	public ArrayList<Word> getWordsOnPath(String src, String des) {
-		int srcNode = wordNodeMap.get(src);
-		int desNode = wordNodeMap.get(des);
+	public ArrayList<Word> getWordsOnPath(Word src, Word des) {
+		int srcNode = src.idx; //wordNodeMap.get(src);
+		int desNode = des.idx;//wordNodeMap.get(des);
 		ArrayList<Integer> path = BFS.getPath(this, srcNode, desNode);
 		ArrayList<Word> res = new ArrayList<Word>();
 		for(Integer node : path) {
 			res.add(new Word(node, nodeWordMap.get(node).trim().toLowerCase()));
-		}
+			}
 		return res;
 	}
 	
@@ -97,4 +98,5 @@ public class Graph {
 			System.err.println(op.second + " -> " + modifierMap.get(op));
 		}
 	}
+	
 }

@@ -1,7 +1,13 @@
 {
-
-
-
-
-
+"POP" : ["population", "people", "inhabitants", "natives"],
+"AGL" : ["area", "land", "land area"],
+"FDI" : ["foreign", "FDI", "direct", "investments"], 
+"GOODS" : ["goods"], 
+"ELEC" : ["Electricity", "kilowatthors", "Terawatt"], 
+"CO2" : ["Carbon", "Carbon Emission", "CO2"], 
+"INF" : ["Inflation", "Price Rise"], 
+"INTERNET" : ["Internet", "users"], 
+"GDP" : ["Gross domestic", "GDP"], 
+"LIFE" : ["life", "life expectancy"],  
+"DIESEL" : ["diesel"]
 }

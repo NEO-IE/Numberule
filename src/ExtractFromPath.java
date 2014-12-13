@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 import util.Word;
@@ -7,6 +8,8 @@ import util.Word;
 //The path should have one of the keywords, and should not have any 
 //modifying words
 public class ExtractFromPath {
+
+	/*
 	public static final Integer AGL = 0;
 	public static final Integer FDI 	= 1;
 	public static final Integer GOODS = 2;
@@ -35,13 +38,15 @@ public class ExtractFromPath {
 		{"diesel"},
 	};
 	static String modifiers[] = {"change", "up", "down", "males", "females", "male", "female", "growth", "increase", "decrease", "decreased", "increased", "changed"};
+	*/
+	
 	/**
 	 * Checks whether the given dependency path is an extraction for the relation defined by the given 
 	 * keywords
 	 * @param path
 	 * @return
 	 */
-	static boolean isExtraction(ArrayList<Word> path, String keywords[]) {
+	static boolean isExtraction(ArrayList<Word> path, ArrayList<String> keywords, String[] modifiers) {
 		boolean keywordPresent = false;
 		boolean modifierPresent = false;
 
@@ -75,13 +80,16 @@ public class ExtractFromPath {
 	 * extraction
 	 */
 	
-	public static ArrayList<String> getExtractions(ArrayList<Word> path) {
+	public static ArrayList<String> getExtractions(ArrayList<Word> path) throws IOException {
 		//System.out.println(path);
+		
+		KeywordData kwd = new KeywordData();
+		
 		//for fast searching, we will first create a map 
 		ArrayList<String> res = new ArrayList<String>();
-		for(int i = 0; i < NUM_RELATIONS; i++) {
-			if(isExtraction(path, KEYWORDS[i])) {
-				res.add(relName[i]);
+		for(int i = 0; i < kwd.NUM_RELATIONS; i++) {
+			if(isExtraction(path, kwd.KEYWORDS.get(i), kwd.modifiers)) {
+				res.add(kwd.relName.get(i));
 			}
 		}
 		return res;

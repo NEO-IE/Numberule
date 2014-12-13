@@ -43,6 +43,7 @@ public class KeywordData {
 			e.printStackTrace();
 		}
 		
+		/* Pretty printing.
 		int i = 0;
 		for(String str: relName){
 			System.out.print(str+" : ");
@@ -53,7 +54,7 @@ public class KeywordData {
 			}
 			System.out.println();
 		}
-		
+		*/
 	}
 	public static void main(String args[]) throws IOException{
 		new KeywordData();

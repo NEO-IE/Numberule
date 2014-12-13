@@ -19,7 +19,7 @@ public class ExtractFromPath {
 	public static final Integer POP = 8;
 	public static final Integer DIESEL = 9;
 	
-	public static final Integer NUM_RELATIONS = 10;
+	public static final Integer NUM_RELATIONS = 11;
 	static String relName[] = {"AGL", "FDI", "GOODS", "ELEC", "CO2", "INF", "INTERNET", "GDP", "LIFE", "POP", "DIESEL"};
 	static String KEYWORDS[][] = {
 		{"area", "land", "land area"},
@@ -46,7 +46,7 @@ public class ExtractFromPath {
 		boolean modifierPresent = false;
 
 		for(String kw : keywords) {
-			keywordPresent = keywordPresent || path.contains(kw.toLowerCase());
+			keywordPresent = keywordPresent || hasKeyword(path, kw.toLowerCase());
 			if(keywordPresent) {
 				break;
 			}
@@ -62,6 +62,14 @@ public class ExtractFromPath {
 		return keywordPresent && !modifierPresent;
 	}
 	
+	static boolean hasKeyword(ArrayList<Word> wordsOnPath, String keyword) {
+		for(Word w : wordsOnPath) {
+			if(w.val.equals(keyword)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	/*
 	 * iterates over all the relations and checks whether the given path is a possible 
 	 * extraction

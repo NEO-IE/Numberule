@@ -1,1 +1,4 @@
 1. All the indexes are as defined by the deps. There is no need to define another set.
+
+2. A sentence is made up of words, a word has a value (string) and an index.There are special words like countries, which have no additional information but help in making the code more explicit, and there are numbers, which are words with units. 
+A bit verbose, but leads to cleaner code.

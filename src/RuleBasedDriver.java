@@ -15,6 +15,7 @@ import org.apache.commons.io.FileUtils;
 import util.Country;
 import util.Number;
 import util.Pair;
+import util.Relation;
 import util.graph.Graph;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
@@ -32,14 +33,14 @@ import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
 
 //sg
-public class RuleBased {
+public class RuleBasedDriver {
 	Properties prop;
 	StanfordCoreNLP pipeline;
 	static Pattern numberPat;
 	HashSet<String> countryList;
 	private static final String countriesFileName = "/home/aman/depbased/data/countries_list";
 	
-	RuleBased() {		
+	RuleBasedDriver() {		
 		numberPat = Pattern.compile("^[\\+-]?\\d+([,\\.]\\d+)*([eE]-?\\d+)?$");
 		prop = new Properties();
 		prop.put("annotators", "tokenize, ssplit, pos, lemma , parse");
@@ -66,7 +67,7 @@ public class RuleBased {
 	 * @throws IOException
 	 */
 	public static void main(String args[]) throws IOException {
-		RuleBased dprsr = new RuleBased();
+		RuleBasedDriver dprsr = new RuleBasedDriver();
 		String fileString = FileUtils.readFileToString(new File("debug"));
 		Annotation doc = new Annotation(fileString);
 		dprsr.pipeline.annotate(doc);
@@ -75,6 +76,7 @@ public class RuleBased {
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
 			
+			//Step 1 : Get the typed dependencies
 			Tree tree = sentence.get(TreeAnnotation.class);
 			TreebankLanguagePack tlp = new PennTreebankLanguagePack();
 			GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
@@ -82,9 +84,14 @@ public class RuleBased {
 			Collection<TypedDependency> td = gs.typedDependenciesCollapsed();
 			Iterator<TypedDependency> tdi = td.iterator();
 			
+			//Step 2 : Make a graph out of them
 			Graph depGraph = Graph.makeDepGraph(tdi);
+			
+			//Step 3 : Identify all the country number word pairs
 			ArrayList< Pair<Country, Number>> pairs = dprsr.getPairs(depGraph, sentence);
 			System.out.println(pairs.size());
+			
+			//Step 4 : Extract the relations that exists in these pairs
 			getExtractions(depGraph, pairs);
 		}
 	}
@@ -92,12 +99,13 @@ public class RuleBased {
 	static void getExtractions(Graph depGraph, ArrayList< Pair<Country, Number> > pairs) {
 		for(Pair<Country, Number> pair : pairs) {
 			//System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
-			ArrayList<String> rels = ExtractFromPath.getExtractions(depGraph.getWordsOnPath(pair.first, pair.second));
+			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair, depGraph.getWordsOnPath(pair.first, pair.second));
 			/**
 			 * TODO : check if the rel extracted is compatible with the unit of the number
 			 * 
 			 */
-			for(String rel : rels) {
+			
+			for(Relation rel : rels) {
 				System.out.println(rel + "(" + pair.first.val + ", " + pair.second.val + ")");
 			}
 			

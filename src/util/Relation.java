@@ -21,4 +21,16 @@ public class Relation {
 	public String toString() {
 		return relName + "(" + arg1.val + ", " + arg2.val + ")";
 	}
+	public Word getArg1() {
+		return arg1;
+	}
+	public Word getArg2() {
+		return arg2;
+	}
+	public Word getKeyword() {
+		return keyword;
+	}
+	public String getRelName() {
+		return relName;
+	}
 }

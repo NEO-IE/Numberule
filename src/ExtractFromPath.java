@@ -25,10 +25,10 @@ public class ExtractFromPath {
 	public static final Integer LIFE = 8;
 	public static final Integer POP = 8;
 	public static final Integer DIESEL = 9;
+	/*
 	
 	public static final Integer NUM_RELATIONS = 11;
 	static String relName[] = {"AGL", "FDI", "GOODS", "ELEC", "CO2", "INF", "INTERNET", "GDP", "LIFE", "POP", "DIESEL"};
-	/*
 	static String KEYWORDS[][] = {
 		{"area", "land", "land area"},
 		{"foreign", "FDI", "direct", "investments"},
@@ -112,7 +112,7 @@ public class ExtractFromPath {
 		for(int i = 0; i < kwd.NUM_RELATIONS; i++) {
 			if(isExtraction(path, kwd.KEYWORDS.get(i), kwd.modifiers, keyword)) {
 				assert(keyword != null);
-				res.add(new Relation(argPair.first, argPair.second, keyword, relName[i]));
+				res.add(new Relation(argPair.first, argPair.second, keyword, kwd.relName.get(i)));
 			}
 		}
 		return res;

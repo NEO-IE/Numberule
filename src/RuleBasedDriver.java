@@ -108,12 +108,28 @@ public class RuleBasedDriver {
 			 */
 			
 			for(Relation rel : rels) {
+				augment(depGraph, rel);
 				System.out.println(rel);
 			}
 			
 		}
 	}
 	
+	/**
+	 * This is the workhorse, given a relation, checks if the argument or the relation can be augmented, and if so,
+	 * returns the augmented relation
+	 * @param rel
+	 * @return
+	 */
+	private static void augment(Graph depGraph, Relation rel) {
+		Word arg1 = rel.getArg1(), modifier = null;
+		System.out.println(depGraph.getModifier(arg1));
+		if(null != (modifier = depGraph.getModifier(arg1))) {
+			arg1.setVal(modifier.val + " " + arg1.val);
+		}
+	
+		System.out.println(modifier);
+	}
 
 	private boolean isCountry(String token) {
 		return countryList.contains(token.toLowerCase());

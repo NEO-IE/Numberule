@@ -16,4 +16,46 @@ public class Word {
 	public String toString() {
 		return val + ", " + idx.toString();
 	}
+	public String getVal() {
+		return val;
+	}
+	public void setVal(String val) {
+		this.val = val;
+	}
+	public Integer getIdx() {
+		return idx;
+	}
+	public void setIdx(Integer idx) {
+		this.idx = idx;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idx == null) ? 0 : idx.hashCode());
+		result = prime * result + ((val == null) ? 0 : val.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		
+		Word other = (Word) obj;
+		if (idx == null) {
+			if (other.idx != null)
+				return false;
+		} else if (!(idx == other.idx))
+			return false;
+		if (val == null) {
+			if (other.val != null)
+				return false;
+		} else if (!val.equals(other.val))
+			return false;
+		return true;
+	}
+	
 }

@@ -47,24 +47,24 @@ public class ExtractFromPath {
 	
 	/**
 	 * Checks whether the given dependency path is an extraction for the relation defined by the given 
-	 * keywords. If a keyword is present, also sets the value of keyword to it
+	 * keywords. Returns the keyword if one is present in the sentence, otherwise returns null
 	 * @param path
 	 * @return
 	 */
 
-	static boolean isExtraction(ArrayList<Word> path, ArrayList<String> keywords, String[] modifiers, Word keyword) {
+	static Word isExtraction(ArrayList<Word> path, ArrayList<String> keywords, String[] modifiers) {
 
 		boolean keywordPresent = false;
 		boolean modifierPresent = false;
-	
+		Word keywordTemp = null;
 		for(String kw : keywords) {
-			keyword = hasKeyword(path, kw.toLowerCase());
-			keywordPresent = (keyword != null);
+			keywordTemp = hasKeyword(path, kw.toLowerCase());
+			keywordPresent = (keywordTemp != null);
 			if(keywordPresent) {
 				break;
 			}
 		}
-		if(!keywordPresent) return false;
+		if(!keywordPresent) return null;
 		for(String mod : modifiers) {
 			modifierPresent = modifierPresent || path.contains(mod);
 			if(modifierPresent) {
@@ -72,7 +72,7 @@ public class ExtractFromPath {
 			}
 		}
 		//System.out.println("kw : " + keywordPresent + ", mod: " + modifierPresent);
-		return keywordPresent && !modifierPresent;
+		return keywordPresent && !modifierPresent ? keywordTemp : null;
 	}
 	
 	/**
@@ -104,14 +104,15 @@ public class ExtractFromPath {
 		try {
 			kwd = new KeywordData();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ArrayList<Relation> res = new ArrayList<Relation>();
 		Word keyword = null;
 		for(int i = 0; i < kwd.NUM_RELATIONS; i++) {
-			if(isExtraction(path, kwd.KEYWORDS.get(i), kwd.modifiers, keyword)) {
+			
+			if(null != (keyword = isExtraction(path, kwd.KEYWORDS.get(i), kwd.modifiers))) {
 				assert(keyword != null);
+				System.out.println("-"+keyword);
 				res.add(new Relation(argPair.first, argPair.second, keyword, kwd.relName.get(i)));
 			}
 		}

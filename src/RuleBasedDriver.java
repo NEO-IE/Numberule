@@ -11,10 +11,6 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
-import org.w3c.dom.Element;
-
-import catalog.QuantityCatalog;
-import catalog.Unit;
 
 import util.Country;
 import util.Number;
@@ -103,7 +99,7 @@ public class RuleBasedDriver {
 			
 			//Step 3 : Identify all the country number word pairs
 			ArrayList< Pair<Country, Number>> pairs = dprsr.getPairs(depGraph, sentence);
-			System.out.println(pairs.size());
+			
 			
 			//Step 4 : Extract the relations that exists in these pairs
 			getExtractions(depGraph, pairs);
@@ -115,6 +111,7 @@ public class RuleBasedDriver {
 			//System.out.println(depGraph.getWordsOnPath(pair.country, pair.number));
 			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(pair.first, pair.second);
 			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair, wordsOnDependencyGraphPath);
+			
 			/**
 			 * TODO : check if the rel extracted is compatible with the unit of the number
 			 * 
@@ -151,10 +148,17 @@ public class RuleBasedDriver {
 	 * @return
 	 */
 	private static void augment(Graph depGraph, Relation rel) {
+		/*Augment the argument*/
 		Word arg1 = rel.getArg1(), modifier = null;
-		System.out.println(depGraph.getModifier(arg1));
 		if(null != (modifier = depGraph.getModifier(arg1))) {
 			arg1.setVal(modifier.val + " " + arg1.val);
+		}
+		/*Augment Relation*/
+		Word relWord = rel.getKeyword();
+		
+		modifier = null;
+		if(null != (modifier = depGraph.getModifier(relWord))) {
+			relWord.setVal(modifier.val + " " + relWord.val);
 		}
 	}
 

@@ -81,7 +81,7 @@ public class ExtractFromPath {
 		boolean modifierPresent = false;
 		// if modifiers are present, cannot be extraction
 		for (String mod : kwd.modifiers) {
-			modifierPresent = modifierPresent || path.contains(mod);
+			modifierPresent = modifierPresent || Word.wordListContainsVal(path, mod);
 			if (modifierPresent) {
 				return res; // return empty result
 			}

@@ -6,6 +6,15 @@
  */
 package util;
 
+/**
+ * Represents a relation in the sentence
+ * as we know, the relation is made up of 3 things
+ * The two arguments, which are words. We make the assumption that the arguments are single words
+ * 
+ * 
+ * @author aman
+ *
+ */
 public class Relation {
 	public Relation(Word arg1, Word arg2, Word keyword, String relName) {
 		this.arg1 = arg1;

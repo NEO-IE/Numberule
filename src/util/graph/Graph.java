@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import util.Pair;
+import meta.ModifyingTypes;
 import util.Word;
 import edu.stanford.nlp.trees.TreeGraphNode;
 import edu.stanford.nlp.trees.TypedDependency;
@@ -58,7 +58,7 @@ public class Graph {
 			// govNode.value());
 			// governor is being modified
 			
-			if (td1.reln().toString().equals("nn")) {
+			if (ModifyingTypes.isModifier(td1.reln().toString())	) {
 				depGraph.addModifier(
 						new Word(govNode.index(), govNode.value()), new Word(
 								depNode.index(), depNode.value()));

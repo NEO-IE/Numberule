@@ -28,7 +28,7 @@ public class Relation {
 	String relName;
 	@Override
 	public String toString() {
-		return relName + "(" + arg1.val + ", " + keyword + ", " + arg2.val + ")";
+		return relName + "(" + arg1.val + ", " + keyword.val + ", " + arg2.val + ")";
 	}
 	public Word getArg1() {
 		return arg1;

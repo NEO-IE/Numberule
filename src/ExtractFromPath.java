@@ -41,51 +41,24 @@ public class ExtractFromPath {
 	 */
 
 	/**
-	 * Checks whether the given dependency path is an extraction for the
-	 * relation defined by the given keywords. Returns the keyword if one is
-	 * present in the sentence, otherwise returns null
-	 * 
+	 * The following 2 functions simply test for existence of a keyword on the specified path
+	 * The function is called once for each of the relations (i.e. with the keyword set of each of the relation
+	 * and checks if one of the words on the path is the keyword
 	 * @param path
-	 * @return
+	 * @param keywords
+	 * @return Keyword on the path if one is found
 	 */
-
-	static Word hasKeyword(ArrayList<Word> path, ArrayList<String> keywords,
-			String[] modifiers) {
-
-		boolean keywordPresent = false;
-		boolean modifierPresent = false;
-		Word keywordTemp = null;
-		for (String kw : keywords) {
-			keywordTemp = hasKeyword(path, kw.toLowerCase());
-			keywordPresent = (keywordTemp != null);
-			if (keywordPresent) {
-				break;
+	static Word getKeyword(ArrayList<Word> path, ArrayList<String> keywords) {
+		for (String kw : keywords) { //for each of the keywords
+			for (Word wordOnPath : path) { //iterate over the word and see if there is a match
+				if (wordOnPath.val.equals(kw)) {
+					return wordOnPath;
+				}
 			}
 		}
-		if (!keywordPresent)
-			return null;
-		// System.out.println("kw : " + keywordPresent + ", mod: " +
-		// modifierPresent);
-		return keywordPresent && !modifierPresent ? keywordTemp : null;
+		return  null;
 	}
-
-	/**
-	 * Returns the keyword (if any that is present on the path), if there is no
-	 * keyword, returns null
-	 * 
-	 * @param wordsOnPath
-	 * @param keyword
-	 * @return
-	 */
-	static Word hasKeyword(ArrayList<Word> wordsOnPath, String keyword) {
-		for (Word w : wordsOnPath) {
-			if (w.val.equals(keyword)) {
-				return w;
-			}
-		}
-		return null;
-	}
-
+	
 	/**
 	 * Returns all the relations that can exist between the argPair, path is the
 	 * list of words that appear in the dependency graph between the argPair
@@ -116,8 +89,7 @@ public class ExtractFromPath {
 		Word keyword = null;
 		for (int i = 0; i < kwd.NUM_RELATIONS; i++) {
 
-			if (null != (keyword = isExtraction(path, kwd.KEYWORDS.get(i),
-					kwd.modifiers))) {
+			if (null != (keyword = getKeyword(path, kwd.KEYWORDS.get(i)))) {
 				assert (keyword != null);
 				res.add(new Relation(argPair.first, argPair.second, keyword,
 						kwd.relName.get(i)));

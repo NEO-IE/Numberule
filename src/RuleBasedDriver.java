@@ -11,6 +11,10 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
+import org.w3c.dom.Element;
+
+import catalog.QuantityCatalog;
+import catalog.Unit;
 
 import util.Country;
 import util.Number;
@@ -40,8 +44,10 @@ public class RuleBasedDriver {
 	static Pattern numberPat;
 	HashSet<String> countryList;
 	private static final String countriesFileName = "data/countries_list";
+   // static QuantityCatalog quantDict = null;
+
 	
-	RuleBasedDriver() {		
+	RuleBasedDriver() throws Exception {		
 		numberPat = Pattern.compile("^[\\+-]?\\d+([,\\.]\\d+)*([eE]-?\\d+)?$");
 		prop = new Properties();
 		prop.put("annotators", "tokenize, ssplit, pos, lemma , parse");
@@ -61,13 +67,20 @@ public class RuleBasedDriver {
 		} catch (IOException e) {
 			System.err.println(e);
 		}
+		/*
+		quantDict = new QuantityCatalog((Element) null);
+        if(quantDict == null){
+                System.err.println("Could not load Quantity Taxonomy file.");
+                throw new Exception("Failed to load Quantity Taxonomy file.");
+        }
+		*/	
 	}
 
 	/**
 	 * @param args
-	 * @throws IOException
+	 * @throws Exception 
 	 */
-	public static void main(String args[]) throws IOException {
+	public static void main(String args[]) throws Exception {
 		RuleBasedDriver dprsr = new RuleBasedDriver();
 		String fileString = FileUtils.readFileToString(new File("debug"));
 		Annotation doc = new Annotation(fileString);
@@ -108,6 +121,22 @@ public class RuleBasedDriver {
 			 */
 			
 			for(Relation rel : rels) {
+		
+				/*
+				Unit unit = quantDict.getUnitFromBaseName(pair.second.getUnit());
+				if(unit != null){
+                    Unit SIUnit = unit.getParentQuantity().getCanonicalUnit();
+                    
+                    if(!RelationUnitMap.getUnit(rel.getRelName()).equals(SIUnit.getBaseName())){
+                    	continue; //Incorrect unit, this cannot be the relation.
+                    }
+                    
+				}else{
+					if(!RelationUnitMap.getUnit(rel.getRelName()).equals("")){
+						continue; //this cannot be the correct relation.
+					}
+				}
+				*/
 				augment(depGraph, rel);
 				System.out.println(rel);
 			}
@@ -160,7 +189,12 @@ public class RuleBasedDriver {
 				
 			}
 			if (isNumber(word)) {
-				numbers.add(new Number(depGraph.getIdx(word), word));
+				Number num = new Number(depGraph.getIdx(word), word);
+			/*
+				//check for unit here....
+				num.setUnit("metre");
+			*/
+				numbers.add(num);
 				
 			}
 		

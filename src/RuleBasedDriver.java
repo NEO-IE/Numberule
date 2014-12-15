@@ -156,13 +156,11 @@ public class RuleBasedDriver {
 		if(null != (modifier = depGraph.getModifier(arg1))) {
 			arg1.setVal(modifier.val + " " + arg1.val);
 		}
-	
-		System.out.println(modifier);
 	}
 
 	private boolean isCountry(String token) {
 		return countryList.contains(token.toLowerCase());
-	}
+	}	
 
 	private static boolean isNumber(String token) {
 		return numberPat.matcher(token.toString()).matches();

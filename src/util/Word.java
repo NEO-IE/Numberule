@@ -1,4 +1,7 @@
 package util;
+
+import java.util.ArrayList;
+
 /**
  * The need of this class arises from the fact that there we cannot treat words as just words 
  * There is a lot of meta information that is associated with the word and the corresponding index
@@ -58,4 +61,12 @@ public class Word {
 		return true;
 	}
 	
+	public static boolean wordListContainsVal(ArrayList<Word> list, String val) {
+		for (Word word : list) { //iterate over the word and see if there is a match
+			if (word.val.equals(val)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

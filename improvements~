@@ -1,0 +1,6 @@
+Possible modifications:
+1. When augmenting a relation, give higher priority to the other keywords modifying the current keyword.
+For example, "users||usage" is one of the keywords of the relation Internet users. 
+If users is found in the path, it is highly likely that Internet will be modifying users.
+
+2. Quick fix : add all the modifiers in the relation || augmented argument name

@@ -3,6 +3,7 @@ package util.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 
 import meta.ModifyingTypes;
@@ -23,7 +24,7 @@ public class Graph {
 	private HashMap<String, Integer> wordNodeMap; // map from node number to
 	// the word
 
-	private HashMap<Word, Word> modifierMap; // given a word, checks if there is
+	private HashMap<Word, HashSet<Word> > modifiersMap; // given a word, checks if there is
 												// a modifier
 
 	public final static int MAX = 1000;
@@ -35,7 +36,7 @@ public class Graph {
 		}
 		nodeWordMap = new HashMap<Integer, String>();
 		wordNodeMap = new HashMap<String, Integer>();
-		modifierMap = new HashMap<>();
+		modifiersMap = new HashMap<>();
 	}
 
 	public static Graph makeDepGraph(Iterator<TypedDependency> tdi) {
@@ -116,16 +117,23 @@ public class Graph {
 	}
 
 	public void addModifier(Word moddedWord, Word modifier) {
-		modifierMap.put(moddedWord, modifier);
+		if(modifiersMap.containsKey(moddedWord)) {
+			modifiersMap.get(moddedWord).add(modifier);
+		} else {
+			HashSet<Word> tmp = new HashSet<Word>();
+			tmp.add(modifier);
+			modifiersMap.put(moddedWord, tmp);
+		}
+		
 	}
 
-	public Word getModifier(Word modifiedWord) {
-		return modifierMap.get(modifiedWord);
+	public HashSet<Word> getModifiers(Word modifiedWord) {
+		return modifiersMap.get(modifiedWord);
 	}
 
 	public void listModifiers() {
-		for (Word word : modifierMap.keySet()) {
-			System.err.println(word + " -> " + modifierMap.get(word));
+		for (Word word : modifiersMap.keySet()) {
+			System.err.println(word + " -> " + modifiersMap.get(word));
 		}
 	}
 

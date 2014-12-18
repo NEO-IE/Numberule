@@ -149,16 +149,21 @@ public class RuleBasedDriver {
 	 */
 	private static void augment(Graph depGraph, Relation rel) {
 		/*Augment the argument*/
-		Word arg1 = rel.getArg1(), modifier = null;
-		if(null != (modifier = depGraph.getModifier(arg1))) {
-			arg1.setVal(modifier.val + " " + arg1.val);
+		Word arg1 = rel.getArg1();
+		HashSet<Word> modifiers = null;
+		if(null != (modifiers = depGraph.getModifiers(arg1))) {
+			for(Word modifier : modifiers) {
+				arg1.setVal(modifier.val + " " + arg1.val);
+			}
 		}
 		/*Augment Relation*/
 		Word relWord = rel.getKeyword();
 		
-		modifier = null;
-		if(null != (modifier = depGraph.getModifier(relWord))) {
-			relWord.setVal(modifier.val + " " + relWord.val);
+		modifiers = null;
+		if(null != (modifiers = depGraph.getModifiers(relWord))) {
+			for(Word modifier : modifiers) {
+				relWord.setVal(modifier.val + " " + relWord.val);
+			}
 		}
 	}
 

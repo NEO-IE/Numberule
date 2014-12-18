@@ -59,9 +59,11 @@ public class Graph {
 			// governor is being modified
 			
 			if (ModifyingTypes.isModifier(td1.reln().toString())	) {
-				depGraph.addModifier(
-						new Word(govNode.index(), govNode.value()), new Word(
-								depNode.index(), depNode.value()));
+				//BUG FIX, DEPENDENCIES HOLD ON BOTH THE SIDES
+				Word govWord = new Word(govNode.index(), govNode.value());
+				Word depWord = new Word(depNode.index(), depNode.value());
+				depGraph.addModifier(govWord, depWord);
+				depGraph.addModifier(depWord, govWord);
 			}
 			// System.out.println(govNode.value() + " -> " + depNode.value());
 		}

@@ -13,7 +13,7 @@ public class Word {
 	public Integer idx; //the index of the word in that sentence
 	public Word(Integer idx, String str) {
 		this.idx = idx;
-		this.val = str;
+		this.val = str.toLowerCase();
 	}
 	@Override
 	public String toString() {

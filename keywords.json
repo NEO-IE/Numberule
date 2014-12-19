@@ -7,7 +7,7 @@
 "CO2" : ["Carbon", "Carbon Emission", "CO2"], 
 "INF" : ["Inflation", "Price Rise"], 
 "INTERNET" : ["Internet", "users", "usage", "penetration", "use"], 
-"GDP" : ["Gross domestic", "GDP"], 
+"GDP" : ["Gross domestic", "GDP", "product"], 
 "LIFE" : ["life", "life expectancy"],  
 "DIESEL" : ["diesel"]
 }

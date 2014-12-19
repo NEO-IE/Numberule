@@ -82,7 +82,6 @@ public class RuleBasedDriver {
 		Annotation doc = new Annotation(fileString);
 		dprsr.pipeline.annotate(doc);
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
-		int sentId = 1;
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
 			
@@ -186,7 +185,6 @@ public class RuleBasedDriver {
 		ArrayList<Country> countries = new ArrayList<Country>();
 		ArrayList<Number> numbers = new ArrayList<Number>();
 		ArrayList< Pair<Country, Number> > res = new ArrayList< Pair<Country, Number> >();
-		int tokenPos = 0;
 		for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
 			// this is the text of the token
 			String word = token.get(TextAnnotation.class);

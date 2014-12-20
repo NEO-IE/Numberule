@@ -16,7 +16,7 @@ public class RelationUnitMap {
 			unitMap.put("INTERNET", "percent");
 			unitMap.put("GDP", "united states dollar");
 			unitMap.put("LIFE", "second");
-			unitMap.put("POP", "metre");
+			unitMap.put("POP", "");
 	}
 	public static String getUnit(String rel) {
 			return unitMap.get(rel);

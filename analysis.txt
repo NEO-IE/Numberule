@@ -1,0 +1,65 @@
+#####################################################
+A note on reading the stanford typed dependencies:
+#####################################################
+
+The stanford typed dependencies are of the type relation(governor, dependent)
+
+In most of the cases, read an extraction such as 
+R(A, B) as A is the R of B
+
+For example, in the sentence, "The red apple is sweet", the list of dependencies is:
+Rel	Gov	Idx	Dep	Idx
+amod	apple	3	red	2
+cop	sweet	5	is	4
+det	apple	3	the	1
+nsubj	sweet	5	apple	3
+
+From this list, we can read out the dependencies in the form : "'det' of 'apple' is 'the'"
+
+The arrow will always be from the governor to the dependent, and the label will be the relation involved.
+
+
+=========
+CASES
+========
+
+1) According to TNIC, there are 
+17.64 million Internet users 
+in Taiwan, or 75.43 percent 
+of the entire population. 
+This can be easily extracted after adding units
+========
+2) Since ITFA was put in place, the Pew Research Center estimates that Internet usage among Americans has skyrocketed from less than 25 percent of all people in 1998 to more than 85 percent today.
+Could be extracted after adding "Americans" to the list of countries and also by adding "usage" to the list of keywords, the full keyword "internet usage" is anyways found out by the dependency parser.
+========
+3) Compare:
+The current Internet penetration in China is only 46% compared to 88% in the US.
+AND
+The current Internet penetration is only 46% in China compared to 88% in the US. (original)
+
+The modified version gets some extractions after adding the keyword "penetration".
+(again, the full keyword is extracted by the original set of dependencies)
+The original version fails, perhaps adding the rule that a keyword can either:
+a) Lie on the path
+b) modify the number OR be connected to the number "somehow", need to look at a few more examples before taking a call on this.
+
+
+There is also the problem of the same country being associated with different numbers, for example, the modified sentence yields the following 
+INTERNET(China, Internet penetration, 46)
+INTERNET(China, Internet penetration, 88)
+========
+4)With an area of 1000 km2, Spain is the second largest country in Western Europe(behind France) and with an average altitude of 650 m, the second highest country in Europe (behind Switzerland).
+
+"There will always be a path".
+Correct, in these cases, we'll need to rely on the redundancy in the extractions.
+
+
+Perhaps redundancy can handle some of these
+========
+
+5) The Gross Domestic Product (GDP) in India was worth 1876.80 billion US dollars in 2013. 
+
+The trick to store set of modifiers instead of only a single modifier now returns the entire relation. The problem again are
+units, and can be curbed in a large number of cases.
+
+

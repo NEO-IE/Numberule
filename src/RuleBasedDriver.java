@@ -98,7 +98,9 @@ public class RuleBasedDriver {
 			TreebankLanguagePack tlp = new PennTreebankLanguagePack();
 			GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
 			GrammaticalStructure gs = gsf.newGrammaticalStructure(tree);
+		
 			Collection<TypedDependency> td = gs.typedDependenciesCollapsed();
+			//Collection<TypedDependency> td = gs.typedDependenciesCCprocessed();
 			Iterator<TypedDependency> tdi = td.iterator();
 			
 			//Step 2 : Make a graph out of them

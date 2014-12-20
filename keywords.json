@@ -3,7 +3,7 @@
 "AGL" : ["area", "land", "land area"],
 "FDI" : ["foreign", "FDI", "direct", "investments"], 
 "GOODS" : ["goods"], 
-"ELEC" : ["Electricity", "kilowatthors", "Terawatt"], 
+"ELEC" : ["Electricity", "kilowatthors", "Terawatt", "generation"], 
 "CO2" : ["Carbon", "Carbon Emission", "CO2"], 
 "INF" : ["Inflation", "Price Rise"], 
 "INTERNET" : ["Internet", "users", "usage", "penetration", "use"], 

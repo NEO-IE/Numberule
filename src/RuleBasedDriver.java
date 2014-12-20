@@ -1,3 +1,5 @@
+import iitb.shared.EntryWithScore;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,6 +14,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 
+import catalog.QuantityCatalog;
+import catalog.Unit;
 import util.Country;
 import util.Number;
 import util.Pair;
@@ -32,6 +36,7 @@ import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
+import eval.UnitExtractor;
 
 //sg
 public class RuleBasedDriver {
@@ -40,7 +45,7 @@ public class RuleBasedDriver {
 	static Pattern numberPat;
 	HashSet<String> countryList;
 	private static final String countriesFileName = "data/countries_list";
-   // static QuantityCatalog quantDict = null;
+    private static UnitExtractor ue = null;
 
 	
 	RuleBasedDriver() throws Exception {		
@@ -63,6 +68,9 @@ public class RuleBasedDriver {
 		} catch (IOException e) {
 			System.err.println(e);
 		}
+		
+		ue = new UnitExtractor();
+		
 		/*
 		quantDict = new QuantityCatalog((Element) null);
         if(quantDict == null){
@@ -119,12 +127,9 @@ public class RuleBasedDriver {
 			 */
 			
 			for(Relation rel : rels) {
-		
-				/*
-				Unit unit = quantDict.getUnitFromBaseName(pair.second.getUnit());
-				if(unit != null){
-                    Unit SIUnit = unit.getParentQuantity().getCanonicalUnit();
-                    
+				Unit unit = ue.quantDict.getUnitFromBaseName(pair.second.getUnit());
+				if(unit != null && !unit.getBaseName().equals("")){
+                    Unit SIUnit = unit.getParentQuantity().getCanonicalUnit();    
                     if(!RelationUnitMap.getUnit(rel.getRelName()).equals(SIUnit.getBaseName())){
                     	continue; //Incorrect unit, this cannot be the relation.
                     }
@@ -134,7 +139,6 @@ public class RuleBasedDriver {
 						continue; //this cannot be the correct relation.
 					}
 				}
-				*/
 				augment(depGraph, rel);
 				System.out.println(rel);
 			}
@@ -187,6 +191,8 @@ public class RuleBasedDriver {
 		ArrayList<Country> countries = new ArrayList<Country>();
 		ArrayList<Number> numbers = new ArrayList<Number>();
 		ArrayList< Pair<Country, Number> > res = new ArrayList< Pair<Country, Number> >();
+		float values[][] = new float[1][1];
+		String unitString = "";
 		for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
 			// this is the text of the token
 			String word = token.get(TextAnnotation.class);
@@ -197,12 +203,16 @@ public class RuleBasedDriver {
 			}
 			if (isNumber(word)) {
 				Number num = new Number(depGraph.getIdx(word), word);
-			/*
-				//check for unit here....
-				num.setUnit("metre");
-			*/
-				numbers.add(num);
+				unitString = sentence.toString().substring(0, token.beginPosition())+"<b>" + token + "</b>" + (( sentence.size() == token.endPosition())?"":sentence.toString().substring(token.endPosition()));
+			//	System.out.println("Unit String: "+ unitString);
+				List<? extends EntryWithScore<Unit>> unitsS = ue.parser.getTopKUnitsValues(unitString, "b", 1, 0,values);
 				
+				//check for unit here....
+				if(unitsS != null){
+				//	System.out.println("units: "+unitsS.toString());
+					num.setUnit(unitsS.get(0).getKey().getBaseName());
+				}
+				numbers.add(num);
 			}
 		
 		}

@@ -16,24 +16,24 @@ package util;
  *
  */
 public class Relation {
-	public Relation(Word arg1, Word arg2, Word keyword, String relName) {
+	public Relation(Word arg1, Number arg2, Word keyword, String relName) {
 		this.arg1 = arg1;
 		this.arg2 = arg2;
 		this.relName = relName;
 		this.keyword = keyword;
 	}
 	Word arg1;
-	Word arg2;
+	Number arg2;
 	Word keyword;
 	String relName;
 	@Override
 	public String toString() {
-		return relName + "(" + arg1.val + ", " + keyword.val + ", " + arg2.val + ")";
+		return relName + "(" + arg1.val + ", " + keyword.val + ", " + arg2.val + " " + arg2.unit + ")";
 	}
 	public Word getArg1() {
 		return arg1;
 	}
-	public Word getArg2() {
+	public Number getArg2() {
 		return arg2;
 	}
 	public Word getKeyword() {

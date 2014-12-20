@@ -2,3 +2,8 @@
 
 2. A sentence is made up of words, a word has a value (string) and an index.There are special words like countries, which have no additional information but help in making the code more explicit, and there are numbers, which are words with units. 
 A bit verbose, but leads to cleaner code.
+
+3. I have added a lot of general keywords in the file keywords.json. The hope is that there will be specific keywords included as dependencies to those general keywords.
+For example, the kw "production" may be present in the path with "electricity" present as a modifier to it. Of course, this may or may not be true. Thus, we will need to add
+a post production step to prune out such wrong extractions. This would be a challenge in itself, but can be made possible by using a more constrained keyword set (i.e. relation
+must include the word electricity)

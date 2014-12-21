@@ -138,8 +138,9 @@ public class RuleBasedDriver {
 						.getUnit());
 				if (unit != null && !unit.getBaseName().equals("")) {
 					Unit SIUnit = unit.getParentQuantity().getCanonicalUnit();
-					if (!RelationUnitMap.getUnit(rel.getRelName()).equals(
-							SIUnit.getBaseName())) {
+					
+					if (SIUnit != null && !RelationUnitMap.getUnit(rel.getRelName()).equals(
+							SIUnit.getBaseName()) || !RelationUnitMap.getUnit(rel.getRelName()).equals(unit.getBaseName())) {
 						continue; // Incorrect unit, this cannot be the
 									// relation.
 					}

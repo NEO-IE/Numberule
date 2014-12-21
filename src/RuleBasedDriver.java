@@ -200,7 +200,7 @@ public class RuleBasedDriver {
 			if (isCountry(word)) {
 				countries.add(new Country(depGraph.getIdx(word), word));
 				
-			}
+			}	
 			if (isNumber(word)) {
 				Number num = new Number(depGraph.getIdx(word), word);
 				unitString = sentence.toString().substring(0, token.beginPosition())+"<b>" + token + "</b>" + (( sentence.size() == token.endPosition())?"":sentence.toString().substring(token.endPosition()));

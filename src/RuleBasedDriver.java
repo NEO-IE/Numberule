@@ -212,13 +212,8 @@ public class RuleBasedDriver {
 
 			if (isCountry(word)) {
 				countries.add(new Country(depGraph.getIdx(word), word));
-<<<<<<< HEAD
-				
-			}	
-=======
-
 			}
->>>>>>> f597e92d3662bb5f2a70b488808b0879435bfe45
+
 			if (isNumber(word)) {
 				Number num = new Number(depGraph.getIdx(word), word);
 				if (unitCog) {

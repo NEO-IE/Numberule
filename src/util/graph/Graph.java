@@ -47,7 +47,6 @@ public class Graph {
 		 */
 		while (tdi.hasNext()) {
 			TypedDependency td1 = tdi.next();
-			//System.out.println(td1);
 			TreeGraphNode depNode = td1.dep();
 			TreeGraphNode govNode = td1.gov();
 

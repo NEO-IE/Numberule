@@ -97,7 +97,7 @@ public class RuleBasedDriver {
 		
 	}
 	
-	ArrayList<Relation> extract(String sentenceString) throws IOException {
+	public ArrayList<Relation> extract(String sentenceString) throws IOException {
 		ArrayList<Relation> res = new ArrayList<Relation>();
 		Annotation doc = new Annotation(sentenceString);
 		pipeline.annotate(doc);
@@ -269,5 +269,9 @@ public class RuleBasedDriver {
 		}
 
 		return res;
+	}
+
+	public void setUnitsActive(boolean unitsActive) {
+		this.unitsActive = unitsActive;
 	}
 }

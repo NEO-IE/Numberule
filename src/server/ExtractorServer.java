@@ -6,9 +6,10 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import main.RuleBasedDriver;
+
 public class ExtractorServer {
-	RuleBasedDriver rbsaed;
-	
+	RuleBasedDriver rbd;
     public static void main(String[] args) throws IOException {
     	Integer PORT = 4080;
         ServerSocket serverSocket = null;

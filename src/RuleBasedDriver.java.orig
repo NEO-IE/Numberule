@@ -14,16 +14,17 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 
+import catalog.Unit;
 import util.Country;
 import util.Number;
 import util.Pair;
 import util.Relation;
 import util.Word;
 import util.graph.Graph;
-import catalog.Unit;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
+import edu.stanford.nlp.ling.tokensregex.SequenceMatchRules.Rule;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
@@ -39,16 +40,16 @@ import eval.UnitExtractor;
 
 //sg
 public class RuleBasedDriver {
-	private Properties prop;
-	private StanfordCoreNLP pipeline;
-	private static Pattern numberPat;
-	private HashSet<String> countryList;
-	private  boolean unitsActive;
+	Properties prop;
+	StanfordCoreNLP pipeline;
+	static Pattern numberPat;
+	HashSet<String> countryList;
+	static boolean unitCog;
 	private static final String countriesFileName = "data/countries_list";
-	private  UnitExtractor ue = null;
+	private static UnitExtractor ue = null;
 
-	public RuleBasedDriver(boolean unitsActive) {
-		this.unitsActive = unitsActive;
+	RuleBasedDriver() throws Exception {
+		
 		numberPat = Pattern.compile("^[\\+-]?\\d+([,\\.]\\d+)*([eE]-?\\d+)?$");
 		prop = new Properties();
 		prop.put("annotators", "tokenize, ssplit, pos, lemma , parse");
@@ -69,12 +70,7 @@ public class RuleBasedDriver {
 			System.err.println(e);
 		}
 
-		try {
-			ue = new UnitExtractor();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ue = new UnitExtractor();
 
 		/*
 		 * quantDict = new QuantityCatalog((Element) null); if(quantDict ==
@@ -88,16 +84,11 @@ public class RuleBasedDriver {
 	 * @throws Exception
 	 */
 	public static void main(String args[]) throws Exception {
-		RuleBasedDriver rbased = new RuleBasedDriver(true);
+		RuleBasedDriver.unitCog = true;
+		RuleBasedDriver dprsr = new RuleBasedDriver();
 		String fileString = FileUtils.readFileToString(new File("debug"));
-		System.out.println(rbased.extract(fileString));
-		
-	}
-	
-	ArrayList<Relation> extract(String sentenceString) throws IOException {
-		ArrayList<Relation> res = new ArrayList<Relation>();
-		Annotation doc = new Annotation(sentenceString);
-		pipeline.annotate(doc);
+		Annotation doc = new Annotation(fileString);
+		dprsr.pipeline.annotate(doc);
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
@@ -117,19 +108,16 @@ public class RuleBasedDriver {
 			Graph depGraph = Graph.makeDepGraph(tdi);
 
 			// Step 3 : Identify all the country number word pairs
-			ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph,
+			ArrayList<Pair<Country, Number>> pairs = dprsr.getPairs(depGraph,
 					sentence);
 
 			// Step 4 : Extract the relations that exists in these pairs
-			res.addAll(getExtractions(depGraph, pairs));
+			getExtractions(depGraph, pairs);
 		}
-		return res;
 	}
 
-	ArrayList<Relation> getExtractions(Graph depGraph,
+	static void getExtractions(Graph depGraph,
 			ArrayList<Pair<Country, Number>> pairs) throws IOException {
-		ArrayList<Relation> result = new ArrayList<Relation>();
-
 		for (Pair<Country, Number> pair : pairs) {
 			// System.out.println(depGraph.getWordsOnPath(pair.country,
 			// pair.number));
@@ -145,34 +133,28 @@ public class RuleBasedDriver {
 			 */
 
 			for (Relation rel : rels) {
+				if(unitCog) {
+				Unit unit = ue.quantDict.getUnitFromBaseName(pair.second
+						.getUnit());
+				if (unit != null && !unit.getBaseName().equals("")) {
+					Unit SIUnit = unit.getParentQuantity().getCanonicalUnit();
+					if (!RelationUnitMap.getUnit(rel.getRelName()).equals(
+							SIUnit.getBaseName())) {
+						continue; // Incorrect unit, this cannot be the
+									// relation.
+					}
 
-				if (unitsActive) {
-					Unit unit = ue.quantDict.getUnitFromBaseName(pair.second
-							.getUnit());
-					if (unit != null && !unit.getBaseName().equals("")) {
-						Unit SIUnit = unit.getParentQuantity()
-								.getCanonicalUnit();
-						if (!RelationUnitMap.getUnit(rel.getRelName()).equals(
-								SIUnit.getBaseName())) {
-							continue; // Incorrect unit, this cannot be the
-										// relation.
-						}
-
-
-					} else {
-						if (!RelationUnitMap.getUnit(rel.getRelName()).equals(
-								"")) {
-							continue; // this cannot be the correct relation.
-						}
+				} else {
+					if (!RelationUnitMap.getUnit(rel.getRelName()).equals("")) {
+						continue; // this cannot be the correct relation.
 					}
 				}
+				}
 				augment(depGraph, rel);
-				result.add(rel);
-
+				System.out.println(rel);
 			}
 
 		}
-		return result;
 	}
 
 	/**
@@ -230,11 +212,16 @@ public class RuleBasedDriver {
 
 			if (isCountry(word)) {
 				countries.add(new Country(depGraph.getIdx(word), word));
-			}
+<<<<<<< HEAD
+				
+			}	
+=======
 
+			}
+>>>>>>> f597e92d3662bb5f2a70b488808b0879435bfe45
 			if (isNumber(word)) {
 				Number num = new Number(depGraph.getIdx(word), word);
-				if (unitsActive) {
+				if (unitCog) {
 
 					unitString = sentence.toString().substring(0,
 							token.beginPosition())

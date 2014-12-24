@@ -45,7 +45,7 @@ import eval.UnitExtractor;
 public class RuleBasedDriver {
 	private Properties prop;
 	private StanfordCoreNLP pipeline;
-	private static Pattern numberPat;
+	private static Pattern numberPat, yearPat;
 	private HashSet<String> countryList;
 	private  boolean unitsActive;
 	private static final String countriesFileName = "data/countries_list";
@@ -54,6 +54,7 @@ public class RuleBasedDriver {
 	public RuleBasedDriver(boolean unitsActive) {
 		this.unitsActive = unitsActive;
 		numberPat = Pattern.compile("^[\\+-]?\\d+([,\\.]\\d+)*([eE]-?\\d+)?$");
+		yearPat = Pattern.compile("^19[56789]\\d|20[01]\\d$");
 		prop = new Properties();
 		prop.put("annotators", "tokenize, ssplit, pos, lemma , parse");
 		pipeline = new StanfordCoreNLP(prop);
@@ -162,6 +163,9 @@ public class RuleBasedDriver {
 		}
 	}
 
+	private static boolean isYear(String token) {
+		return yearPat.matcher(token).matches();
+	}
 
 	ArrayList<Relation> getExtractions(Graph depGraph,
 			ArrayList<Pair<Country, Number>> pairs) throws IOException {
@@ -263,16 +267,16 @@ public class RuleBasedDriver {
 		ArrayList<Number> numbers = new ArrayList<Number>();
 		ArrayList<Pair<Country, Number>> res = new ArrayList<Pair<Country, Number>>();
 		float values[][] = new float[1][1];
-		String unitString = "";
+		String unitString = "";	
 		for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
 			// this is the text of the token
 			String word = token.get(TextAnnotation.class);
 
-			if (isCountry(word)) {
+			if (isCountry(word)) {	
 				countries.add(new Country(depGraph.getIdx(word), word));
 			}
 			
-			if (isNumber(word)) {
+			if (isNumber(word) && !isYear(word)) {
 				Number num = new Number(depGraph.getIdx(word), word);
 				if (unitsActive) {
 					int beginPos = token.beginPosition() - cumulativeLen;

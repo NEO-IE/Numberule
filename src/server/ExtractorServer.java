@@ -15,6 +15,7 @@ public class ExtractorServer {
 	public static void main(String[] args) throws IOException {
 		RuleBasedDriver rbd;
 		rbd = new RuleBasedDriver(true);
+		rbd.setUnitsActive(false);
 		Integer PORT = 4080;
 		ServerSocket serverSocket = null;
 		try {
@@ -24,8 +25,8 @@ public class ExtractorServer {
 			System.err.println("Could not listen on port:  " + PORT);
 			System.exit(1);
 		}
-		int i = 20;
-		while (i > 0) {
+		
+		while (true) {
 			Socket clientSocket = null;
 			try {
 				clientSocket = serverSocket.accept();
@@ -34,20 +35,29 @@ public class ExtractorServer {
 				System.err.println("Accept failed.");
 				System.exit(1);
 			}
+			System.out.println("Got connection from " + clientSocket);
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					clientSocket.getInputStream()));
 			String inputLine = in.readLine();
-			ArrayList<Relation> rels = rbd.extract(inputLine);
+			String ipSplit[] = inputLine.split(":");
+			boolean useUnits = (Integer.parseInt(ipSplit[0])) == 1;
+			System.out.println(useUnits);
+			rbd.setUnitsActive(useUnits);
+			System.out.println("Extracting from " + inputLine );
+			ArrayList<Relation> rels = rbd.extract(ipSplit[1]);
 
 			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),
-					true);
+					true);	
+			StringBuffer res = new StringBuffer();
 			for (Relation rel : rels) {
-				out.println(rel.toString());
+				res.append(rel);
+				res.append("<br/>");
 			}
+			out.println(res.toString());
 			out.close();
 			clientSocket.close();
-			i--;
+			
 		}
-		serverSocket.close();
+		//serverSocket.close();
 	}
 }

@@ -4,7 +4,9 @@ import iitb.shared.EntryWithScore;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -28,7 +30,6 @@ import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.trees.GrammaticalStructure;
@@ -93,9 +94,10 @@ public class RuleBasedDriver {
 	 * @throws Exception
 	 */
 	public static void main(String args[]) throws Exception {
-		RuleBasedDriver rbased = new RuleBasedDriver(true);
+		RuleBasedDriver rbased = new RuleBasedDriver(false);
 		String fileString = FileUtils.readFileToString(new File("debug"));
-		rbased.batchExtract(fileString);
+		String outFile = "tac_sample_output";
+		rbased.batchExtract(fileString, outFile);
 		
 	}
 	
@@ -132,11 +134,12 @@ public class RuleBasedDriver {
 		return res;
 	}
 
-	public void batchExtract(String fileString) throws IOException {
+	public void batchExtract(String fileString, String outFile) throws IOException {
 		Annotation doc = new Annotation(fileString);
 		pipeline.annotate(doc);
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
 		int i = 0;
+		PrintWriter pw = new PrintWriter(new FileWriter(outFile));
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
 			
@@ -157,10 +160,16 @@ public class RuleBasedDriver {
 			// Step 3 : Identify all the country number word pairs
 			ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph,
 					sentence);
-			System.out.println("For sentence " + i++);
+			/*
+			pw.write("\n---\n");
+			pw.write("sentence " + i++ + "\n");
+			pw.write(sentence + "\n\n");
 			// Step 4 : Extract the relations that exists in these pairs
-			getExtractions(depGraph, pairs);
+			pw.write(getExtractions(depGraph, pairs) + "\n");
+			pw.write("---\n");*/
+			System.out.println(getExtractions(depGraph, pairs) + "\n");
 		}
+		pw.close();
 	}
 
 	private static boolean isYear(String token) {
@@ -279,9 +288,10 @@ public class RuleBasedDriver {
 			if (isNumber(word) && !isYear(word)) {
 				Number num = new Number(depGraph.getIdx(word), word);
 				if (unitsActive) {
+					/*
 					int beginPos = token.beginPosition() - cumulativeLen;
 					int endPos = token.endPosition() - cumulativeLen;
-					System.out.println(beginPos);
+					*/
 					String sentString = sentence.toString();
 					int beginIdx = sentString.indexOf(word);
 					int endIdx = beginIdx + word.length();

@@ -52,8 +52,9 @@ public class ExtractFromPath {
 	 */
 	static Word getKeyword(ArrayList<Word> path, ArrayList<String> keywords) {
 		for (String kw : keywords) { //for each of the keywords
+			kw = kw.toLowerCase();
 			for (Word wordOnPath : path) { //iterate over the word and see if there is a match
-				if (wordOnPath.val.equals(kw)) {
+				if (wordOnPath.val.toLowerCase().equals(kw)) {
 					return wordOnPath;
 				}
 			}

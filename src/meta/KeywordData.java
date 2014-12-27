@@ -10,7 +10,7 @@ import org.json.simple.parser.ParseException;
 
 
 public class KeywordData {
-	public String keyWordFile = "keywords.json";
+	public String keyWordFile = "data/keywords.json";
 	public String modifiers[];
 	public ArrayList<String> relName;
 	public ArrayList<ArrayList<String>> KEYWORDS;

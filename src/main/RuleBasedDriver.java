@@ -94,7 +94,7 @@ public class RuleBasedDriver {
 	 * @throws Exception
 	 */
 	public static void main(String args[]) throws Exception {
-		RuleBasedDriver rbased = new RuleBasedDriver(false);
+		RuleBasedDriver rbased = new RuleBasedDriver(true);
 		String fileString = FileUtils.readFileToString(new File("debug"));
 		String outFile = "tac_sample_output";
 		rbased.batchExtract(fileString, outFile);
@@ -210,9 +210,9 @@ public class RuleBasedDriver {
 							continue; // Incorrect unit, this cannot be the
 										// relation.
 						}
-
-
-					} else {
+					}else if(unit == null && !pair.second.getUnit().equals("") && RelationUnitMap.getUnit(rel.getRelName()).equals(pair.second.getUnit())){ //for the cases where units are compound units.
+						//do nothing, seems legit
+					}else {
 						if (!RelationUnitMap.getUnit(rel.getRelName()).equals(
 								"")) {
 							continue; // this cannot be the correct relation.
@@ -299,13 +299,12 @@ public class RuleBasedDriver {
 					/*unitString = sentence.toString().substring(0, beginPos) + //before 
 								"<b>" + token + "</b>"+  //the token
 								((sentence.size() == endPos) ? "" : sentence.toString().substring(endPos)); //after*/
-					// System.out.println("Unit String: "+ unitString);
+					//System.out.println("Unit String: "+ utString);
 					List<? extends EntryWithScore<Unit>> unitsS = ue.parser
 							.getTopKUnitsValues(utString, "b", 1, 0, values);
 
 					// check for unit here....
 					if (unitsS != null) {
-						// System.out.println("units: "+unitsS.toString());
 						num.setUnit(unitsS.get(0).getKey().getBaseName());
 					}
 				}

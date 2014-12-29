@@ -85,8 +85,12 @@ public class ExtractFromPath {
 		ArrayList<Relation> res = new ArrayList<Relation>();
 		
 		Integer numNode = depGraph.getIdx(argPair.second.val);
+		
+		//checking if the label before the number is to. Checking one more label to accompany units if any.
+		
 		String prevLabel = depGraph.getLabel(numNode - 1);
-		if(numNode != 0 && prevLabel != null && prevLabel.equals("to")){
+		String prev_prevLabel = depGraph.getLabel(numNode - 2);
+		if( prevLabel != null && prevLabel.equals("to") || prev_prevLabel != null && prev_prevLabel.equals("to")){
 			//ignore modifier for this number
 		}else{
 			if(modifierPresent(argPair, path, kwd)){

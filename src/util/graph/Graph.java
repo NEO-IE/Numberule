@@ -108,11 +108,17 @@ public class Graph {
 	}
 
 	public String getLabel(int num) {
-		return nodeWordMap.get(num);
+		if(nodeWordMap.containsKey(num))
+			return nodeWordMap.get(num);
+		else
+			return null;
 	}
 
 	public Integer getIdx(String word) {
-		return wordNodeMap.get(word.toLowerCase());
+		if(wordNodeMap.containsKey(word.toLowerCase()))
+			return wordNodeMap.get(word.toLowerCase());
+		else
+			return null;
 	}
 
 	public void addModifier(Word moddedWord, Word modifier) {

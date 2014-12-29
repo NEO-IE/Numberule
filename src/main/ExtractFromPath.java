@@ -85,7 +85,8 @@ public class ExtractFromPath {
 		ArrayList<Relation> res = new ArrayList<Relation>();
 		
 		Integer numNode = depGraph.getIdx(argPair.second.val);
-		if(numNode != 0 && depGraph.getLabel(numNode-1).equals("to")){
+		String prevLabel = depGraph.getLabel(numNode - 1);
+		if(numNode != 0 && prevLabel != null && prevLabel.equals("to")){
 			//ignore modifier for this number
 		}else{
 			if(modifierPresent(argPair, path, kwd)){

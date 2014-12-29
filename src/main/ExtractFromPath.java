@@ -8,6 +8,7 @@ import util.Pair;
 import util.Relation;
 import util.Word;
 import util.Number;
+import util.graph.Graph;
 
 //sg
 
@@ -68,10 +69,11 @@ public class ExtractFromPath {
 	 * 
 	 * @param argPair
 	 * @param path
+	 * @param depGraph 
 	 * @return
 	 */
 	public static ArrayList<Relation> getExtractions(
-			Pair<Country, Number> argPair, ArrayList<Word> path) {
+			Pair<Country, Number> argPair, ArrayList<Word> path, Graph depGraph) {
 
 		KeywordData kwd = null;
 		try {
@@ -81,12 +83,13 @@ public class ExtractFromPath {
 		}
 
 		ArrayList<Relation> res = new ArrayList<Relation>();
-		boolean modifierPresent = false;
-		// if modifiers are present, cannot be extraction
-		for (String mod : kwd.modifiers) {
-			modifierPresent = modifierPresent || Word.wordListContainsVal(path, mod);
-			if (modifierPresent) {
-				return res; // return empty result
+		
+		Integer numNode = depGraph.getIdx(argPair.second.val);
+		if(numNode != 0 && depGraph.getLabel(numNode-1).equals("to")){
+			//ignore modifier for this number
+		}else{
+			if(modifierPresent(argPair, path, kwd)){
+				return res;
 			}
 		}
 		Word keyword = null;
@@ -99,5 +102,16 @@ public class ExtractFromPath {
 			}
 		}
 		return res;
+	}
+	public static boolean modifierPresent(Pair<Country, Number> argPair, ArrayList<Word> path, KeywordData kwd){
+		boolean modifierPresent = false;
+		// if modifiers are present, cannot be extraction
+		for (String mod : kwd.modifiers) {
+			modifierPresent = modifierPresent || Word.wordListContainsVal(path, mod);
+			if (modifierPresent) {
+				return true; // return empty result
+			}
+		}
+		return false;
 	}
 }

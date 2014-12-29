@@ -149,7 +149,8 @@ public class RuleBasedDriver {
 			GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
 			GrammaticalStructure gs = gsf.newGrammaticalStructure(tree);
 
-			Collection<TypedDependency> td = gs.typedDependenciesCollapsed();
+			//Collection<TypedDependency> td = gs.typedDependenciesCollapsed();
+			Collection<TypedDependency> td = gs.allTypedDependencies();
 			// Collection<TypedDependency> td =
 			// gs.typedDependenciesCCprocessed();
 			Iterator<TypedDependency> tdi = td.iterator();
@@ -186,7 +187,7 @@ public class RuleBasedDriver {
 			ArrayList<Word> wordsOnDependencyGraphPath = depGraph
 					.getWordsOnPath(pair.first, pair.second);
 			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair,
-					wordsOnDependencyGraphPath);
+					wordsOnDependencyGraphPath, depGraph);
 
 			/**
 			 * TODO : check if the rel extracted is compatible with the unit of
@@ -299,13 +300,14 @@ public class RuleBasedDriver {
 					/*unitString = sentence.toString().substring(0, beginPos) + //before 
 								"<b>" + token + "</b>"+  //the token
 								((sentence.size() == endPos) ? "" : sentence.toString().substring(endPos)); //after*/
-					//System.out.println("Unit String: "+ utString);
+				//	System.out.println("Unit String: "+ utString);
 					List<? extends EntryWithScore<Unit>> unitsS = ue.parser
 							.getTopKUnitsValues(utString, "b", 1, 0, values);
 
 					// check for unit here....
 					if (unitsS != null) {
 						num.setUnit(unitsS.get(0).getKey().getBaseName());
+					//	System.out.println("unit: "+unitsS.toString());
 					}
 				}
 				numbers.add(num);

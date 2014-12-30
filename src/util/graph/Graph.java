@@ -23,14 +23,16 @@ import edu.stanford.nlp.trees.TypedDependency;
  * position and the index
  */
 public class Graph {
-	private ArrayList<ArrayList<Integer>> adj; // the adjacency list
-	private HashMap<Integer, Word> nodeWordMap; // map from node number to
-													// the word
-	private HashMap<Word, Integer> wordNodeMap; // map from node number to
-	// the word
+	private HashMap<Word, ArrayList<Word> > adjMap; // the adjacency map
+	
+	//Mapping from index to the corresponding node, required
+	//for fast graph ops
+	private HashMap<Integer, Word> nodeWordMap;
+	private HashMap<Word, Integer> wordNodeMap; 
 
-	private HashMap<Word, HashSet<Word> > modifiersMap; // given a word, checks if there is
-												// a modifier
+	//Modifiers of the words
+	private HashMap<Word, HashSet<Word> > modifiersMap;
+	
 	
 	private HashMap<Pair<Word, Word>, Integer> pathLenMap; //all pairs shortest path
 	
@@ -40,12 +42,9 @@ public class Graph {
 	private int numNodes; // the number of nodes
 	
 	private Graph() {
-		adj = new ArrayList<ArrayList<Integer>>();
-		for (int i = 0; i < MAX; i++) {
-			adj.add(new ArrayList<Integer>());
-		}
+		adjMap = new HashMap<Word, ArrayList<Word> >();
 		nodeWordMap = new HashMap<Integer, Word>();
-		wordNodeMap = new HashMap<String, Integer>();
+		wordNodeMap = new HashMap<Word, Integer>();
 		modifiersMap = new HashMap<>();
 		pathLenMap = new HashMap<Pair<Word,Word>, Integer>();
 	}
@@ -106,18 +105,20 @@ public class Graph {
 			TreeGraphNode depNode = td1.dep();
 			TreeGraphNode govNode = td1.gov();
 
-			depGraph.addNode(depNode.index(), depNode.value());
-			depGraph.addNode(govNode.index(), govNode.value());
-			//undirected, add both edges
-			depGraph.addEdge(depNode.index(), govNode.index());
-			depGraph.addEdge(govNode.index(), depNode.index());
+			Word govWord = new Word(govNode.index(), govNode.value().toLowerCase());
+			Word depWord = new Word(depNode.index(), depNode.value().toLowerCase());
+			
+			depGraph.addNode(depNode.index(), depWord);
+			depGraph.addNode(govNode.index(), govWord);
+			
+			//undirected, add edges between depWord and govWord
+			depGraph.addEdge(depWord, govWord);
+			depGraph.addEdge(govWord, depWord);
 
 			// governor is being modified
 			
 			if (ModifyingTypes.isModifier(td1.reln().toString())) {
 				
-				Word govWord = new Word(govNode.index(), govNode.value());
-				Word depWord = new Word(depNode.index(), depNode.value());
 				//dependencies are bidirectional
 				depGraph.addModifier(govWord, depWord);
 				depGraph.addModifier(depWord, govWord);
@@ -135,13 +136,23 @@ public class Graph {
 	}
 
 	// undirected graph
-	public void addEdge(int i, int j) {
-
-		(adj.get(i)).add(j);
+	public void addEdge(Word a, Word b) {
+		if(adjMap.keySet().contains(a)) {
+			adjMap.get(a).add(b);
+		} else {
+			ArrayList<Word> adjListA = new ArrayList<Word>();
+			adjListA.add(b);
+			adjMap.put(a, adjListA);
+		}
 	}
 
-	public ArrayList<Integer> getNbr(int curr) {
-		return adj.get(curr);
+	/**
+	 * Returns the neighboring words of w
+	 * @param curr
+	 * @return
+	 */
+	public ArrayList<Word> getNbr(Word curr) {
+		return adjMap.get(curr);
 	}
 
 	/**
@@ -150,22 +161,13 @@ public class Graph {
 	 * @param pos
 	 * @param word
 	 */
-	public void addNode(int pos, String word) {
-		word = word.toLowerCase();
-		nodeWordMap.put(pos, new Word(pos, word));
-		wordNodeMap.put(word, pos);
+	public void addNode(int pos, Word w) {
+		nodeWordMap.put(pos, w);
+		wordNodeMap.put(w, pos);
 	}
 
 	public ArrayList<Word> getWordsOnPath(Word src, Word des) {
-		int srcNode = src.idx; // wordNodeMap.get(src);
-		int desNode = des.idx;// wordNodeMap.get(des);
-
-		ArrayList<Integer> path = BFS.getPath(this, srcNode, desNode);
-		ArrayList<Word> res = new ArrayList<Word>();
-		for (Integer node : path) {
-			res.add(new Word(node, nodeWordMap.get(node).getVal().trim().toLowerCase()));
-		}
-		return res;
+		return BFS.getPath(this, src, des);
 	}
 
 	public String getLabel(int num) {

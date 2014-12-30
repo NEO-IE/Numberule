@@ -184,7 +184,7 @@ public class RuleBasedDriver {
 	ArrayList<Relation> getExtractions(Graph depGraph,
 			ArrayList<Pair<Country, Number>> pairs) throws IOException {
 		ArrayList<Relation> result = new ArrayList<Relation>();
-		HashMap< Pair<Word, Word>, Relation> alreadyExtractedCountryRel = new HashMap<Pair<Word,Word>, Relation>();
+		HashMap< Pair<Word, Word>, Relation> alreadyExtractedRelMap = new HashMap<Pair<Word,Word>, Relation>();
 		
 		//The hashcode of Relation does not include argument2
 		for (Pair<Country, Number> pair : pairs) {
@@ -221,18 +221,18 @@ public class RuleBasedDriver {
 				}
 				augment(depGraph, rel);
 				Pair<Word, Word> argRelPairKey = new Pair<Word, Word>(rel.getCountry(),rel.getKeyword());
-				if(alreadyExtractedCountryRel.containsKey(argRelPairKey)) { //the same arg1, relation, and keyword have already been extracted?
-					Number arg2 = alreadyExtractedCountryRel.get(argRelPairKey).getNumber();
+				if(alreadyExtractedRelMap.containsKey(argRelPairKey)) { //the same arg1, relation, and keyword have already been extracted?
+					Number arg2 = alreadyExtractedRelMap.get(argRelPairKey).getNumber();
 					Number currNumber = rel.getNumber();
-					if(arg2.idx > currNumber.idx) { //the current number is closer?
-						alreadyExtractedCountryRel.put(argRelPairKey, rel);
+					if(depGraph.distance(rel.getCountry(), currNumber) < depGraph.distance(rel.getCountry(), arg2)) { //the current number is closer?
+						alreadyExtractedRelMap.put(argRelPairKey, rel);
 					} //else nothing to do, the relation already present in the map is the one that should be there
 				} else {
-					alreadyExtractedCountryRel.put(argRelPairKey, rel);
+					alreadyExtractedRelMap.put(argRelPairKey, rel);
 				}
 			}
 		}
-		for(Relation rel : alreadyExtractedCountryRel.values()) {
+		for(Relation rel : alreadyExtractedRelMap.values()) {
 			result.add(rel);
 		}
 		return result;

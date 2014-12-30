@@ -2,11 +2,16 @@
 package util.graph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import org.w3c.dom.Node;
+
 import meta.ModifyingTypes;
+import util.Number;
+import util.Pair;
 import util.Word;
 import edu.stanford.nlp.trees.TreeGraphNode;
 import edu.stanford.nlp.trees.TypedDependency;
@@ -19,26 +24,77 @@ import edu.stanford.nlp.trees.TypedDependency;
  */
 public class Graph {
 	private ArrayList<ArrayList<Integer>> adj; // the adjacency list
-	private HashMap<Integer, String> nodeWordMap; // map from node number to
+	private HashMap<Integer, Word> nodeWordMap; // map from node number to
 													// the word
-	private HashMap<String, Integer> wordNodeMap; // map from node number to
+	private HashMap<Word, Integer> wordNodeMap; // map from node number to
 	// the word
 
 	private HashMap<Word, HashSet<Word> > modifiersMap; // given a word, checks if there is
 												// a modifier
-
+	
+	private HashMap<Pair<Word, Word>, Integer> pathLenMap; //all pairs shortest path
+	
 	public final static int MAX = 1000;
-
+	
+	
+	private int numNodes; // the number of nodes
+	
 	private Graph() {
 		adj = new ArrayList<ArrayList<Integer>>();
 		for (int i = 0; i < MAX; i++) {
 			adj.add(new ArrayList<Integer>());
 		}
-		nodeWordMap = new HashMap<Integer, String>();
+		nodeWordMap = new HashMap<Integer, Word>();
 		wordNodeMap = new HashMap<String, Integer>();
 		modifiersMap = new HashMap<>();
+		pathLenMap = new HashMap<Pair<Word,Word>, Integer>();
+	}
+	
+	/**
+	 * Floyd-Warshall All pairs shortest path
+	 */
+	private void allPairs() {
+		int dist[][] = new int[numNodes + 2][numNodes + 2];
+		for(int i = 0; i < adj.size(); i++) {
+			ArrayList<Integer> adjI = adj.get(i);
+		//	System.out.println(adjI);
+			for(int j = 0; j < adjI.size(); j++) {
+				dist[i][adjI.get(j)] = 1;
+			}
+		}
+		for(int i = 0; i < numNodes; i++) {
+			for(int j = 0; j < numNodes; j++) {
+				dist[i][j] = MAX;
+			}
+		}
+		//Arrays.fill(dist, Integer.MAX_VALUE);
+		for(int  k = 0; k < numNodes; k++) {
+			for(int i = 0; i < numNodes; i++) {
+				for(int j = 0; j < numNodes; j++) {
+					dist[i][j] = Math.min(dist[i][j], dist[i][k] + dist[k][j]);
+				}
+			}
+		}
+		
+		for(int i = 0; i < numNodes; i++) {
+			for(int j = 0; j < numNodes; j++) {
+				if(dist[i][j] != MAX) {
+					Word w1 = nodeWordMap.get(i);
+					Word w2 = nodeWordMap.get(j);
+					if(null == w1 || null == w2) continue;
+					Pair<Word, Word> keyPair = new Pair<Word, Word>(w1, w2);
+					System.out.println(w1.getVal() + " - " + w2.getVal() + " = " + dist[i][j]);
+					pathLenMap.put(keyPair, dist[i][j]);
+				}
+			}
+		}
 	}
 
+	/**
+	 * The factory method that takes the typed dependencies and returns a graph
+	 * @param tdi
+	 * @return
+	 */
 	public static Graph makeDepGraph(Iterator<TypedDependency> tdi) {
 		Graph depGraph = new Graph();
 
@@ -52,16 +108,17 @@ public class Graph {
 
 			depGraph.addNode(depNode.index(), depNode.value());
 			depGraph.addNode(govNode.index(), govNode.value());
+			//undirected, add both edges
 			depGraph.addEdge(depNode.index(), govNode.index());
 			depGraph.addEdge(govNode.index(), depNode.index());
-			// System.out.println("dep : " + depNode.value() + " gov : " +
-			// govNode.value());
+
 			// governor is being modified
 			
-			if (ModifyingTypes.isModifier(td1.reln().toString())	) {
-				//BUG FIX, DEPENDENCIES HOLD ON BOTH THE SIDES
+			if (ModifyingTypes.isModifier(td1.reln().toString())) {
+				
 				Word govWord = new Word(govNode.index(), govNode.value());
 				Word depWord = new Word(depNode.index(), depNode.value());
+				//dependencies are bidirectional
 				depGraph.addModifier(govWord, depWord);
 				depGraph.addModifier(depWord, govWord);
 			}
@@ -69,6 +126,10 @@ public class Graph {
 		}
 		// depGraph.listModifiers();
 		
+		depGraph.setNumNodes(100);
+		System.out.println(depGraph.wordNodeMap.keySet());
+		System.out.println(depGraph.numNodes);
+		depGraph.allPairs();
 		return depGraph;
 
 	}
@@ -91,7 +152,7 @@ public class Graph {
 	 */
 	public void addNode(int pos, String word) {
 		word = word.toLowerCase();
-		nodeWordMap.put(pos, word);
+		nodeWordMap.put(pos, new Word(pos, word));
 		wordNodeMap.put(word, pos);
 	}
 
@@ -102,14 +163,14 @@ public class Graph {
 		ArrayList<Integer> path = BFS.getPath(this, srcNode, desNode);
 		ArrayList<Word> res = new ArrayList<Word>();
 		for (Integer node : path) {
-			res.add(new Word(node, nodeWordMap.get(node).trim().toLowerCase()));
+			res.add(new Word(node, nodeWordMap.get(node).getVal().trim().toLowerCase()));
 		}
 		return res;
 	}
 
 	public String getLabel(int num) {
 		if(nodeWordMap.containsKey(num))
-			return nodeWordMap.get(num);
+			return nodeWordMap.get(num).getVal();
 		else
 			return null;
 	}
@@ -143,6 +204,17 @@ public class Graph {
 		for (Word word : modifiersMap.keySet()) {
 			System.err.println(word + " -> " + modifiersMap.get(word));
 		}
+	}
+
+
+	public void setNumNodes(int numNodes) {
+		this.numNodes = numNodes;
+	}
+
+	public int distance(Word country, Number currNumber) {
+		Word num = (Word) currNumber;
+		return pathLenMap.get(new Pair<Word, Word>(country, num));
+	
 	}
 
 }

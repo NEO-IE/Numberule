@@ -1,6 +1,7 @@
 package main;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import meta.KeywordData;
 import util.Country;
@@ -49,14 +50,24 @@ public class ExtractFromPath {
 	 * and checks if one of the words on the path is the keyword
 	 * @param path
 	 * @param keywords
+	 * @param depGraph 
 	 * @return Keyword on the path if one is found
 	 */
-	static Word getKeyword(ArrayList<Word> path, ArrayList<String> keywords) {
+	static Word getKeyword(ArrayList<Word> path, ArrayList<String> keywords, Graph depGraph) {
 		for (String kw : keywords) { //for each of the keywords
 			kw = kw.toLowerCase();
 			for (Word wordOnPath : path) { //iterate over the word and see if there is a match
 				if (wordOnPath.val.toLowerCase().equals(kw)) {
 					return wordOnPath;
+				}else{
+					HashSet<Word> modWords = depGraph.getModifiers(wordOnPath);
+					if(modWords == null)
+						continue; //no modifier words.
+					for(Word modWord: modWords){
+						if(modWord.val.toLowerCase().equals(kw)){
+							return modWord;
+						}
+					}
 				}
 			}
 		}
@@ -100,7 +111,7 @@ public class ExtractFromPath {
 		Word keyword = null;
 		for (int i = 0; i < kwd.NUM_RELATIONS; i++) {
 
-			if (null != (keyword = getKeyword(path, kwd.KEYWORDS.get(i)))) {
+			if (null != (keyword = getKeyword(path, kwd.KEYWORDS.get(i),depGraph))) {
 				assert (keyword != null);
 				res.add(new Relation(argPair.first, argPair.second, keyword,
 						kwd.relName.get(i)));

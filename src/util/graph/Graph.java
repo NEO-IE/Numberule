@@ -133,7 +133,10 @@ public class Graph {
 	}
 
 	public HashSet<Word> getModifiers(Word modifiedWord) {
-		return modifiersMap.get(modifiedWord);
+		if(modifiersMap.containsKey(modifiedWord))
+			return modifiersMap.get(modifiedWord);
+		
+		return null;
 	}
 
 	public void listModifiers() {

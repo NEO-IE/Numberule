@@ -1,0 +1,705 @@
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=53920,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=53999,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=54011,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+-49
+Got connection from Socket[addr=/10.105.1.3,port=54022,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion in 2014
+-87
+Got connection from Socket[addr=/10.105.1.3,port=36511,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+-133
+Got connection from Socket[addr=/10.105.1.3,port=36547,localport=4080]
+true
+Extracting from 1:1.3 billion is Thane's population.
+-198
+Got connection from Socket[addr=/10.105.1.3,port=36555,localport=4080]
+true
+Extracting from 1:1.3 million is Thane's population.
+-232
+Got connection from Socket[addr=/10.105.1.3,port=36566,localport=4080]
+true
+Extracting from 1:1.3 million is Uganda's population.
+-266
+Got connection from Socket[addr=/10.105.1.3,port=36593,localport=4080]
+true
+Extracting from 1:1.3 million is Uganda's total population.
+-301
+Got connection from Socket[addr=/10.105.1.3,port=36692,localport=4080]
+false
+Extracting from 0:1.3 million is Uganda's population
+Got connection from Socket[addr=/10.105.1.3,port=36710,localport=4080]
+true
+Extracting from 1:1.3 million is Uganda's population
+-376
+Got connection from Socket[addr=/10.105.1.3,port=36722,localport=4080]
+true
+Extracting from 1:1.3 million is Uganda's total population
+-410
+Got connection from Socket[addr=/10.105.1.3,port=37025,localport=4080]
+true
+Extracting from 1:1.3 million is Uganda's total population.
+-450
+Got connection from Socket[addr=/10.105.1.3,port=45776,localport=4080]
+false
+Extracting from 0:Urban population of India stands at a whopping 23.3 million
+Got connection from Socket[addr=/10.105.1.3,port=45803,localport=4080]
+false
+Extracting from 0:Rural population of India forms the major chunk at a whopping 23.3 million
+Got connection from Socket[addr=/10.105.1.3,port=46034,localport=4080]
+false
+Extracting from 0:Urban India uses major chunk of Internet at 23%
+Got connection from Socket[addr=/10.105.1.3,port=46043,localport=4080]
+true
+Extracting from 1:Urban India uses major chunk of Internet at 23%
+-627
+Got connection from Socket[addr=/10.105.1.3,port=46078,localport=4080]
+true
+Extracting from 1:23% of the Urban Indians use Internet
+-718
+Got connection from Socket[addr=/10.105.1.3,port=46087,localport=4080]
+true
+Extracting from 1:23% of the Urban Indians use the Internet
+-755
+Got connection from Socket[addr=/10.105.1.3,port=46097,localport=4080]
+true
+Extracting from 1:23% of the Urban Indians usage the Internet
+-796
+Got connection from Socket[addr=/10.105.1.3,port=46286,localport=4080]
+true
+Extracting from 1:Urban Indian Internet users form a whopping 23%
+-795
+Got connection from Socket[addr=/10.105.1.3,port=46324,localport=4080]
+true
+Extracting from 1:Urban Indian Internet users percent stands at 23%
+-840
+Got connection from Socket[addr=/10.105.1.3,port=46346,localport=4080]
+true
+Extracting from 1:Almost 23% of the urban Indians use Internet
+-928
+Got connection from Socket[addr=/10.105.1.3,port=46490,localport=4080]
+true
+Extracting from 1:Almost 23% of the urban Indians have usage Internet
+-972
+Got connection from Socket[addr=/10.105.1.3,port=46497,localport=4080]
+true
+Extracting from 1:Almost 23% of the urban Indians  usage Internet
+-1023
+Got connection from Socket[addr=/10.105.1.3,port=46508,localport=4080]
+true
+Extracting from 1:Almost 23% of the urban Indians  Internet usage
+-1070
+Got connection from Socket[addr=/10.105.1.3,port=46519,localport=4080]
+true
+Extracting from 1:Internet usage in the urban india stands at 23
+-1080
+Got connection from Socket[addr=/10.105.1.3,port=46525,localport=4080]
+false
+Extracting from 0:Internet usage in the urban india stands at 23
+Got connection from Socket[addr=/10.105.1.3,port=46544,localport=4080]
+true
+Extracting from 1:Internet usage in the urban india stands at 23 %
+-1172
+Got connection from Socket[addr=/10.105.1.3,port=46792,localport=4080]
+true
+Extracting from 1:Population of rural areas stand at 23
+-1229
+Got connection from Socket[addr=/10.105.1.3,port=46807,localport=4080]
+false
+Extracting from 0:Population of rural areas stand at 23
+Got connection from Socket[addr=/10.105.1.3,port=46815,localport=4080]
+false
+Extracting from 0:Population of rural areas of India stand at 23
+Got connection from Socket[addr=/10.105.1.3,port=47360,localport=4080]
+false
+Extracting from 0:Population of rural areas of India stand at 23
+Got connection from Socket[addr=/10.105.1.3,port=47378,localport=4080]
+false
+Extracting from 0:population of rural areas of India stand at 23
+Got connection from Socket[addr=/10.105.1.3,port=47381,localport=4080]
+false
+Extracting from 0:Population of rural areas of India stand at 23
+Got connection from Socket[addr=/10.105.1.3,port=47398,localport=4080]
+false
+Extracting from 0:Population of India stand at 23
+Got connection from Socket[addr=/10.105.1.3,port=47405,localport=4080]
+false
+Extracting from 0:Population of India stands at 23
+Got connection from Socket[addr=/10.105.1.3,port=47420,localport=4080]
+false
+Extracting from 0:Population of India stand at 23
+Got connection from Socket[addr=/10.105.1.3,port=47430,localport=4080]
+false
+Extracting from 0:Population of rural areas of India stands at 23
+Got connection from Socket[addr=/10.105.1.3,port=47450,localport=4080]
+false
+Extracting from 0:Population of rural areas of India stands at 23 million
+Got connection from Socket[addr=/10.105.1.3,port=47879,localport=4080]
+true
+Extracting from 1:Population of rural areas of India stands at 23 million
+-1673
+Got connection from Socket[addr=/10.105.1.3,port=54208,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=57945,localport=4080]
+true
+Extracting from 1:The GDP of India in the year 2007 was US $1.09 trillion
+Got connection from Socket[addr=/10.105.1.3,port=57969,localport=4080]
+true
+Extracting from 1:The GDP of India in the year 2007 was US $1.09 trillion
+Got connection from Socket[addr=/10.105.1.3,port=58266,localport=4080]
+true
+Extracting from 1:The GDP of India in the year 2007 was US $1.09 trillion
+Got connection from Socket[addr=/10.105.1.3,port=60645,localport=4080]
+true
+Extracting from 1:The GDP of India in the year 2007 was US $1.09 trillion
+Got connection from Socket[addr=/10.105.1.3,port=45742,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=45743,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=37600,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=37620,localport=4080]
+false
+Extracting from 0:The population of rural India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=37649,localport=4080]
+false
+Extracting from 0:The population of rural India is 1.3 billion people.
+Got connection from Socket[addr=/10.105.1.3,port=37653,localport=4080]
+true
+Extracting from 1:The population of rural India is 1.3 billion people.
+Got connection from Socket[addr=/10.105.1.3,port=37671,localport=4080]
+true
+Extracting from 1:The population of rural India that likes to fish is 1.3 billion people.
+Got connection from Socket[addr=/10.105.1.3,port=37694,localport=4080]
+true
+Extracting from 1:The population of rural India which likes to fish is 1.3 billion people.
+Got connection from Socket[addr=/10.105.1.3,port=37728,localport=4080]
+true
+Extracting from 1:The adult population of rural India which likes to fish is 1.3 billion people.
+Got connection from Socket[addr=/10.105.1.3,port=37748,localport=4080]
+true
+Extracting from 1:The adult population of rural India  is about 1.3 billion people.
+Got connection from Socket[addr=/10.105.1.3,port=37778,localport=4080]
+true
+Extracting from 1:The adult population in rural India who have access to a newspaper is about 1.3 billion people.
+Got connection from Socket[addr=/10.105.1.3,port=37795,localport=4080]
+true
+Extracting from 1:The adult population in rural parts of India who have access to a newspaper is about 1.3 billion people.
+Got connection from Socket[addr=/10.105.1.3,port=38297,localport=4080]
+true
+Extracting from 1:The population in rural India increased by 5 million.
+Got connection from Socket[addr=/10.105.1.3,port=38307,localport=4080]
+true
+Extracting from 1:The population in rural India increased to 5 million.
+Got connection from Socket[addr=/10.105.1.3,port=38439,localport=4080]
+true
+Extracting from 1:India reported a net population of 1.3 billion, whereas Pakistan was a close second at 1 billion.
+Got connection from Socket[addr=/10.105.1.3,port=38455,localport=4080]
+true
+Extracting from 1:India reported a net population of 1.3 billion, whereas Pakistan was a close second at 1.1 billion.
+Got connection from Socket[addr=/10.105.1.3,port=38486,localport=4080]
+true
+Extracting from 1:India reported a net population of 1.3 billion, whereas Pakistan's population was hovering at 1.1 billion.
+Got connection from Socket[addr=/10.105.1.3,port=38577,localport=4080]
+true
+Extracting from 1:India's population sits at 1.3 billion, whereas Pakistan's population has been hovering around 1.1 billion.
+Got connection from Socket[addr=/10.105.1.3,port=38607,localport=4080]
+true
+Extracting from 1:Indian population grew to 1.4 billion last year.
+Got connection from Socket[addr=/10.105.1.3,port=38637,localport=4080]
+true
+Extracting from 1:Indian population grew by 1.4 billion last year.
+Got connection from Socket[addr=/10.105.1.3,port=38660,localport=4080]
+true
+Extracting from 1:Indian population was reported as 1.4 billion last year.
+Got connection from Socket[addr=/10.105.1.3,port=39045,localport=4080]
+true
+Extracting from 1:Indian population was reported as 1.4 billion last year.
+Got connection from Socket[addr=/10.105.1.3,port=39060,localport=4080]
+true
+Extracting from 1:India's population was reported as 1.4 billion last year.
+Got connection from Socket[addr=/10.105.1.3,port=53871,localport=4080]
+true
+Extracting from 1:India's population sits at 1.3 billion, whereas Pakistan's population has been hovering around 1.1 billion.
+Got connection from Socket[addr=/10.105.1.3,port=53890,localport=4080]
+true
+Extracting from 1:The population in rural India increased to 1.3 billion.
+Got connection from Socket[addr=/10.105.1.3,port=53901,localport=4080]
+true
+Extracting from 1:The population in rural India that have an access to a newspaper is 1.3 billion. 
+Got connection from Socket[addr=/10.105.1.3,port=53907,localport=4080]
+true
+Extracting from 1:The population in rural India that have an access to a newspaper is 1.3 billion. 
+Got connection from Socket[addr=/10.105.1.3,port=55412,localport=4080]
+true
+Extracting from 1:The population in rural India that have an access to a newspaper is 1.3 billion. 
+Got connection from Socket[addr=/10.105.1.3,port=58551,localport=4080]
+true
+Extracting from 1:marginal fdi in sugarcane India is 2948
+Got connection from Socket[addr=/10.105.1.3,port=58693,localport=4080]
+true
+Extracting from 1:marginal fdi in sugarcane India is 2948 united states dollar
+Got connection from Socket[addr=/10.105.1.3,port=58732,localport=4080]
+true
+Extracting from 1:marginal fdi in sugarcane India is 2948 US $
+Got connection from Socket[addr=/10.105.1.3,port=58910,localport=4080]
+true
+Extracting from 1:marginal fdi in sugarcane India is 2948 US $
+Got connection from Socket[addr=/10.105.1.3,port=58918,localport=4080]
+false
+Extracting from 0:marginal fdi in sugarcane India is 2948 US $
+Got connection from Socket[addr=/10.105.1.3,port=58939,localport=4080]
+false
+Extracting from 0:marginal FDI in sugarcane India is 2948 US $
+Got connection from Socket[addr=/10.105.1.3,port=58951,localport=4080]
+false
+Extracting from 0:FDI of India is 232
+Got connection from Socket[addr=/10.105.1.3,port=33046,localport=4080]
+false
+Extracting from 0:The GDP of India in the year 2007 was US $1.09 trillion
+Got connection from Socket[addr=/10.105.1.3,port=33055,localport=4080]
+true
+Extracting from 1:The GDP of India in the year 2007 was US $1.09 trillion
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=34964,localport=4080]
+true
+Extracting from 1:retail FDI in suburban India is 232 billion $
+Got connection from Socket[addr=/10.105.1.3,port=35017,localport=4080]
+false
+Extracting from 0:retail FDI in suburban India is 232 billion $
+Got connection from Socket[addr=/10.105.1.3,port=35024,localport=4080]
+true
+Extracting from 1:retail FDI in suburban India is 232 billion $
+Got connection from Socket[addr=/10.105.1.3,port=40484,localport=4080]
+true
+Extracting from 1:The diesel prices are at an all time low of 23$
+Got connection from Socket[addr=/10.105.1.3,port=40526,localport=4080]
+true
+Extracting from 1:The diesel prices are at an all time low of 23$/litre
+Got connection from Socket[addr=/10.105.1.3,port=40541,localport=4080]
+false
+Extracting from 0:The diesel prices are at an all time low of 23$/litre
+Got connection from Socket[addr=/10.105.1.3,port=40542,localport=4080]
+false
+Extracting from 0:The diesel prices are at an all time low of 23 $/litre
+Got connection from Socket[addr=/10.105.1.3,port=40552,localport=4080]
+false
+Extracting from 0:The diesel prices in India are at an all time low of 23 $/litre
+Got connection from Socket[addr=/10.105.1.3,port=40564,localport=4080]
+false
+Extracting from 0:The diesel prices in India is 23 $/litre
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=40871,localport=4080]
+false
+Extracting from 0:The diesel prices in India is 23 $/litre
+Got connection from Socket[addr=/10.105.1.3,port=41777,localport=4080]
+false
+Extracting from 0:The diesel price in India is 23 $ per litre
+Got connection from Socket[addr=/10.105.1.3,port=41782,localport=4080]
+true
+Extracting from 1:The diesel price in India is 23 $ per litre
+Got connection from Socket[addr=/10.105.1.3,port=44249,localport=4080]
+true
+Extracting from 1:The diesel price in India is 23 $ per litre
+Got connection from Socket[addr=/10.105.1.3,port=44256,localport=4080]
+false
+Extracting from 0:The diesel price in India is 23 $ per litre
+Got connection from Socket[addr=/10.105.1.3,port=44283,localport=4080]
+false
+Extracting from 0:The diesel price in Capital of India is 23 $ per litre
+Got connection from Socket[addr=/10.105.1.3,port=44422,localport=4080]
+false
+Extracting from 0:The diesel price in the Capital of India is 23 $ per litre
+Got connection from Socket[addr=/10.105.1.3,port=45487,localport=4080]
+false
+Extracting from 0:Diesel is priced at 23 $ per litre in India
+Got connection from Socket[addr=/10.105.1.3,port=47697,localport=4080]
+false
+Extracting from 0:Diesel is priced at 23 $ per litre in India
+Got connection from Socket[addr=/10.105.1.3,port=47942,localport=4080]
+false
+Extracting from 0:Female population of urban india is 23 million
+Got connection from Socket[addr=/10.105.1.3,port=35057,localport=4080]
+false
+Extracting from 0:Female population of urban india is 23 million
+Got connection from Socket[addr=/10.105.1.3,port=35073,localport=4080]
+false
+Extracting from 0:the urban population of india is 424
+Got connection from Socket[addr=/10.105.1.3,port=35089,localport=4080]
+false
+Extracting from 0:urban indian population stands at 424
+Got connection from Socket[addr=/10.105.1.3,port=35108,localport=4080]
+false
+Extracting from 0:urban indian population stands at 424
+Got connection from Socket[addr=/10.105.1.3,port=35138,localport=4080]
+false
+Extracting from 0:The urban population of India is 2348
+Got connection from Socket[addr=/10.105.1.3,port=35162,localport=4080]
+false
+Extracting from 0:The urban population of India is 424 million
+Got connection from Socket[addr=/10.105.1.3,port=35166,localport=4080]
+true
+Extracting from 1:The urban population of India is 424 million
+Got connection from Socket[addr=/10.105.1.3,port=35202,localport=4080]
+true
+Extracting from 1:Urban Indian population stands at 242 million
+Got connection from Socket[addr=/10.105.1.3,port=35213,localport=4080]
+true
+Extracting from 1:Urban Indian population stands at 424 million
+Got connection from Socket[addr=/10.105.1.3,port=42241,localport=4080]
+false
+Extracting from 0:The users in India are 23.43 million
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=42369,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=42380,localport=4080]
+false
+Extracting from 0:The users in India are 1213.23
+Got connection from Socket[addr=/10.105.1.3,port=43960,localport=4080]
+false
+Extracting from 0:There are no official figures for the population of Russia in 2014, but the 2010 census, the results of which were released in late 2011 and early 2012, reports that the official population of Russia was 142,946,800.
+Got connection from Socket[addr=/10.105.1.3,port=56834,localport=4080]
+true
+Extracting from 1:Italy 's resident population in the first two month rise 0.07 percent to 60,088,880.
+Got connection from Socket[addr=/10.105.1.3,port=56846,localport=4080]
+false
+Extracting from 0:Italy 's resident population in the first two month rise 0.07 percent to 60,088,880.
+Got connection from Socket[addr=/10.105.1.3,port=37944,localport=4080]
+true
+Extracting from 1:accord to the International Telecommunication Union , as of June 2010 , Singapore Internet usage have a 77.8 percent penetration rate , say Dr Sundeep Muppidi of the asian Media Information and Communication Center -lrb- AMIC -rrb- .
+Got connection from Socket[addr=/10.105.1.3,port=38193,localport=4080]
+true
+Extracting from 1:Since 1970, average life expectancy in the region has climbed from 60 to 74 years, the report noted, rising to 79 years in Costa Rica, Chile and Cuba.
+Got connection from Socket[addr=/10.105.1.3,port=38681,localport=4080]
+true
+Extracting from 1:A government report said in July that Japan's average life expectancy set a world-best 86.44 years for women while men's average life expectancy came fifth globally with 79.59 years.
+Got connection from Socket[addr=/10.105.1.3,port=38913,localport=4080]
+true
+Extracting from 1:Zimbabwe, where life expectancy is around 47 years and 15 percent of the population need food aid, would lose 47 percent; Nigeria -- Africa's most populous nation with a population of 152 million -- and Ethiopia would each lose 46 percent, and Liberia's population would fall by 45 percent.
+Got connection from Socket[addr=/10.105.1.3,port=39138,localport=4080]
+true
+Extracting from 1:Covering a total area of 8.51 million square kilometers, Brazil has a rangeland of more than 200 million hectares, a farmland of 6.2 million hectares and 100 million hectares of unexploited land.
+Got connection from Socket[addr=/10.105.1.3,port=39649,localport=4080]
+true
+Extracting from 1:Two-way trade amounted to 760 million euros (about US$1.07 billion) in 2008, with Ireland importing 536 million euros worth of goods from Taiwan and exporting 224 million euros worth of merchandise to Taiwan.
+Got connection from Socket[addr=/10.105.1.3,port=40954,localport=4080]
+true
+Extracting from 1:Pump price for diesel fuel (US dollar per liter) in Zambia was last measured at 1.52 in 2010, according to the World Bank.
+Got connection from Socket[addr=/10.105.1.3,port=41090,localport=4080]
+true
+Extracting from 1:The latest value for Pump price for diesel fuel (US$ per liter) in Zambia was 1.48 as of 2012.
+Got connection from Socket[addr=/10.105.1.3,port=43354,localport=4080]
+true
+Extracting from 1:In the US, diesel is priced at Rs 54.55 per litre, while it costs Rs 77.84 in France, Rs 83.36 in Germany, Rs 99.38 in UK and Rs 93.11 in Italy.
+Got connection from Socket[addr=/10.105.1.3,port=45462,localport=4080]
+false
+Extracting from 0:A government report said in July that Japan's average life expectancy set a world-best 86.44 years for women while men's average life expectancy came fifth globally with 79.59 years
+Got connection from Socket[addr=/10.105.1.3,port=45705,localport=4080]
+false
+Extracting from 0:The latest value for Pump price for diesel fuel (US$ per liter) in Zambia was 1.48 as of 2012.
+Got connection from Socket[addr=/10.105.1.3,port=45765,localport=4080]
+false
+Extracting from 0:The diesel price in India is 1.48 $ er liter 
+Got connection from Socket[addr=/10.105.1.3,port=45770,localport=4080]
+false
+Extracting from 0:The diesel price in India is 1.48 $ per liter 
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=49940,localport=4080]
+false
+Extracting from 0:life expectancy of japan is 234 years
+Got connection from Socket[addr=/10.105.1.3,port=50260,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=50269,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=50270,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=50272,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=50343,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=50344,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=50451,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=50484,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=50486,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=50487,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=50489,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=50494,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=50496,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=50597,localport=4080]
+false
+Extracting from 0:the price of diesel is 13 $ per liter
+Got connection from Socket[addr=/10.105.1.3,port=50607,localport=4080]
+false
+Extracting from 0:the price of diesel in India is 13 $ per liter
+Got connection from Socket[addr=/10.105.1.3,port=50609,localport=4080]
+false
+Extracting from 0:the price of diesel in India is 13 $ per litre
+Got connection from Socket[addr=/10.105.1.3,port=50619,localport=4080]
+false
+Extracting from 0:the price of diesel in India is 13 $ per liter
+Got connection from Socket[addr=/10.105.1.3,port=50644,localport=4080]
+false
+Extracting from 0:the co2 emissions are 23 kiloton
+Got connection from Socket[addr=/10.105.1.3,port=50655,localport=4080]
+false
+Extracting from 0:the co2 emissions in India  are 23 kiloton
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=54504,localport=4080]
+true
+Extracting from 1:Thailand, a country which is widely known for its craze for social networks, reportedly, has a Facebook and internet penetration of 36 per cent and 26 per cent respectively. 
+Got connection from Socket[addr=/10.105.1.3,port=54506,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=54508,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=54517,localport=4080]
+false
+Extracting from 0:The electricity sector in India had an installed capacity of 250.256 GW as of end July 2014.
+Got connection from Socket[addr=/10.105.1.3,port=54526,localport=4080]
+true
+Extracting from 1:The electricity sector in India had an installed capacity of 250.256 GW as of end July 2014.
+Got connection from Socket[addr=/10.105.1.3,port=54627,localport=4080]
+false
+Extracting from 0:The electricity sector in India had an installed capacity of 250.256 GWH as of end July 2014.
+Got connection from Socket[addr=/10.105.1.3,port=54628,localport=4080]
+true
+Extracting from 1:The electricity sector in India had an installed capacity of 250.256 GW as of end July 2014.
+Got connection from Socket[addr=/10.105.1.3,port=54630,localport=4080]
+true
+Extracting from 1:The electricity sector in India had an installed capacity of 250.256 GWH as of end July 2014.
+Got connection from Socket[addr=/10.105.1.3,port=54634,localport=4080]
+true
+Extracting from 1:The electricity sector in India had an installed capacity of 250.256 GWh as of end July 2014.
+Got connection from Socket[addr=/10.105.1.3,port=54641,localport=4080]
+true
+Extracting from 1:The electricity sector in India had an installed capacity of 250.256 GWH as of end July 2014.
+Got connection from Socket[addr=/10.105.1.3,port=55253,localport=4080]
+false
+Extracting from 0:According to the IEA the Russian gross production of electricity was 1,038 TWh in 2008 and 930 TWh in 2004 giving the 4 th top position among the world producers in 2008.
+Got connection from Socket[addr=/10.105.1.3,port=55259,localport=4080]
+true
+Extracting from 1:According to the IEA the Russian gross production of electricity was 1,038 TWh in 2008 and 930 TWh in 2004 giving the 4 th top position among the world producers in 2008.
+Got connection from Socket[addr=/10.105.1.3,port=55304,localport=4080]
+true
+Extracting from 1:Latest figures (published 2009) show that there was a 0.4% decrease in the total supply of electricity in the UK in 2008, to 399.6 TWh.
+Got connection from Socket[addr=/10.105.1.3,port=55310,localport=4080]
+true
+Extracting from 1:Latest figures (published 2009) show that there was a 0.4% decrease in the total supply of electricity in the UK in 2008, to 399.6 TWh.
+Got connection from Socket[addr=/10.105.1.3,port=55317,localport=4080]
+false
+Extracting from 0:Latest figures (published 2009) show that there was a 0.4% decrease in the total supply of electricity in the UK in 2008, to 399.6 TWh.
+Got connection from Socket[addr=/10.105.1.3,port=55588,localport=4080]
+true
+Extracting from 1:Life expectancy at birth for Indian males has gone up from 48.6 years in 1970 to 63.2 years in 2010, while for Indian females the number has risen from 49.1 years to 67.5 years during the same period.
+Got connection from Socket[addr=/10.105.1.3,port=55618,localport=4080]
+false
+Extracting from 0:Life expectancy at birth for Indian males has gone up from 48.6 years in 1970 to 63.2 years in 2010, while for Indian females the number has risen from 49.1 years to 67.5 years during the same period.
+Got connection from Socket[addr=/10.105.1.3,port=55803,localport=4080]
+false
+Extracting from 0:Life expectancy at birth for Indian males has gone up from 48.6 years in 1970 to 63.2 years in 2010, while for Indian females the number has risen from 49.1 years to 67.5 years during the same period.
+Got connection from Socket[addr=/10.105.1.3,port=55813,localport=4080]
+true
+Extracting from 1:Life expectancy at birth for Indian males has gone up from 48.6 years in 1970 to 63.2 years in 2010, while for Indian females the number has risen from 49.1 years to 67.5 years during the same period.
+Got connection from Socket[addr=/10.105.1.3,port=56314,localport=4080]
+false
+Extracting from 0:Foreign Direct Investment in Germany increased to -2158.93 EUR Million in April of 2014 from -3564.89 EUR Million in March of 2014.
+Got connection from Socket[addr=/10.105.1.3,port=56320,localport=4080]
+true
+Extracting from 1:Foreign Direct Investment in Germany increased to -2158.93 EUR Million in April of 2014 from -3564.89 EUR Million in March of 2014.
+Got connection from Socket[addr=/10.105.1.3,port=56758,localport=4080]
+true
+Extracting from 1:The inflow of FDI into Pakistan was US$ 258.42 million in 1991.
+Got connection from Socket[addr=/10.105.1.3,port=56829,localport=4080]
+true
+Extracting from 1: The inflow of FDI into Pakistan was US$ 258.42 million in 1991, and in the same year in Afghanistan it was zero but in the year 2007 the inflow of FDI into Pakistan increased to US$ 4273 million and into Afghanistan it was at US$ 288 during 2007.
+Got connection from Socket[addr=/10.105.1.3,port=56837,localport=4080]
+false
+Extracting from 0: The inflow of FDI into Pakistan was US$ 258.42 million in 1991, and in the same year in Afghanistan it was zero but in the year 2007 the inflow of FDI into Pakistan increased to US$ 4273 million and into Afghanistan it was at US$ 288 during 2007.
+Got connection from Socket[addr=/10.105.1.3,port=56868,localport=4080]
+false
+Extracting from 0:Inflow of FDI into Pakistan increased to US$ 4273 million and into Afghanistan it was at US$ 288 during 2007.
+Got connection from Socket[addr=/10.105.1.3,port=56871,localport=4080]
+true
+Extracting from 1:Inflow of FDI into Pakistan increased to US$ 4273 million and into Afghanistan it was at US$ 288 during 2007.
+Got connection from Socket[addr=/10.105.1.3,port=57002,localport=4080]
+true
+Extracting from 1:The inflow of FDI into Pakistan was US$ 258.42 million in 1991, and in the same year in Afghanistan it was zero
+Got connection from Socket[addr=/10.105.1.3,port=33322,localport=4080]
+true
+Extracting from 1:In 2012, U.S. greenhouse gas emissions totaled 6,526 million metric tons CO2.
+Got connection from Socket[addr=/10.105.1.3,port=39748,localport=4080]
+false
+Extracting from 0:United States exports rose by 1.2 percent to USD197.5 billion in October of 2014 from $195.2 billion in September of 2014.
+Got connection from Socket[addr=/10.105.1.3,port=39757,localport=4080]
+true
+Extracting from 1:United States exports rose by 1.2 percent to USD197.5 billion in October of 2014 from $195.2 billion in September of 2014.
+Got connection from Socket[addr=/10.105.1.3,port=42603,localport=4080]
+false
+Extracting from 0:United States exports rose by 1.2 percent to USD197.5 billion in October of 2014 from $195.2 billion in September of 2014.
+Got connection from Socket[addr=/10.105.1.3,port=42612,localport=4080]
+true
+Extracting from 1:United States exports rose by 1.2 percent to USD197.5 billion in October of 2014 from $195.2 billion in September of 2014.
+Got connection from Socket[addr=/10.105.1.3,port=42658,localport=4080]
+true
+Extracting from 1:United States exports rose by 1.2 percent to USD197.5 billion in October of 2014 from $195.2 billion in September of 2014.
+Got connection from Socket[addr=/10.105.1.3,port=42673,localport=4080]
+false
+Extracting from 0:United States exports rose by 1.2 percent to USD197.5 billion in October of 2014 from $195.2 billion in September of 2014.
+Got connection from Socket[addr=/10.105.1.3,port=42691,localport=4080]
+false
+Extracting from 0:United States exports rose by 1.2 percent to USD 197.5 billion in October of 2014 from $195.2 billion in September of 2014.
+Got connection from Socket[addr=/10.105.1.3,port=42776,localport=4080]
+false
+Extracting from 0:United States exports rose by 1.2 percent to USD 197.5 billion in October of 2014 from $195.2 billion in September of 2014.
+Got connection from Socket[addr=/10.105.1.3,port=42794,localport=4080]
+true
+Extracting from 1:United States exports rose by 1.2 percent to USD 197.5 billion in October of 2014 from $195.2 billion in September of 2014.
+Got connection from Socket[addr=/10.105.1.3,port=42865,localport=4080]
+true
+Extracting from 1:United States exports rose by 1.2 percent to USD 197.5 billion in October from $195.2 billion in September of 2014.
+Got connection from Socket[addr=/10.105.1.3,port=43125,localport=4080]
+false
+Extracting from 0:A government report said in July that Japan's average life expectancy set a world-best 86.44 years for women while men's average life expectancy came fifth globally with 79.59 years.
+Got connection from Socket[addr=/10.105.1.3,port=45531,localport=4080]
+false
+Extracting from 0:In 2013, exports from Russia amounted to US$526.4 billion, up 74.4% since 2009.
+Got connection from Socket[addr=/10.105.1.3,port=45535,localport=4080]
+true
+Extracting from 1:In 2013, exports from Russia amounted to US$526.4 billion, up 74.4% since 2009.
+Got connection from Socket[addr=/10.105.1.3,port=50683,localport=4080]
+false
+Extracting from 0:In the US, diesel is priced at Rs 54.55 per litre, while it costs Rs 77.84 in France, Rs 83.36 in Germany, Rs 99.38 in UK and Rs 93.11 in Italy.
+Got connection from Socket[addr=/10.105.1.3,port=50700,localport=4080]
+true
+Extracting from 1:In the US, diesel is priced at Rs 54.55 per litre, while it costs Rs 77.84 in France, Rs 83.36 in Germany, Rs 99.38 in UK and Rs 93.11 in Italy.
+Got connection from Socket[addr=/10.105.1.3,port=50737,localport=4080]
+false
+Extracting from 0:In the US, diesel is priced at Rs 54.55 per litre, while it costs Rs 77.84 in France, Rs 83.36 in Germany, Rs 99.38 in UK and Rs 93.11 in Italy.
+Got connection from Socket[addr=/10.105.1.3,port=51074,localport=4080]
+false
+Extracting from 0:life expectancy for pakistan is 23 years and same for afghanistan is 22 years
+Got connection from Socket[addr=/10.105.1.3,port=51840,localport=4080]
+false
+Extracting from 0:Suriname , with its population of 500,000 people , be sandwich between Guyana and French Guiana , border northern Brazil .
+Got connection from Socket[addr=/10.105.1.3,port=51854,localport=4080]
+true
+Extracting from 1:Suriname , with its population of 500,000 people , be sandwich between Guyana and French Guiana , border northern Brazil .
+Got connection from Socket[addr=/10.105.1.3,port=52231,localport=4080]
+true
+Extracting from 1:Thailand, a country which is widely known for its craze for social networks, reportedly, has a Facebook and internet penetration of 36 per cent and 26 per cent respectively.
+Got connection from Socket[addr=/10.105.1.3,port=52238,localport=4080]
+false
+Extracting from 0:Thailand, a country which is widely known for its craze for social networks, reportedly, has a Facebook and internet penetration of 36 per cent and 26 per cent respectively.
+Got connection from Socket[addr=/10.105.1.3,port=52285,localport=4080]
+true
+Extracting from 1:Thailand, a country which is widely known for its craze for social networks, reportedly, has a Facebook and internet penetration of 36 per cent and 26 per cent respectively.
+Got connection from Socket[addr=/10.105.1.3,port=52290,localport=4080]
+false
+Extracting from 0:Thailand, a country which is widely known for its craze for social networks, reportedly, has a Facebook and internet penetration of 36 per cent and 26 per cent respectively.
+Got connection from Socket[addr=/10.105.1.3,port=52541,localport=4080]
+false
+Extracting from 0:Thailand, a country which is widely known for its craze for social networks, reportedly, has a Facebook and internet penetration of 36 percent and 26 percent respectively.
+Got connection from Socket[addr=/10.105.1.3,port=52554,localport=4080]
+true
+Extracting from 1:Thailand, a country which is widely known for its craze for social networks, reportedly, has a Facebook and internet penetration of 36 percent and 26 percent respectively.

@@ -13,4 +13,9 @@ public class Pair<F, S> {
 	public int hashCode() {
 		return first.hashCode() ^ second.hashCode();
 	}
+	
+	@Override
+	public String toString() {
+		return first.toString() + ", " + second.toString();
+	}
 }

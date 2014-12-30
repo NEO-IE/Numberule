@@ -1,0 +1,700 @@
+
+---
+sentence 0
+At 3.71 million square miles (9.62 million km2) and with around 318 million people, the US is the world's 3rd or 4th-largest country by total area and third-largest by population.
+
+[POP(us, people, 318 million)]
+---
+
+---
+sentence 1
+The land area of the contiguous US is 2,959,064 square miles (7,663,941 km2).
+
+[AGL(contiguous us, land area, 2,959,064 square mile), AGL(contiguous us, land area, 7,663,941 square kilometre)]
+---
+
+---
+sentence 2
+The US has a total area of more than 3.5 million square miles, making it the third largest country in the world after Russia and Canada.
+
+[AGL(us, has total area, 3.5 square mile [million])]
+---
+
+---
+sentence 3
+US total area: 3,794,083 square miles (including water) -- (9,826,630 sq km).
+
+[AGL(us, total area, 3,794,083 square mile), AGL(us, total area, 9,826,630 square kilometre)]
+---
+
+---
+sentence 4
+With an area of about 9.6 million km², the People's Republic of China is the 3rd largest country in total area behind Russia and Canada, and very similar to the US.
+
+[AGL(china, area, 9.6 square kilometre [million]), AGL(russia, total area, 9.6 square kilometre [million]), AGL(canada, total area, 9.6 square kilometre [million]), AGL(us, area, 9.6 square kilometre [million])]
+---
+
+---
+sentence 5
+Land area (sq. km) in China was last measured at 9327489.90 in 2011, according to the World Bank.
+
+[]
+---
+
+---
+sentence 6
+The land area of China is 36926 square miles, and that of India is 11823 square miles.
+
+[AGL(china, land area, 36926 square mile), AGL(china, land area, 11823 square mile)]
+---
+
+---
+sentence 7
+Pakistan covers an area of 796,095 km2 (307,374 sq mi), approximately equal to the combined land areas of France and the United Kingdom.
+
+[AGL(pakistan, covers area, 796,095 square kilometre), AGL(pakistan, covers area, 307,374 square mile)]
+---
+
+---
+sentence 8
+The value for Land area (sq. km) in Pakistan was 770,880 as of 2011.
+
+[]
+---
+
+---
+sentence 9
+Tunisia occupies an area of 163,610 square kilometres, of which 8,250 are water.
+
+[AGL(tunisia, occupies area, 163,610 square kilometre)]
+---
+
+---
+sentence 10
+Vatican City officially Vatican City State (Italian: Stato della Città del Vaticano; pronounced), a walled enclave within the city of Rome, with an area of approximately 44 hectares (110 acres), and a population of 842, is the smallest internationally recognized independent state in the world by both area and population.
+
+[AGL(state vatican, area, 44 hectare), AGL(state vatican, area, 110 acre), POP(state vatican, population, 842 ), AGL(state vatican, area, 44 hectare), AGL(state vatican, area, 110 acre), POP(state vatican, population, 842 ), AGL(italian, area, 44 hectare), AGL(italian, area, 110 acre), POP(italian, population, 842 )]
+---
+
+---
+sentence 11
+At 17,075,400 square kilometres (6,592,800 sq mi), Russia is the largest country in the world, covering more than one-eighth of the Earth's inhabited land area.
+
+[]
+---
+
+---
+sentence 12
+With an area of 504,030 km², Spain is the second largest country in Western Europe(behind France) and with an average altitude of 650 m, the second highest country in Europe (behind Switzerland).
+
+[AGL(spain, area, 504,030 square kilometre), AGL(france, area, 504,030 square kilometre), AGL(switzerland, area, 504,030 square kilometre)]
+---
+
+---
+sentence 13
+Foreign direct investments (FDIs) in the Philippines reached $473 million in May as investors remained highly confident in the domestic economy, the Bangko Sentral ng Pilipinas said yesterday.
+
+[FDI(philippines, direct foreign investments, 473 united states dollar [million])]
+---
+
+---
+sentence 14
+Public broadcaster ARD/ZDF said 55.6 million people in Germany use the internet, or 79 percent of the population aged 14 and over.
+
+[POP(germany, people, 55.6 million), INTERNET(germany, use internet, 79 percent), POP(germany, people, 14 )]
+---
+
+---
+sentence 15
+According to TNIC, there are 17.64 million Internet users in Taiwan, or 75.43 percent of the entire population.
+
+[INTERNET(taiwan, internet users, 75.43 percent)]
+---
+
+---
+sentence 16
+Since ITFA was put in place, the Pew Research Center estimates that Internet usage among Americans has skyrocketed from less than 25 percent of all people in 1998 to more than 85 percent today.
+
+[INTERNET(americans, internet usage, 25 percent), INTERNET(americans, internet usage, 85 percent)]
+---
+
+---
+sentence 17
+The current Internet penetration is only 46% in China compared to 88% in the US.
+
+[]
+---
+
+---
+sentence 18
+According to our January 2014 survey, 87% of American adults use the internet, up from 14% in 1995.
+
+[]
+---
+
+---
+sentence 19
+The Gross Domestic Product (GDP) in India was worth 1876.80 billion US dollars in 2013.
+
+[GDP(india, gross domestic product, 1876.80 united states dollar [billion])]
+---
+
+---
+sentence 20
+The GDP of India in the year 2007 was US $1.09 trillion.
+
+[GDP(india, gdp, 1.09 united states dollar [trillion])]
+---
+
+---
+sentence 21
+Actual USA electricity generation in 2012 of 4,047.7 Terawatt hours.
+
+[ELEC(generation usa, actual usa electricity generation, 4,047.7 terawatt-hour)]
+---
+
+---
+sentence 22
+In 2013, the United States generated about 4,058 billion kilowatthours of electricity.
+
+[ELEC(states united, kilowatthors, 4,058 kilowatt-hour [billion])]
+---
+
+---
+sentence 23
+As of Jan-2010, total electricity generation for the 2 largest generators was as follows: USA: 3992 billion kWh (3992 TWh) and China: 3715 billion kWh (3715 TWh).
+
+[]
+---
+
+---
+sentence 24
+The electricity sector in India had an installed capacity of 250.256 GW as of end July 2014.
+
+[]
+---
+
+---
+sentence 25
+According to the IEA the Russian gross production of electricity was 1,038 TWh in 2008 and 930 TWh in 2004 giving the 4 th top position among the world producers in 2008.
+
+[ELEC(production russian, gross russian production, 1,038 terawatt-hour), ELEC(production russian, gross russian production, 930 terawatt-hour)]
+---
+
+---
+sentence 26
+In 2011, electric power generation totaled approximately 996 billion kilowatthours, and Russia consumed about 861 billion kilowatthours.
+
+[ELEC(russia, totaled kilowatthors, 996 kilowatt-hour [billion]), ELEC(russia, kilowatthors, 861 kilowatt-hour [billion])]
+---
+
+---
+sentence 27
+Latest figures (published 2009) show that there was a 0.4% decrease in the total supply of electricity in the UK in 2008, to 399.6 TWh.
+
+[ELEC(uk, electricity, 399.6 terawatt-hour)]
+---
+
+---
+sentence 28
+In 2013 Germany's electricity production reached 631.4 TWh.
+
+[ELEC(production germany, germany electricity production, 631.4 terawatt-hour)]
+---
+
+---
+sentence 29
+The estimated population for 2014 of the Australian continent is about 36.25 million people.
+
+[POP(continent australian, estimated population, 36.25 million)]
+---
+
+---
+sentence 30
+Mongolia's total population as of July 2007 is estimated by U.S. Census Bureau at 2,951,786 people, ranking at around 138th in the world in terms of population.
+
+[POP(population mongolia, mongolia total estimated population, 2,951,786 ), POP(bureau u.s., people, 2,951,786 )]
+---
+
+---
+sentence 31
+The Provisional results of the 2014 census show that the total population of Myanmar is 51,419,420.
+
+[POP(myanmar, total population, 51,419,420 )]
+---
+
+---
+sentence 32
+The last census in Germany took place in 2011, showing a population of 80,219,695, which made it the 16th most populous country.
+
+[POP(germany, showing population, 80,219,695 )]
+---
+
+---
+sentence 33
+Germany's population was counted to be 80,219,695 on May 9, 2011, making it the 16th most populous country in the world.
+
+[POP(population germany, counted germany population, 80,219,695 ), POP(population germany, counted germany population, 9 )]
+---
+
+---
+sentence 34
+Russia is one of the few countries with a negative growth rate, and its 2014 population is estimated at 142,072,744, a decrease from 2013’s estimate of 142,572,794.
+
+[]
+---
+
+---
+sentence 35
+There are no official figures for the population of Russia in 2014, but the 2010 census, the results of which were released in late 2011 and early 2012, reports that the official population of Russia was 142,946,800.
+
+[POP(russia, official population, 142,946,800 ), POP(russia, official population, 142,946,800 )]
+---
+
+---
+sentence 36
+At the time, Singapore had about 1,000 inhabitants.
+
+[POP(singapore, inhabitants, 1,000 )]
+---
+
+---
+sentence 37
+The population of Vatican City is about 800 people, of whom over 450 have Vatican citizenship, while the rest have permission to reside there, either temporarily or permanently, without the benefit of citizenship.
+
+[POP(citizenship vatican, people, 800 ), POP(citizenship vatican, people, 800 )]
+---
+
+---
+sentence 38
+With 1,210,193,422 residents reported in the 2011 provisional census,[8] India is the world's second-most populous country.
+
+[POP(india, residents, 1,210,193,422 ), POP(india, residents, 8 )]
+---
+
+---
+sentence 39
+The total population of India at the 00.00 hours of 1st March 2001 stood at 1,028,737,436 comprising 532,223,090 males and 496,514,346 females.
+
+[POP(india, total population, 1,028,737,436 )]
+---
+
+---
+sentence 40
+Since 1970, average life expectancy in the region has climbed from 60 to 74 years, the report noted, rising to 79 years in Costa Rica, Chile and Cuba.
+
+[]
+---
+
+---
+sentence 41
+Suriname , with its population of 500,000 people , be sandwich between Guyana and French Guiana , border northern Brazil .
+
+[POP(suriname, its population, 500,000 ), POP(guiana guyana, its population, 500,000 ), POP(french, its population, 500,000 ), POP(northern brazil, its population, 500,000 )]
+---
+
+---
+sentence 42
+he say the deployment would help to ease unemployment in the nation of 104,000 people , as well as foster closer tie between Tonga and Britain .
+
+[POP(tonga, people, 104,000 ), POP(britain, people, 104,000 )]
+---
+
+---
+sentence 43
+China shipped US$2.21 trillion worth of goods, up by 84% since 2009.
+
+[]
+---
+
+---
+sentence 44
+Germany is the third largest exporter in the world with $1.516 trillion exported in 2012.
+
+[]
+---
+
+---
+sentence 45
+A 2004 EU entrant of 38 million people, Poland is almost entirely reliant on coal for electricity and heat.
+
+[POP(poland, people, 38 million)]
+---
+
+---
+sentence 46
+An estimated 10 million people in Burundi, Tanzania, Zambia and the Democratic Republic of Congo depend on the lake, using it for drinking water and for fish, of which up to 200,000 tonnes, mainly sardines, are harvested each year.
+
+[POP(burundi, estimated people, 10 million), POP(tanzania, estimated people, 10 million), POP(zambia, estimated people, 10 million), POP(congo, estimated people, 10 million)]
+---
+
+---
+sentence 47
+Pump price for diesel fuel (US dollar per liter) in Zambia was last measured at 1.52 in 2010, according to the World Bank.
+
+[]
+---
+
+---
+sentence 48
+Zimbabwe, where life expectancy is around 47 years and 15 percent of the population need food aid, would lose 47 percent; Nigeria -- Africa's most populous nation with a population of 152 million -- and Ethiopia would each lose 46 percent, and Liberia's population would fall by 45 percent.
+
+[POP(zimbabwe, population, 152 million), POP(nigeria, population, 152 million), POP(ethiopia, population, 152 million), POP(population liberia, liberia population, 152 million)]
+---
+
+---
+sentence 49
+The latest value for Pump price for diesel fuel (US$ per liter) in Zambia was 1.48 as of 2012.
+
+[DIESEL(zambia, pump price, 1.48 united states dollar per litre)]
+---
+
+---
+sentence 50
+The United States is the world's largest national economy with a GDP of approximately $16.8 trillion, due to high average incomes, a large population,[6] capital investment, moderate unemployment,[7] high consumer spending,[8] a relatively young population,[9] and technological innovation.
+
+[POP(states united, young population, 9 )]
+---
+
+---
+sentence 51
+drug abuse be a relatively minor problem in Brunei , a tiny sultanate of about 400,000 people on Borneo island .
+
+[POP(brunei, people, 400,000 )]
+---
+
+---
+sentence 52
+The domestic prices of 92-RON, the most commonly used grade of gasoline in Vietnam, is VND 24,570 (US$1.16) a liter on July 17.
+
+[]
+---
+
+---
+sentence 53
+accord to the International Telecommunication Union , as of June 2010 , Singapore Internet usage have a 77.8 percent penetration rate , say Dr Sundeep Muppidi of the asian Media Information and Communication Center -lrb- AMIC -rrb- .
+
+[INTERNET(usage singapore, singapore internet usage, 77.8 percent), INF(usage singapore, have percent penetration rate, 77.8 percent)]
+---
+
+---
+sentence 54
+Foreign Direct Investment in India decreased to 2801 USD Million in October of 2014 from 2897 USD Million in September of 2014.
+
+[]
+---
+
+---
+sentence 55
+Foreign direct investment (FDI) in U.S. businesses, measured on a cumulative stock basis, reached $2.7 trillion at the end of 2012, which is equivalent to about 16 percent of U.S. gross domestic product.
+
+[]
+---
+
+---
+sentence 56
+Starting from a base of less than $19 billion in 1990, the stock of FDI in China rose to over $300 billion at the end of 1999.
+
+[FDI(china, fdi, 19 united states dollar [billion]), FDI(china, fdi, 300 united states dollar [billion])]
+---
+
+---
+sentence 57
+The latest value for Exports of goods and services (BoP, current US$) in Bangladesh was $26,990,090,000 as of 2011.
+
+[]
+---
+
+---
+sentence 58
+According to Singapore National Environment Agency, Singapore emits about 38,000 kilotons of CO2 each year, 15% of which is from transportation.
+
+[CO2(singapore, kilotons, 38,000 kiloton), CO2(singapore, kilotons, 38,000 kiloton)]
+---
+
+---
+sentence 59
+United States exports rose by 1.2 percent to USD197.5 billion in October of 2014 from $195.2 billion in September of 2014.
+
+[]
+---
+
+---
+sentence 60
+A government report said in July that Japan's average life expectancy set a world-best 86.44 years for women while men's average life expectancy came fifth globally with 79.59 years.
+
+[LIFE(expectancy japan, average japan life expectancy, 86.44 year), LIFE(expectancy japan, average japan life expectancy, 79.59 year)]
+---
+
+---
+sentence 61
+China leads the list, with 9.86 million kilotons of CO2 emissions in 2012, as compared to 9.7 million kilotons in 2011.
+
+[CO2(china, kilotons, 9.86 kiloton [million]), CO2(china, kilotons, 9.7 kiloton [million])]
+---
+
+---
+sentence 62
+India, Germany, and Canada had constant CO2 emissions for the two years, at 1.97, 0.81, and 0.56 million kilotons, respectively.
+
+[CO2(india, kilotons, 0.56 kiloton [million]), CO2(germany, kilotons, 0.56 kiloton [million]), CO2(canada, kilotons, 0.56 kiloton [million])]
+---
+
+---
+sentence 63
+According to the U.S. Department of Energy’s Carbon Dioxide Information Analysis Center, China in 2012 emitted 9.8 million kilotons of CO2, while the United States emitted 5.2 million kilotons.
+
+[CO2(department u.s., emitted kilotons, 9.8 kiloton [million]), CO2(department u.s., emitted kilotons, 5.2 kiloton [million]), CO2(china, emitted kilotons, 9.8 kiloton [million]), CO2(china, emitted kilotons, 5.2 kiloton [million]), CO2(states united, emitted kilotons, 9.8 kiloton [million]), CO2(states united, emitted kilotons, 5.2 kiloton [million])]
+---
+
+---
+sentence 64
+In 2013, exports from Russia amounted to US$526.4 billion, up 74.4% since 2009.
+
+[GOODS(russia, exports, 526.4 united states dollar [billion])]
+---
+
+---
+sentence 65
+In 2012, U.S. greenhouse gas emissions totaled 6,526 million metric tons CO2.
+
+[CO2(emissions u.s., gas u.s. greenhouse emissions, 6,526 tonne [million])]
+---
+
+---
+sentence 66
+Mexico’s land area extends 1,964,375 sq km.
+
+[AGL(area mexico, mexico land area, 1,964,375 square kilometre)]
+---
+
+---
+sentence 67
+Food Inflation in India decreased to 3.50 percent in November of 2014 from 5.68 percent in October of 2014.
+
+[INF(india, food inflation, 3.50 percent)]
+---
+
+---
+sentence 68
+The latest annual inflation rate for the United States is 1.3% through the 12 months ended November 2014, as published by the US government on December 17, 2014.
+
+[INF(states united, annual inflation latest rate, 1.3 percent)]
+---
+
+---
+sentence 69
+In 2014 China reached $17.6 trillion or 16.48 percent of the world’s purchasing-power-adjusted GDP, while the US made slightly less, 16.28 percent or $17.4 trillion, the FT reported citing IMF data.
+
+[]
+---
+
+---
+sentence 70
+But in the rest of Canada, male life expectancy rose to 77.5 years from 74.1 years and among females it rose to 81.3 years from 79.7 years.
+
+[]
+---
+
+---
+sentence 71
+Covering a total area of 8.51 million square kilometers, Brazil has a rangeland of more than 200 million hectares, a farmland of 6.2 million hectares and 100 million hectares of unexploited land.
+
+[AGL(brazil, total area, 8.51 square kilometre [million])]
+---
+
+---
+sentence 72
+The life expectancy for Canadians born in 1990 is 77 years; for people born in 2012, it's 82 years.
+
+[]
+---
+
+---
+sentence 73
+The estimated population for 2014 of the Australian continent is about 36.25 million people.
+
+[POP(continent australian, estimated population, 36.25 million)]
+---
+
+---
+sentence 74
+The Gross Domestic Product (GDP) in Somalia was worth 1.07 billion US dollars in 2010.
+
+[GDP(somalia, gross domestic product, 1.07 united states dollar [billion])]
+---
+
+---
+sentence 75
+In the US, diesel is priced at Rs 54.55 per litre, while it costs Rs 77.84 in France, Rs 83.36 in Germany, Rs 99.38 in UK and Rs 93.11 in Italy.
+
+[]
+---
+
+---
+sentence 76
+Exports in the United States averaged 46346.36 USD Million from 1950 until 2014, reaching an all time high of 198570 USD Million in August of 2014 and a record low of 772 USD Million in March of 1950.
+
+[GOODS(states united, exports, 46346.36 united states dollar [million]), GOODS(states united, exports, 198570 united states dollar [million]), GOODS(states united, exports, 772 united states dollar [million])]
+---
+
+---
+sentence 77
+China’s total electricity generated in 2013 amounted to 5322 billion kWh (TWh), including 3959 TWh from coal power stations (74%), 896 TWh from hydro power stations, 140 TWh from wind, 8.7 TWh from solar PV, 112 TWh from nuclear, and the rest from other sources.
+
+[ELEC(electricity china, total china electricity, 5322 kilowatt-hour [billion]), ELEC(electricity china, total china electricity, 3959 terawatt-hour), ELEC(electricity china, total china electricity, 896 terawatt-hour), ELEC(electricity china, total china electricity, 140 terawatt-hour), ELEC(electricity china, total china electricity, 8.7 terawatt-hour), ELEC(electricity china, total china electricity, 112 terawatt-hour)]
+---
+
+---
+sentence 78
+China 's population of internet user , already the world 's largest , soar nearly 30 percent last year to 384 million as the number of people surf the web by mobile phone more than double , a research group report Friday .
+
+[POP(population china, china population, 384 million)]
+---
+
+---
+sentence 79
+the state of Brazil 's more developed southeast have the highest internet use -- 48.1 percent , compare to 30 percent in the poorer northeast , the agency say .
+
+[INTERNET(southeast brazil, internet highest have use, 48.1 percent)]
+---
+
+---
+sentence 80
+almost 60 percent of internet user in China say that consumer review site , as well as discussion forum and blog , influence they purchasing decision , compare with less than 20 percent in the US .
+
+[INTERNET(china, internet user, 60 percent), INTERNET(china, internet user, 20 percent)]
+---
+
+---
+sentence 81
+the BBS datum also show Bangladesh 's point-to-point inflation dip to 2.25 percent in June , while it be 10.04 percent in June a year ago .
+
+[]
+---
+
+---
+sentence 82
+Food inflation rise to 17.65 percent for the week which end April 10 from 17.22 percent in the previous week in India , report the Press Trust of India .
+
+[INF(india, food inflation rise, 17.65 percent), INF(india, food inflation rise, 17.22 percent), INF(india, food inflation rise, 17.65 percent), INF(india, food inflation rise, 17.22 percent)]
+---
+
+---
+sentence 83
+Fiji inflation jump to 5.1 percent SUVA , Oct. 14 -lrb- Xinhua -rrb- inflation in Fiji more than double in August to 5.1 percent , up from 2.2 percent in July , accord to the Reserve Bank of Fiji 's September economic review .
+
+[]
+---
+
+---
+sentence 84
+Canada 's inflation rate track down to 1.7 percent in the 12 month to August , follow July 's increase to 1.8 percent from 1.0 percent in June .
+
+[INF(rate canada, canada inflation rate, 1.7 percent), INF(rate canada, canada inflation rate, 1.8 percent), INF(rate canada, canada inflation rate, 1.0 percent)]
+---
+
+---
+sentence 85
+Such a decline in population growth leads to a reduction of 1.83 billion tons of carbon dioxide emissions in China per annum at present, Zhao said.
+
+[CO2(china, carbon dioxide emissions, 1.83 tonne [billion])]
+---
+
+---
+sentence 86
+According to the authority's preliminary estimate, greenhouse gas emissions in Finland amounted to 70.1 million tons of carbon dioxide equivalent in 2008.
+
+[CO2(finland, gas greenhouse emissions, 70.1 tonne [million])]
+---
+
+---
+sentence 87
+So every extra $10 billion of goods sold to China is like its own little stimulus program.
+
+[GOODS(china, goods, 10 united states dollar [billion])]
+---
+
+---
+sentence 88
+The inflow of FDI into Pakistan was US$ 258.42 million in 1991, and in the same year in Afghanistan it was zero but in the year 2007 the inflow of FDI into Pakistan increased to US$ 4273 million and into Afghanistan it was at US$ 288 during 2007.
+
+[FDI(pakistan, fdi, 4273 united states dollar [million]), FDI(pakistan, fdi, 4273 united states dollar [million])]
+---
+
+---
+sentence 89
+The wide scattering of the Marshalls' 29 atolls, 2,300 miles (3,700 kilometers) southwest of Hawaii, give them an exclusive economic zone of 800,000 square miles (2 million square kilometers) of ocean, an area the size of Mexico.
+
+[]
+---
+
+---
+sentence 90
+Life expectancy at birth for Indian males has gone up from 48.6 years in 1970 to 63.2 years in 2010, while for Indian females the number has risen from 49.1 years to 67.5 years during the same period.
+
+[]
+---
+
+---
+sentence 91
+Bangladesh received USD 1599.16 Million Foreign Direct Investment (FDI) in 2013 when we have exported about USD 30.71 billion and imported about USD 40.61 billion.
+
+[]
+---
+
+---
+sentence 92
+because of Iceland 's tiny population , around 320,000 , the original deal would have require each person to pay around $ 135 a month for eight year -- the equivalent of a quarter of a average four-member family 's salary .
+
+[POP(population iceland, around iceland tiny population, 320,000 )]
+---
+
+---
+sentence 93
+Drinking causes an extraordinary number of deaths in Russia, where male life expectancy is about 60 years, and it contributes to an array of economic and social problems.
+
+[LIFE(russia, deaths, 60 year)]
+---
+
+---
+sentence 94
+Thailand, a country which is widely known for its craze for social networks, reportedly, has a Facebook and internet penetration of 36 per cent and 26 per cent respectively.
+
+[]
+---
+
+---
+sentence 95
+by the end of last year , the number of internet user in China have reach 384 million user , cover about 28.9 percent of the country 's total population .
+
+[INTERNET(china, internet user, 28.9 percent)]
+---
+
+---
+sentence 96
+the institution also state that Brazil 's inflation rate will remain between 4 percent and 4.5 percent both in 2009 and 2010 .
+
+[INF(rate brazil, brazil inflation rate, 4 percent), INF(rate brazil, brazil inflation rate, 4.5 percent)]
+---
+
+---
+sentence 97
+wholesale price inflation , India 's main cost-of-living measure , be at 9.90 percent , above the bank 's 5.5-percent target for the year end March 2011 .
+
+[INF(measure india, wholesale price inflation, 9.90 percent)]
+---
+
+---
+sentence 98
+inflation soar from negative figure at the end of the 1990s to a record 12.9 percent in July last year , before plunge to one percent in June this year , accord to the Central Bank of Libya .
+
+[]
+---
+
+---
+sentence 99
+Current India CO2 Emissions is 2.01 Million kt.
+
+[CO2(emissions india, current india co2 emissions, 2.01 kiloton [million])]
+---

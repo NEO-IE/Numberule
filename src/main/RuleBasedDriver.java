@@ -7,8 +7,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -96,8 +98,9 @@ public class RuleBasedDriver {
 	public static void main(String args[]) throws Exception {
 		RuleBasedDriver rbased = new RuleBasedDriver(true);
 		String fileString = FileUtils.readFileToString(new File("debug"));
-		String outFile = "tac_sample_output";
-		rbased.batchExtract(fileString, outFile);
+		String outFile = "gold_output_3";
+		System.out.println(rbased.extract(fileString));
+		//rbased.batchExtract(fileString, outFile);
 		
 	}
 	
@@ -161,14 +164,15 @@ public class RuleBasedDriver {
 			// Step 3 : Identify all the country number word pairs
 			ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph,
 					sentence);
-			/*
+		
+			
 			pw.write("\n---\n");
 			pw.write("sentence " + i++ + "\n");
 			pw.write(sentence + "\n\n");
 			// Step 4 : Extract the relations that exists in these pairs
 			pw.write(getExtractions(depGraph, pairs) + "\n");
-			pw.write("---\n");*/
-			System.out.println(getExtractions(depGraph, pairs) + "\n");
+			pw.write("---\n");
+			///*/System.out.println(getExtractions(depGraph, pairs) + "\n");
 		}
 		pw.close();
 	}
@@ -180,7 +184,9 @@ public class RuleBasedDriver {
 	ArrayList<Relation> getExtractions(Graph depGraph,
 			ArrayList<Pair<Country, Number>> pairs) throws IOException {
 		ArrayList<Relation> result = new ArrayList<Relation>();
-
+		HashMap< Pair<Word, Word>, Relation> alreadyExtractedCountryRel = new HashMap<Pair<Word,Word>, Relation>();
+		
+		//The hashcode of Relation does not include argument2
 		for (Pair<Country, Number> pair : pairs) {
 			// System.out.println(depGraph.getWordsOnPath(pair.country,
 			// pair.number));
@@ -188,15 +194,8 @@ public class RuleBasedDriver {
 					.getWordsOnPath(pair.first, pair.second);
 			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair,
 					wordsOnDependencyGraphPath, depGraph);
-
-			/**
-			 * TODO : check if the rel extracted is compatible with the unit of
-			 * the number
-			 * 
-			 */
-
 			for (Relation rel : rels) {
-
+				
 				if (unitsActive) {
 					Unit unit = ue.quantDict.getUnitFromBaseName(pair.second
 							.getUnit());
@@ -221,10 +220,20 @@ public class RuleBasedDriver {
 					}
 				}
 				augment(depGraph, rel);
-				result.add(rel);
-
+				Pair<Word, Word> argRelPairKey = new Pair<Word, Word>(rel.getCountry(),rel.getKeyword());
+				if(alreadyExtractedCountryRel.containsKey(argRelPairKey)) { //the same arg1, relation, and keyword have already been extracted?
+					Number arg2 = alreadyExtractedCountryRel.get(argRelPairKey).getNumber();
+					Number currNumber = rel.getNumber();
+					if(arg2.idx > currNumber.idx) { //the current number is closer?
+						alreadyExtractedCountryRel.put(argRelPairKey, rel);
+					} //else nothing to do, the relation already present in the map is the one that should be there
+				} else {
+					alreadyExtractedCountryRel.put(argRelPairKey, rel);
+				}
 			}
-
+		}
+		for(Relation rel : alreadyExtractedCountryRel.values()) {
+			result.add(rel);
 		}
 		return result;
 	}
@@ -238,7 +247,7 @@ public class RuleBasedDriver {
 	 */
 	private static void augment(Graph depGraph, Relation rel) {
 		/* Augment the argument */
-		Word arg1 = rel.getArg1();
+		Word arg1 = rel.getCountry();
 		HashSet<Word> modifiers = null;
 		if (null != (modifiers = depGraph.getModifiers(arg1))) {
 			for (Word modifier : modifiers) {

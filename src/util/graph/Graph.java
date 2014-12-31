@@ -44,48 +44,7 @@ public class Graph {
 		valIdxMap = new HashMap<String, Integer>();
 	}
 	
-	/**
-	 * Floyd-Warshall All pairs shortest path
-	 */
-	/*
-	private void allPairs() {
-		int dist[][] = new int[numNodes + 2][numNodes + 2];
-		for(int i = 0; i < adj.size(); i++) {
-			ArrayList<Integer> adjI = adj.get(i);
-		//	System.out.println(adjI);
-			for(int j = 0; j < adjI.size(); j++) {
-				dist[i][adjI.get(j)] = 1;
-			}
-		}
-		for(int i = 0; i < numNodes; i++) {
-			for(int j = 0; j < numNodes; j++) {
-				dist[i][j] = MAX;
-			}
-		}
-		//Arrays.fill(dist, Integer.MAX_VALUE);
-		for(int  k = 0; k < numNodes; k++) {
-			for(int i = 0; i < numNodes; i++) {
-				for(int j = 0; j < numNodes; j++) {
-					dist[i][j] = Math.min(dist[i][j], dist[i][k] + dist[k][j]);
-				}
-			}
-		}
-		
-		for(int i = 0; i < numNodes; i++) {
-			for(int j = 0; j < numNodes; j++) {
-				if(dist[i][j] != MAX) {
-					Word w1 = nodeWordMap.get(i);
-					Word w2 = nodeWordMap.get(j);
-					if(null == w1 || null == w2) continue;
-					Pair<Word, Word> keyPair = new Pair<Word, Word>(w1, w2);
-					System.out.println(w1.getVal() + " - " + w2.getVal() + " = " + dist[i][j]);
-					pathLenMap.put(keyPair, dist[i][j]);
-				}
-			}
-		}
-	}
-	*/
-
+	
 	/**
 	 * The factory method that takes the typed dependencies and returns a graph
 	 * @param tdi
@@ -123,7 +82,7 @@ public class Graph {
 			// System.out.println(govNode.value() + " -> " + depNode.value());
 		}
 		// depGraph.listModifiers();
-		System.out.println(depGraph.adjMap.keySet());
+		
 		for(Word w : depGraph.wordNodeMap.keySet()) {
 			depGraph.valIdxMap.put(w.getVal(), w.getIdx());
 		}
@@ -134,7 +93,7 @@ public class Graph {
 
 	// undirected graph
 	public void addEdge(Word a, Word b) {
-		System.out.println("Adding : " + a + " -> " + b);
+
 		if(adjMap.keySet().contains(a)) {
 			adjMap.get(a).add(b);
 		} else {
@@ -150,7 +109,7 @@ public class Graph {
 	 * @return
 	 */
 	public ArrayList<Word> getNbr(Word curr) {
-		System.out.println(adjMap.keySet());
+	
 		return adjMap.get(curr);
 	}
 
@@ -209,7 +168,9 @@ public class Graph {
 	}
 
 	public int distance(Word country, Number currNumber) {
-		return getWordsOnPath(country, currNumber).size();
+		//The country argument here might be the augmented country, 
+		//and BFS must be called with the original country
+		return getWordsOnPath(nodeWordMap.get(country.getIdx()), currNumber).size();
 	
 	}
 

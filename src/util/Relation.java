@@ -17,7 +17,7 @@ package util;
  */
 public class Relation {
 	public Relation(Word arg1, Number arg2, Word keyword, String relName) {
-		this.country = (util.Country)arg1;
+		this.country = arg1;
 		this.num = arg2;
 		this.relName = relName;
 		this.keyword = keyword;
@@ -25,10 +25,13 @@ public class Relation {
 	
 	public Relation(Relation r) {
 		country = new Country(r.getCountry());
-		
+		num = new Number(r.getNumber());
+		keyword = new Word(r.getKeyword());
+		relName= new String(relName);
+	
 	}
 	
-	Country country;
+	Word country;
 	Number num;
 	Word keyword;
 	String relName;

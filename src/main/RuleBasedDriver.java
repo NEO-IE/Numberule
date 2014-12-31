@@ -21,6 +21,8 @@ import meta.RelationUnitMap;
 
 import org.apache.commons.io.FileUtils;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 import util.Country;
 import util.Number;
 import util.Pair;
@@ -97,11 +99,14 @@ public class RuleBasedDriver {
 	 */
 	public static void main(String args[]) throws Exception {
 		RuleBasedDriver rbased = new RuleBasedDriver(true);
-		//String fileString = FileUtils.readFileToString(new File("gold_set"));
-		String fileString = FileUtils.readFileToString(new File("debug"));
-		String outFile = "gold_output_3";
-		System.out.println(rbased.extract(fileString));
-		//rbased.batchExtract(fileString, outFile);
+		String fileString = FileUtils.readFileToString(new File("gold_set"));
+		String outFile = "gold_output_4";
+		rbased.batchExtract(fileString, outFile);
+		
+//		String fileString = FileUtils.readFileToString(new File("debug"));
+//		System.out.println(rbased.extract(fileString));
+//		
+
 		
 	}
 	
@@ -248,27 +253,47 @@ public class RuleBasedDriver {
 	 */
 	private static Relation augment(Graph depGraph, Relation rel) {
 		/* Augment the argument */
+
 		boolean hasChaged = false;
-		Relation newRel = new Relation(rel);
-		Word arg1 = newRel.getCountry();
+		
+		Word countryArg = rel.getCountry();
 		HashSet<Word> modifiers = null;
-		if (null != (modifiers = depGraph.getModifiers(arg1))) {
+		
+		/*
+		 * Augmenting country first
+		 */
+		StringBuffer countryValBuffer = new StringBuffer("");
+		countryValBuffer.append(rel.getCountry().getVal());
+		
+		if (null != (modifiers = depGraph.getModifiers(countryArg))) {
 			hasChaged = true;
 			for (Word modifier : modifiers) {
-				arg1.setVal(modifier.getVal() + " " + arg1.getVal());
+				//modifier.getVal() + " " + arg1.getVal());
+				countryValBuffer.append(" " + modifier.getVal());
+			
 			}
 		}
+		
 		/* Augment Relation */
-		Word relWord = newRel.getKeyword();
-
+		Word relWord = rel.getKeyword();
+		StringBuffer relValBuffer = new StringBuffer("");
+		relValBuffer.append(rel.getCountry().getVal());
 		modifiers = null;
 		if (null != (modifiers = depGraph.getModifiers(relWord))) {
 			hasChaged = true;
 			for (Word modifier : modifiers) {
-				relWord.setVal(modifier.getVal() + " " + relWord.getVal());
+				//relWord.setVal(modifier.getVal() + " " + relWord.getVal());
+				relValBuffer.append(" " + modifier.getVal());
 			}
 		}
-		return hasChaged ? newRel : rel;
+		
+		if(hasChaged) { //need to create a new relation
+			Word newCountry = new Word(rel.getCountry().getIdx(), countryValBuffer.toString());
+			Word newRelWord= new Word(rel.getKeyword().getIdx(), relValBuffer.toString());
+			Relation newRel = new Relation(newCountry, rel.getNumber(), newRelWord, rel.getRelName());
+			return newRel;
+		}
+		return rel;
 	}
 
 	private boolean isCountry(String token) {

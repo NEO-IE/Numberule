@@ -41,19 +41,6 @@ public class KeywordData {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		/* Pretty printing.
-		int i = 0;
-		for(String str: relName){
-			System.out.print(str+" : ");
-			ArrayList<String> keywords = KEYWORDS.get(i);
-			i++;
-			for(String words: keywords){
-				System.out.print(" "+words);
-			}
-			System.out.println();
-		}
-		*/
 	}
 	public static void main(String args[]) throws IOException{
 		new KeywordData();

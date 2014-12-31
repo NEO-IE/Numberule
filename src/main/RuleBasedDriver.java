@@ -97,6 +97,7 @@ public class RuleBasedDriver {
 	 */
 	public static void main(String args[]) throws Exception {
 		RuleBasedDriver rbased = new RuleBasedDriver(true);
+		//String fileString = FileUtils.readFileToString(new File("gold_set"));
 		String fileString = FileUtils.readFileToString(new File("debug"));
 		String outFile = "gold_output_3";
 		System.out.println(rbased.extract(fileString));
@@ -162,7 +163,7 @@ public class RuleBasedDriver {
 			Graph depGraph = Graph.makeDepGraph(tdi);
 
 			// Step 3 : Identify all the country number word pairs
-			ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph,
+			ArrayList< Pair<Country, Number> > pairs = getPairs(depGraph,
 					sentence);
 		
 			
@@ -219,15 +220,15 @@ public class RuleBasedDriver {
 						}
 					}
 				}
-				augment(depGraph, rel);
+				rel= augment(depGraph, rel);
 				Pair<Word, Word> argRelPairKey = new Pair<Word, Word>(rel.getCountry(),rel.getKeyword());
 				if(alreadyExtractedRelMap.containsKey(argRelPairKey)) { //the same arg1, relation, and keyword have already been extracted?
-					Number arg2 = alreadyExtractedRelMap.get(argRelPairKey).getNumber();
+					Number prevNumber = alreadyExtractedRelMap.get(argRelPairKey).getNumber();
 					Number currNumber = rel.getNumber();
-					if(depGraph.distance(rel.getCountry(), currNumber) < depGraph.distance(rel.getCountry(), arg2)) { //the current number is closer?
+					if(depGraph.distance(rel.getCountry(), currNumber) < depGraph.distance(rel.getCountry(), prevNumber)) { //the current number is closer?
 						alreadyExtractedRelMap.put(argRelPairKey, rel);
 					} //else nothing to do, the relation already present in the map is the one that should be there
-				} else {
+				} else { //new relation, must extract	
 					alreadyExtractedRelMap.put(argRelPairKey, rel);
 				}
 			}
@@ -245,24 +246,29 @@ public class RuleBasedDriver {
 	 * @param rel
 	 * @return
 	 */
-	private static void augment(Graph depGraph, Relation rel) {
+	private static Relation augment(Graph depGraph, Relation rel) {
 		/* Augment the argument */
-		Word arg1 = rel.getCountry();
+		boolean hasChaged = false;
+		Relation newRel = new Relation(rel);
+		Word arg1 = newRel.getCountry();
 		HashSet<Word> modifiers = null;
 		if (null != (modifiers = depGraph.getModifiers(arg1))) {
+			hasChaged = true;
 			for (Word modifier : modifiers) {
-				arg1.setVal(modifier.val + " " + arg1.val);
+				arg1.setVal(modifier.getVal() + " " + arg1.getVal());
 			}
 		}
 		/* Augment Relation */
-		Word relWord = rel.getKeyword();
+		Word relWord = newRel.getKeyword();
 
 		modifiers = null;
 		if (null != (modifiers = depGraph.getModifiers(relWord))) {
+			hasChaged = true;
 			for (Word modifier : modifiers) {
-				relWord.setVal(modifier.val + " " + relWord.val);
+				relWord.setVal(modifier.getVal() + " " + relWord.getVal());
 			}
 		}
+		return hasChaged ? newRel : rel;
 	}
 
 	private boolean isCountry(String token) {
@@ -286,11 +292,10 @@ public class RuleBasedDriver {
 		ArrayList<Number> numbers = new ArrayList<Number>();
 		ArrayList<Pair<Country, Number>> res = new ArrayList<Pair<Country, Number>>();
 		float values[][] = new float[1][1];
-		String unitString = "";	
 		for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
 			// this is the text of the token
 			String word = token.get(TextAnnotation.class);
-
+			//System.out.println(word  + " - " + depGraph.getIdx(word) + depGraph.nodeWordMap.get(depGraph.getIdx(word)));
 			if (isCountry(word)) {	
 				countries.add(new Country(depGraph.getIdx(word), word));
 			}

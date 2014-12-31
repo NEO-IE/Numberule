@@ -17,24 +17,30 @@ package util;
  */
 public class Relation {
 	public Relation(Word arg1, Number arg2, Word keyword, String relName) {
-		this.arg1 = arg1;
-		this.arg2 = arg2;
+		this.country = (util.Country)arg1;
+		this.num = arg2;
 		this.relName = relName;
 		this.keyword = keyword;
 	}
-	Word arg1;
-	Number arg2;
+	
+	public Relation(Relation r) {
+		country = new Country(r.getCountry());
+		
+	}
+	
+	Country country;
+	Number num;
 	Word keyword;
 	String relName;
 	@Override
 	public String toString() {
-		return relName + "(" + arg1.val + ", " + keyword.val + ", " + arg2.val + " " + arg2.unit + ")";
+		return relName + "(" + country.getVal() + ", " + keyword.getVal() + ", " + num.getVal() + " " + num.unit + ")";
 	}
 	public Word getCountry() {
-		return arg1;
+		return country;
 	}
 	public Number getNumber() {
-		return arg2;
+		return num;
 	}
 	public Word getKeyword() {
 		return keyword;
@@ -46,7 +52,7 @@ public class Relation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((arg1 == null) ? 0 : arg1.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((keyword == null) ? 0 : keyword.hashCode());
 		result = prime * result + ((relName == null) ? 0 : relName.hashCode());
 		return result;
@@ -60,10 +66,10 @@ public class Relation {
 		if (getClass() != obj.getClass())
 			return false;
 		Relation other = (Relation) obj;
-		if (arg1 == null) {
-			if (other.arg1 != null)
+		if (country == null) {
+			if (other.country != null)
 				return false;
-		} else if (!arg1.equals(other.arg1))
+		} else if (!country.equals(other.country))
 			return false;
 		if (keyword == null) {
 			if (other.keyword != null)

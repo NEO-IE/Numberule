@@ -19,5 +19,12 @@ public class Number extends Word {
 		return unit;	
 	}
 	
+	public Number(Number n) {
+		super(n.getIdx(), n.getVal());
+		unit = new String(n.getUnit());
+		hasUnit = n.hasUnit;
+	}
+	
+	
 
 }

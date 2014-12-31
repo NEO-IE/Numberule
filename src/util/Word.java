@@ -9,15 +9,20 @@ import java.util.ArrayList;
  *
  */
 public class Word {
-	public String val; //the string content of the word
-	public Integer idx; //the index of the word in that sentence
+	private String val; //the string content of the word
+	private Integer idx; //the index of the word in that sentence
 	public Word(Integer idx, String str) {
 		this.idx = idx;
 		this.val = str.toLowerCase();
 	}
+	
+	public Word(Word w) {
+		val = new String(w.getVal());
+		idx = w.idx;
+	}
 	@Override
 	public String toString() {
-		return val + ", " + idx.toString();
+		return "(" + val + ", " + idx.toString() + ")";
 	}
 	public String getVal() {
 		return val;

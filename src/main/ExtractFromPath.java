@@ -57,14 +57,14 @@ public class ExtractFromPath {
 		for (String kw : keywords) { //for each of the keywords
 			kw = kw.toLowerCase();
 			for (Word wordOnPath : path) { //iterate over the word and see if there is a match
-				if (wordOnPath.val.toLowerCase().equals(kw)) {
+				if (wordOnPath.getVal().toLowerCase().equals(kw)) {
 					return wordOnPath;
 				}else{
 					HashSet<Word> modWords = depGraph.getModifiers(wordOnPath);
 					if(modWords == null)
 						continue; //no modifier words.
 					for(Word modWord: modWords){
-						if(modWord.val.toLowerCase().equals(kw)){
+						if(modWord.getVal().toLowerCase().equals(kw)){
 							return modWord;
 						}
 					}
@@ -95,7 +95,7 @@ public class ExtractFromPath {
 
 		ArrayList<Relation> res = new ArrayList<Relation>();
 		
-		Integer numNode = depGraph.getIdx(argPair.second.val);
+		Integer numNode = depGraph.getIdx(argPair.second.getVal());
 		
 		//checking if the label before the number is to. Checking one more label to accompany units if any.
 		

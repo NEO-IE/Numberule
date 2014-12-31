@@ -2,16 +2,12 @@
 package util.graph;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import org.w3c.dom.Node;
-
 import meta.ModifyingTypes;
 import util.Number;
-import util.Pair;
 import util.Word;
 import edu.stanford.nlp.trees.TreeGraphNode;
 import edu.stanford.nlp.trees.TypedDependency;
@@ -29,29 +25,29 @@ public class Graph {
 	//for fast graph ops
 	private HashMap<Integer, Word> nodeWordMap;
 	private HashMap<Word, Integer> wordNodeMap; 
-
+	
+	//A mapping from all the word vals to corresponding indexes
+	private HashMap<String, Integer> valIdxMap;
 	//Modifiers of the words
 	private HashMap<Word, HashSet<Word> > modifiersMap;
 	
 	
-	private HashMap<Pair<Word, Word>, Integer> pathLenMap; //all pairs shortest path
 	
 	public final static int MAX = 1000;
 	
-	
-	private int numNodes; // the number of nodes
 	
 	private Graph() {
 		adjMap = new HashMap<Word, ArrayList<Word> >();
 		nodeWordMap = new HashMap<Integer, Word>();
 		wordNodeMap = new HashMap<Word, Integer>();
 		modifiersMap = new HashMap<>();
-		pathLenMap = new HashMap<Pair<Word,Word>, Integer>();
+		valIdxMap = new HashMap<String, Integer>();
 	}
 	
 	/**
 	 * Floyd-Warshall All pairs shortest path
 	 */
+	/*
 	private void allPairs() {
 		int dist[][] = new int[numNodes + 2][numNodes + 2];
 		for(int i = 0; i < adj.size(); i++) {
@@ -88,6 +84,7 @@ public class Graph {
 			}
 		}
 	}
+	*/
 
 	/**
 	 * The factory method that takes the typed dependencies and returns a graph
@@ -114,7 +111,7 @@ public class Graph {
 			//undirected, add edges between depWord and govWord
 			depGraph.addEdge(depWord, govWord);
 			depGraph.addEdge(govWord, depWord);
-
+	
 			// governor is being modified
 			
 			if (ModifyingTypes.isModifier(td1.reln().toString())) {
@@ -126,17 +123,18 @@ public class Graph {
 			// System.out.println(govNode.value() + " -> " + depNode.value());
 		}
 		// depGraph.listModifiers();
-		
-		depGraph.setNumNodes(100);
-		System.out.println(depGraph.wordNodeMap.keySet());
-		System.out.println(depGraph.numNodes);
-		depGraph.allPairs();
+		System.out.println(depGraph.adjMap.keySet());
+		for(Word w : depGraph.wordNodeMap.keySet()) {
+			depGraph.valIdxMap.put(w.getVal(), w.getIdx());
+		}
+		//depGraph.allPairs();
 		return depGraph;
 
 	}
 
 	// undirected graph
 	public void addEdge(Word a, Word b) {
+		System.out.println("Adding : " + a + " -> " + b);
 		if(adjMap.keySet().contains(a)) {
 			adjMap.get(a).add(b);
 		} else {
@@ -152,6 +150,7 @@ public class Graph {
 	 * @return
 	 */
 	public ArrayList<Word> getNbr(Word curr) {
+		System.out.println(adjMap.keySet());
 		return adjMap.get(curr);
 	}
 
@@ -177,9 +176,10 @@ public class Graph {
 			return null;
 	}
 
-	public Integer getIdx(String word) {
-		if(wordNodeMap.containsKey(word.toLowerCase()))
-			return wordNodeMap.get(word.toLowerCase());
+	public Integer getIdx(String ip) {
+		ip  = ip.toLowerCase(); //everything is stored in graph in lower case
+		if(valIdxMap.containsKey(ip))
+			return valIdxMap.get(ip);
 		else
 			return null;
 	}
@@ -208,14 +208,8 @@ public class Graph {
 		}
 	}
 
-
-	public void setNumNodes(int numNodes) {
-		this.numNodes = numNodes;
-	}
-
 	public int distance(Word country, Number currNumber) {
-		Word num = (Word) currNumber;
-		return pathLenMap.get(new Pair<Word, Word>(country, num));
+		return getWordsOnPath(country, currNumber).size();
 	
 	}
 

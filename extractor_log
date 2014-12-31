@@ -535,3 +535,15 @@ Extracting from 0:the co2 emissions are 23 kiloton
 Got connection from Socket[addr=/10.105.1.3,port=50655,localport=4080]
 false
 Extracting from 0:the co2 emissions in India  are 23 kiloton
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=43017,localport=4080]
+false
+Extracting from 0:Foreign Direct Investment in India decreased to 2801 USD Million in October of 2014 from 2897 USD Million in September of 2014.

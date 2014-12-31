@@ -99,13 +99,13 @@ public class RuleBasedDriver {
 	 */
 	public static void main(String args[]) throws Exception {
 		RuleBasedDriver rbased = new RuleBasedDriver(true);
-//		String fileString = FileUtils.readFileToString(new File("gold_set"));
-//		String outFile = "gold_output_4";
-//		rbased.batchExtract(fileString, outFile);
+		String fileString = FileUtils.readFileToString(new File("gold_set"));
+		String outFile = "gold_output_4";
+		rbased.batchExtract(fileString, outFile);
 		
-		String fileString = FileUtils.readFileToString(new File("debug"));
-		System.out.println(rbased.extract(fileString));
-	
+//		String fileString = FileUtils.readFileToString(new File("debug"));
+//		System.out.println(rbased.extract(fileString));
+//	
 
 		
 	}
@@ -125,7 +125,8 @@ public class RuleBasedDriver {
 			GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
 			GrammaticalStructure gs = gsf.newGrammaticalStructure(tree);
 
-			Collection<TypedDependency> td = gs.typedDependenciesCollapsed();
+			//Collection<TypedDependency> td = gs.typedDependenciesCollapsed();
+			Collection<TypedDependency> td = gs.allTypedDependencies();
 			// Collection<TypedDependency> td =
 			// gs.typedDependenciesCCprocessed();
 			Iterator<TypedDependency> tdi = td.iterator();
@@ -196,10 +197,8 @@ public class RuleBasedDriver {
 		for (Pair<Country, Number> pair : pairs) {
 			// System.out.println(depGraph.getWordsOnPath(pair.country,
 			// pair.number));
-			ArrayList<Word> wordsOnDependencyGraphPath = depGraph
-					.getWordsOnPath(pair.first, pair.second);
-			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair,
-					wordsOnDependencyGraphPath, depGraph);
+			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(pair.first, pair.second);
+			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair,wordsOnDependencyGraphPath, depGraph);
 			for (Relation rel : rels) {
 				
 				if (unitsActive) {

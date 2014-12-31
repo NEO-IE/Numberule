@@ -154,7 +154,7 @@ public class Graph {
 		}
 	}
 	
-	void addToMap(Word moddedWord, Word modifier, HashMap<Word, HashSet<Word> > modMap) {
+	private void addToMap(Word moddedWord, Word modifier, HashMap<Word, HashSet<Word> > modMap) {
 		if(modMap.containsKey(moddedWord)) {
 			modMap.get(moddedWord).add(modifier);
 		} else {

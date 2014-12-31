@@ -99,13 +99,13 @@ public class RuleBasedDriver {
 	 */
 	public static void main(String args[]) throws Exception {
 		RuleBasedDriver rbased = new RuleBasedDriver(true);
-		String fileString = FileUtils.readFileToString(new File("gold_set"));
-		String outFile = "gold_output_4";
-		rbased.batchExtract(fileString, outFile);
+//		String fileString = FileUtils.readFileToString(new File("gold_set"));
+//		String outFile = "gold_output_4";
+//		rbased.batchExtract(fileString, outFile);
 		
-//		String fileString = FileUtils.readFileToString(new File("debug"));
-//		System.out.println(rbased.extract(fileString));
-//		
+		String fileString = FileUtils.readFileToString(new File("debug"));
+		System.out.println(rbased.extract(fileString));
+	
 
 		
 	}
@@ -265,7 +265,7 @@ public class RuleBasedDriver {
 		StringBuffer countryValBuffer = new StringBuffer("");
 		countryValBuffer.append(rel.getCountry().getVal());
 		
-		if (null != (modifiers = depGraph.getModifiers(countryArg))) {
+		if (null != (modifiers = depGraph.getRelationModifiers(countryArg))) {
 			hasChaged = true;
 			for (Word modifier : modifiers) {
 				//modifier.getVal() + " " + arg1.getVal());
@@ -279,7 +279,7 @@ public class RuleBasedDriver {
 		StringBuffer relValBuffer = new StringBuffer("");
 		relValBuffer.append(rel.getCountry().getVal());
 		modifiers = null;
-		if (null != (modifiers = depGraph.getModifiers(relWord))) {
+		if (null != (modifiers = depGraph.getRelationModifiers(relWord))) {
 			hasChaged = true;
 			for (Word modifier : modifiers) {
 				//relWord.setVal(modifier.getVal() + " " + relWord.getVal());

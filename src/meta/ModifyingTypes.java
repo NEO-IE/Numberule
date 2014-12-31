@@ -13,26 +13,46 @@ import java.util.HashSet;
  *
  */
 public class ModifyingTypes {
-	static HashSet<String> modifyingTypesSet;
-	final static String MODDING_TYPES_LIST_FILE = "data/modtypes";
+	static HashSet<String> relDepTypes;
+	static HashSet<String> keywordDepTypes;
+	final static String RelationModTypes = "data/modtypes";
+	final static String KeywordModTypes = "data/keyword_mod_types";
 	static
 	{
-		modifyingTypesSet = new HashSet<>();
+		relDepTypes = new HashSet<>();
 		try
 		{
-		BufferedReader br = new BufferedReader(new FileReader(new File(MODDING_TYPES_LIST_FILE)));
+		BufferedReader br = new BufferedReader(new FileReader(new File(RelationModTypes)));
 		String type_line = null;
 		while(null != (type_line = br.readLine())) {
-			modifyingTypesSet.add(type_line);
+			relDepTypes.add(type_line);
 		}
 		br.close();
 		} catch(IOException ioe) {
 			System.out.println(ioe);
 		}
+		
+		keywordDepTypes = new HashSet<>();
+		try
+		{
+		BufferedReader br = new BufferedReader(new FileReader(new File(KeywordModTypes)));
+		String type_line = null;
+		while(null != (type_line = br.readLine())) {
+			keywordDepTypes.add(type_line);
+		}
+		br.close();
+		} catch(IOException ioe) {
+			System.out.println(ioe);
+		}
+		
+		
 	}
-	public static boolean isModifier(String dependencyType) {
-		// TODO Auto-generated method stub
-		return modifyingTypesSet.contains(dependencyType);
+	public static boolean isRelDep(String dep) {
+		return relDepTypes.contains(dep);
+	}
+	public static boolean isKeywordDep(String dep) {
+	
+		return keywordDepTypes.contains(dep);
 	}
 		
 }

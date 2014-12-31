@@ -29,7 +29,8 @@ public class Graph {
 	//A mapping from all the word vals to corresponding indexes
 	private HashMap<String, Integer> valIdxMap;
 	//Modifiers of the words
-	private HashMap<Word, HashSet<Word> > modifiersMap;
+	private HashMap<Word, HashSet<Word> > relationModifiersMap;
+	private HashMap<Word, HashSet<Word>> keywordModifiersMap;
 	
 	
 	
@@ -40,8 +41,9 @@ public class Graph {
 		adjMap = new HashMap<Word, ArrayList<Word> >();
 		nodeWordMap = new HashMap<Integer, Word>();
 		wordNodeMap = new HashMap<Word, Integer>();
-		modifiersMap = new HashMap<>();
+		relationModifiersMap = new HashMap<>();
 		valIdxMap = new HashMap<String, Integer>();
+		keywordModifiersMap = new HashMap<>();
 	}
 	
 	
@@ -73,12 +75,13 @@ public class Graph {
 	
 			// governor is being modified
 			
-			if (ModifyingTypes.isModifier(td1.reln().toString())) {
+			if (ModifyingTypes.isRelDep(td1.reln().toString()) || ModifyingTypes.isKeywordDep(td1.reln().toString())) {
 				
 				//dependencies are bidirectional
-				depGraph.addModifier(govWord, depWord);
-				depGraph.addModifier(depWord, govWord);
+				depGraph.addModifier(govWord, depWord, td1.reln().toString());
+				depGraph.addModifier(depWord, govWord, td1.reln().toString());
 			}
+
 			// System.out.println(govNode.value() + " -> " + depNode.value());
 		}
 		// depGraph.listModifiers();
@@ -143,27 +146,41 @@ public class Graph {
 			return null;
 	}
 
-	public void addModifier(Word moddedWord, Word modifier) {
-		if(modifiersMap.containsKey(moddedWord)) {
-			modifiersMap.get(moddedWord).add(modifier);
+	public void addModifier(Word moddedWord, Word modifier, String dep) {
+		if(ModifyingTypes.isRelDep(dep)) {
+			addToMap(moddedWord, modifier, relationModifiersMap);
+		} else if(ModifyingTypes.isKeywordDep(dep)) {
+			addToMap(moddedWord, modifier, keywordModifiersMap);
+		}
+	}
+	
+	void addToMap(Word moddedWord, Word modifier, HashMap<Word, HashSet<Word> > modMap) {
+		if(modMap.containsKey(moddedWord)) {
+			modMap.get(moddedWord).add(modifier);
 		} else {
 			HashSet<Word> tmp = new HashSet<Word>();
 			tmp.add(modifier);
-			modifiersMap.put(moddedWord, tmp);
+			modMap.put(moddedWord, tmp);
 		}
-		
 	}
 
-	public HashSet<Word> getModifiers(Word modifiedWord) {
-		if(modifiersMap.containsKey(modifiedWord))
-			return modifiersMap.get(modifiedWord);
+	
+	public HashSet<Word> getRelationModifiers(Word modifiedWord) {
+		if(relationModifiersMap.containsKey(modifiedWord))
+			return relationModifiersMap.get(modifiedWord);
 		
 		return null;
 	}
 
+	public HashSet<Word> getKeywordModifiers(Word modifiedWord) {
+		if(keywordModifiersMap.containsKey(modifiedWord))
+			return keywordModifiersMap.get(modifiedWord);
+		return null;
+	}
+
 	public void listModifiers() {
-		for (Word word : modifiersMap.keySet()) {
-			System.err.println(word + " -> " + modifiersMap.get(word));
+		for (Word word : relationModifiersMap.keySet()) {
+			System.err.println(word + " -> " + relationModifiersMap.get(word));
 		}
 	}
 

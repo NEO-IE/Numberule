@@ -60,7 +60,7 @@ public class ExtractFromPath {
 				if (wordOnPath.getVal().toLowerCase().equals(kw)) {
 					return wordOnPath;
 				}else{
-					HashSet<Word> modWords = depGraph.getModifiers(wordOnPath);
+					HashSet<Word> modWords = depGraph.getKeywordModifiers(wordOnPath);
 					if(modWords == null)
 						continue; //no modifier words.
 					for(Word modWord: modWords){

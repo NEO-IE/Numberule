@@ -99,13 +99,13 @@ public class RuleBasedDriver {
 	 */
 	public static void main(String args[]) throws Exception {
 		RuleBasedDriver rbased = new RuleBasedDriver(true);
-		String fileString = FileUtils.readFileToString(new File("gold_set"));
-		String outFile = "gold_output_4";
-		rbased.batchExtract(fileString, outFile);
-		
-//		String fileString = FileUtils.readFileToString(new File("debug"));
-//		System.out.println(rbased.extract(fileString));
-//	
+//		String fileString = FileUtils.readFileToString(new File("gold_set"));
+//		String outFile = "gold_output_4";
+//		rbased.batchExtract(fileString, outFile);
+//		
+		String fileString = FileUtils.readFileToString(new File("debug"));
+		System.out.println(rbased.extract(fileString));
+	
 
 		
 	}
@@ -130,7 +130,10 @@ public class RuleBasedDriver {
 			// Collection<TypedDependency> td =
 			// gs.typedDependenciesCCprocessed();
 			Iterator<TypedDependency> tdi = td.iterator();
-
+			while(tdi.hasNext()) {
+				System.out.println(tdi.next());
+			}
+			tdi = td.iterator();
 			// Step 2 : Make a graph out of them
 			Graph depGraph = Graph.makeDepGraph(tdi);
 

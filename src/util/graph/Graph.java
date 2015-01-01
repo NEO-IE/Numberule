@@ -149,7 +149,8 @@ public class Graph {
 	public void addModifier(Word moddedWord, Word modifier, String dep) {
 		if(ModifyingTypes.isRelDep(dep)) {
 			addToMap(moddedWord, modifier, relationModifiersMap);
-		} else if(ModifyingTypes.isKeywordDep(dep)) {
+		}
+		if(ModifyingTypes.isKeywordDep(dep)) {
 			addToMap(moddedWord, modifier, keywordModifiersMap);
 		}
 	}

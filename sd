@@ -94,7 +94,7 @@ With an area of 504,030 km², Spain is the second largest country in Western Eur
 sentence 13
 Foreign direct investments (FDIs) in the Philippines reached $473 million in May as investors remained highly confident in the domestic economy, the Bangko Sentral ng Pilipinas said yesterday.
 
-[FDI(philippines, philippines investments, 473 united states dollar [million])]
+[FDI(philippines, philippines foreign direct, 473 united states dollar [million])]
 ---
 
 ---
@@ -108,14 +108,14 @@ Public broadcaster ARD/ZDF said 55.6 million people in Germany use the internet,
 sentence 15
 According to TNIC, there are 17.64 million Internet users in Taiwan, or 75.43 percent of the entire population.
 
-[INTERNET(taiwan, taiwan users, 75.43 percent)]
+[INTERNET(taiwan, taiwan internet, 75.43 percent)]
 ---
 
 ---
 sentence 16
 Since ITFA was put in place, the Pew Research Center estimates that Internet usage among Americans has skyrocketed from less than 25 percent of all people in 1998 to more than 85 percent today.
 
-[INTERNET(americans, americans usage, 85 percent)]
+[INTERNET(americans, americans internet, 85 percent)]
 ---
 
 ---
@@ -136,7 +136,7 @@ According to our January 2014 survey, 87% of American adults use the internet, u
 sentence 19
 The Gross Domestic Product (GDP) in India was worth 1876.80 billion US dollars in 2013.
 
-[GDP(india, india product, 1876.80 united states dollar [billion])]
+[GDP(india, india domestic gross, 1876.80 united states dollar [billion])]
 ---
 
 ---
@@ -150,7 +150,7 @@ The GDP of India in the year 2007 was US $1.09 trillion.
 sentence 21
 Actual USA electricity generation in 2012 of 4,047.7 Terawatt hours.
 
-[ELEC(usa generation, usa generation, 4,047.7 terawatt-hour)]
+[ELEC(usa generation, usa electricity usa actual, 4,047.7 terawatt-hour)]
 ---
 
 ---
@@ -199,7 +199,7 @@ Latest figures (published 2009) show that there was a 0.4% decrease in the total
 sentence 28
 In 2013 Germany's electricity production reached 631.4 TWh.
 
-[ELEC(germany, germany production, 631.4 terawatt-hour)]
+[ELEC(germany, germany electricity, 631.4 terawatt-hour)]
 ---
 
 ---
@@ -241,7 +241,7 @@ Germany's population was counted to be 80,219,695 on May 9, 2011, making it the 
 sentence 34
 Russia is one of the few countries with a negative growth rate, and its 2014 population is estimated at 142,072,744, a decrease from 2013’s estimate of 142,572,794.
 
-[POP(russia, russia estimated, 142,072,744 )]
+[]
 ---
 
 ---
@@ -346,7 +346,7 @@ Zimbabwe, where life expectancy is around 47 years and 15 percent of the populat
 sentence 49
 The latest value for Pump price for diesel fuel (US$ per liter) in Zambia was 1.48 as of 2012.
 
-[DIESEL(zambia, zambia fuel, 1.48 united states dollar per litre)]
+[DIESEL(zambia, zambia pump, 1.48 united states dollar per litre)]
 ---
 
 ---
@@ -367,21 +367,21 @@ drug abuse be a relatively minor problem in Brunei , a tiny sultanate of about 4
 sentence 52
 The domestic prices of 92-RON, the most commonly used grade of gasoline in Vietnam, is VND 24,570 (US$1.16) a liter on July 17.
 
-[GDP(vietnam, vietnam prices, 24,570 united states dollar)]
+[]
 ---
 
 ---
 sentence 53
 accord to the International Telecommunication Union , as of June 2010 , Singapore Internet usage have a 77.8 percent penetration rate , say Dr Sundeep Muppidi of the asian Media Information and Communication Center -lrb- AMIC -rrb- .
 
-[INF(singapore usage, singapore penetration percent have, 77.8 percent), INTERNET(singapore usage, singapore usage, 77.8 percent)]
+[INF(singapore usage, singapore penetration percent have, 77.8 percent), INTERNET(singapore usage, singapore internet singapore, 77.8 percent)]
 ---
 
 ---
 sentence 54
 Foreign Direct Investment in India decreased to 2801 USD Million in October of 2014 from 2897 USD Million in September of 2014.
 
-[FDI(india, india investment, 2801 united states dollar [million])]
+[FDI(india, india foreign direct, 2801 united states dollar [million])]
 ---
 
 ---
@@ -423,7 +423,7 @@ United States exports rose by 1.2 percent to USD197.5 billion in October of 2014
 sentence 60
 A government report said in July that Japan's average life expectancy set a world-best 86.44 years for women while men's average life expectancy came fifth globally with 79.59 years.
 
-[LIFE(japan, japan expectancy, 86.44 year)]
+[LIFE(japan, japan life average, 86.44 year)]
 ---
 
 ---
@@ -437,14 +437,14 @@ China leads the list, with 9.86 million kilotons of CO2 emissions in 2012, as co
 sentence 62
 India, Germany, and Canada had constant CO2 emissions for the two years, at 1.97, 0.81, and 0.56 million kilotons, respectively.
 
-[CO2(india, india had constant co2, 0.56 kiloton [million]), CO2(canada, canada had constant co2, 0.56 kiloton [million]), CO2(germany, germany had constant co2, 0.56 kiloton [million])]
+[CO2(canada, kilotons, 0.56 kiloton [million]), CO2(india, kilotons, 0.56 kiloton [million]), CO2(germany, kilotons, 0.56 kiloton [million])]
 ---
 
 ---
 sentence 63
 According to the U.S. Department of Energy’s Carbon Dioxide Information Analysis Center, China in 2012 emitted 9.8 million kilotons of CO2, while the United States emitted 5.2 million kilotons.
 
-[CO2(united states, united emitted, 5.2 kiloton [million]), CO2(china, china emitted, 9.8 kiloton [million]), CO2(u.s. department, u.s. emitted, 9.8 kiloton [million])]
+[CO2(united states, united emitted, 5.2 kiloton [million]), CO2(china, china emitted, 5.2 kiloton [million]), CO2(china, china emitted, 9.8 kiloton [million]), CO2(united states, united emitted, 9.8 kiloton [million]), CO2(u.s. department, u.s. emitted, 5.2 kiloton [million]), CO2(u.s. department, u.s. emitted, 9.8 kiloton [million])]
 ---
 
 ---
@@ -458,7 +458,7 @@ In 2013, exports from Russia amounted to US$526.4 billion, up 74.4% since 2009.
 sentence 65
 In 2012, U.S. greenhouse gas emissions totaled 6,526 million metric tons CO2.
 
-[CO2(u.s. emissions, u.s. totaled, 6,526 tonne [million])]
+[CO2(u.s. emissions, u.s. greenhouse u.s. gas, 6,526 tonne [million])]
 ---
 
 ---
@@ -479,7 +479,7 @@ Food Inflation in India decreased to 3.50 percent in November of 2014 from 5.68 
 sentence 68
 The latest annual inflation rate for the United States is 1.3% through the 12 months ended November 2014, as published by the US government on December 17, 2014.
 
-[INF(us government, us latest inflation annual, 1.3 percent), INF(united states, united rate, 1.3 percent)]
+[INF(us government, us latest inflation annual, 1.3 percent), INF(united states, united latest inflation annual, 1.3 percent)]
 ---
 
 ---
@@ -507,7 +507,7 @@ Covering a total area of 8.51 million square kilometers, Brazil has a rangeland 
 sentence 72
 The life expectancy for Canadians born in 1990 is 77 years; for people born in 2012, it's 82 years.
 
-[LIFE(canadians, canadians expectancy, 77 year)]
+[LIFE(canadians, canadians life, 77 year)]
 ---
 
 ---
@@ -521,7 +521,7 @@ The estimated population for 2014 of the Australian continent is about 36.25 mil
 sentence 74
 The Gross Domestic Product (GDP) in Somalia was worth 1.07 billion US dollars in 2010.
 
-[GDP(somalia, somalia product, 1.07 united states dollar [billion])]
+[GDP(somalia, somalia domestic gross, 1.07 united states dollar [billion])]
 ---
 
 ---
@@ -556,28 +556,28 @@ China 's population of internet user , already the world 's largest , soar nearl
 sentence 79
 the state of Brazil 's more developed southeast have the highest internet use -- 48.1 percent , compare to 30 percent in the poorer northeast , the agency say .
 
-[INTERNET(brazil, brazil have highest internet, 30 percent), INTERNET(brazil, brazil use, 48.1 percent)]
+[INTERNET(brazil, brazil have highest internet, 48.1 percent)]
 ---
 
 ---
 sentence 80
 almost 60 percent of internet user in China say that consumer review site , as well as discussion forum and blog , influence they purchasing decision , compare with less than 20 percent in the US .
 
-[INTERNET(china, china user, 60 percent)]
+[INTERNET(china, china internet, 60 percent)]
 ---
 
 ---
 sentence 81
 the BBS datum also show Bangladesh 's point-to-point inflation dip to 2.25 percent in June , while it be 10.04 percent in June a year ago .
 
-[INF(bangladesh, bangladesh dip, 10.04 percent)]
+[]
 ---
 
 ---
 sentence 82
 Food inflation rise to 17.65 percent for the week which end April 10 from 17.22 percent in the previous week in India , report the Press Trust of India .
 
-[INF(india, india rise, 17.65 percent)]
+[INF(india, india inflation food, 17.65 percent)]
 ---
 
 ---
@@ -591,14 +591,14 @@ Fiji inflation jump to 5.1 percent SUVA , Oct. 14 -lrb- Xinhua -rrb- inflation i
 sentence 84
 Canada 's inflation rate track down to 1.7 percent in the 12 month to August , follow July 's increase to 1.8 percent from 1.0 percent in June .
 
-[INF(canada, canada rate, 1.8 percent)]
+[INF(canada, canada inflation, 1.8 percent)]
 ---
 
 ---
 sentence 85
 Such a decline in population growth leads to a reduction of 1.83 billion tons of carbon dioxide emissions in China per annum at present, Zhao said.
 
-[CO2(china, china emissions, 1.83 tonne [billion])]
+[CO2(china, china dioxide carbon, 1.83 tonne [billion])]
 ---
 
 ---
@@ -633,7 +633,7 @@ The wide scattering of the Marshalls' 29 atolls, 2,300 miles (3,700 kilometers) 
 sentence 90
 Life expectancy at birth for Indian males has gone up from 48.6 years in 1970 to 63.2 years in 2010, while for Indian females the number has risen from 49.1 years to 67.5 years during the same period.
 
-[LIFE(indian males, indian expectancy, 63.2 year)]
+[LIFE(indian males, indian life, 63.2 year)]
 ---
 
 ---
@@ -661,21 +661,21 @@ Drinking causes an extraordinary number of deaths in Russia, where male life exp
 sentence 94
 Thailand, a country which is widely known for its craze for social networks, reportedly, has a Facebook and internet penetration of 36 percent and 26 percent respectively.
 
-[INTERNET(thailand, thailand penetration, 36 percent)]
+[INTERNET(thailand, thailand internet, 36 percent)]
 ---
 
 ---
 sentence 95
 by the end of last year , the number of internet user in China have reach 384 million user , cover about 28.9 percent of the country 's total population .
 
-[INTERNET(china, china user, 28.9 percent)]
+[INTERNET(china, china internet, 28.9 percent)]
 ---
 
 ---
 sentence 96
 the institution also state that Brazil 's inflation rate will remain between 4 percent and 4.5 percent both in 2009 and 2010 .
 
-[INF(brazil, brazil rate, 4 percent)]
+[INF(brazil, brazil inflation, 4 percent)]
 ---
 
 ---
@@ -696,5 +696,5 @@ inflation soar from negative figure at the end of the 1990s to a record 12.9 per
 sentence 99
 Current India CO2 Emissions is 2.01 Million kt.
 
-[CO2(india emissions, india emissions, 2.01 kiloton [million])]
+[CO2(india emissions, india co2 india current, 2.01 kiloton [million])]
 ---

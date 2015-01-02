@@ -1,6 +1,6 @@
 {
 "POP" : ["population", "people", "inhabitants", "natives", "residents", "people"],
-"AGL" : ["area", "land", "land area"],
+"AGL" : ["area", "land"],
 "FDI" : ["foreign", "fdi", "direct", "investments", "investment"], 
 "GOODS" : ["goods", "exports", "export", "exporter", "exported", "ships", "shipped"], 
 "ELEC" : ["Electricity", "kilowatthors", "terawatt", "generation", "production", "sector"], 

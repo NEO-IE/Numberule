@@ -19,7 +19,10 @@ public class KeywordData {
 	
 	
 	public KeywordData() throws IOException{
-		modifiers = new String[]{"change", "up", "down", "males", "females", "male", "female", "growth", "increase", "decrease", "decreased", "increased", "changed"};
+		modifiers = new String[]
+				{"change", "up", "down", "males", "females", "male", "female",
+				"growth", "increase", "decrease", "decreased", "increased", 
+				"changed", "grown", "grew", "surge", "surged"};
 		String keywordJson = FileUtils.readFileToString(new File(keyWordFile));
 		
 		//System.out.println(keywordJson);

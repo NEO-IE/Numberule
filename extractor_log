@@ -1,0 +1,351 @@
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=43818,localport=4080]
+true
+Extracting from 1:The actual number of users is still only 15 percent of the population
+Got connection from Socket[addr=/10.105.1.3,port=43844,localport=4080]
+true
+Extracting from 1:The actual number of users in India is still only 15 percent of the population
+Got connection from Socket[addr=/10.105.1.3,port=44705,localport=4080]
+true
+Extracting from 1:Nepal had a total of 9.34 million internet subscribers as of 16 October, up from 9.03 million in mid-September, while the internet penetration rate in the country grew to 35.28 percent in October from 34.09 percent in the previous month
+Got connection from Socket[addr=/10.105.1.3,port=44741,localport=4080]
+true
+Extracting from 1:Nepal had a total of 9.34 million internet subscribers as of 16 October, up from 9.03 million in mid-September, while the internet penetration rate in the country grew to 35.28 percent in October.
+Got connection from Socket[addr=/10.105.1.3,port=44755,localport=4080]
+true
+Extracting from 1:Nepal had a total of 9.34 million internet subscribers as of 16 October, up from 9.03 million in mid-September, while the internet penetration rate in the country grew to 35.28 percent in October from 34.09 percent in the previous month
+Got connection from Socket[addr=/10.105.1.3,port=44773,localport=4080]
+true
+Extracting from 1:Nepal had a total of 9.34 million internet subscribers as of 16 October, up from 9.03 million in mid-September, while the internet penetration rate in the country grew to 35.28 percent in October 
+Got connection from Socket[addr=/10.105.1.3,port=44779,localport=4080]
+false
+Extracting from 0:Nepal had a total of 9.34 million internet subscribers as of 16 October, up from 9.03 million in mid-September, while the internet penetration rate in the country grew to 35.28 percent in October 
+Got connection from Socket[addr=/10.105.1.3,port=44788,localport=4080]
+true
+Extracting from 1:Nepal had a total of 9.34 million internet subscribers as of 16 October, up from 9.03 million in mid-September, while the internet penetration rate in the country grew to 35.28 percent in October from 34.09 percent in the previous month
+Got connection from Socket[addr=/10.105.1.3,port=44828,localport=4080]
+true
+Extracting from 1:Nepal had a total of 9.34 million internet subscribers as of 16 October, up from 9.03 million in mid-September, while the internet penetration rate in the country grew to 35.28 percent in October from 34.09 percent in the previous month.
+Got connection from Socket[addr=/10.105.1.3,port=44896,localport=4080]
+true
+Extracting from 1:Nepal had a total of 9.34 million internet subscribers as of 16 October, up from 9.03 million in mid-September, while the internet penetration rate in the country grew to 35.28 percent in October from 34.09 percent in the previous month.
+Got connection from Socket[addr=/10.105.1.3,port=45534,localport=4080]
+true
+Extracting from 1:The inflow of FDI into Pakistan was US$ 258.42 million in 1991, and in the same year in Afghanistan it was zero but in the year 2007 the inflow of FDI into Pakistan increased to US$ 4273 million and into Afghanistan it was at US$ 288 during 2007.
+Got connection from Socket[addr=/10.105.1.3,port=45570,localport=4080]
+false
+Extracting from 0:The inflow of FDI into Pakistan was US$ 258.42 million in 1991, and in the same year in Afghanistan it was zero but in the year 2007 the inflow of FDI into Pakistan increased to US$ 4273 million and into Afghanistan it was at US$ 288 during 2007.
+Got connection from Socket[addr=/10.105.1.3,port=45589,localport=4080]
+true
+Extracting from 1:The inflow of FDI into Pakistan was US$ 258.42 million in 1991, and in the same year in Afghanistan it was 0 but in the year 2007 the inflow of FDI into Pakistan increased to US$ 4273 million and into Afghanistan it was at US$ 288 during 2007.
+Got connection from Socket[addr=/10.105.1.3,port=45590,localport=4080]
+false
+Extracting from 0:The inflow of FDI into Pakistan was US$ 258.42 million in 1991, and in the same year in Afghanistan it was 0 but in the year 2007 the inflow of FDI into Pakistan increased to US$ 4273 million and into Afghanistan it was at US$ 288 during 2007.
+Got connection from Socket[addr=/10.105.1.3,port=45598,localport=4080]
+false
+Extracting from 0:The inflow of FDI into Pakistan was US$ 258.42 million in 1991, and in the same year in Afghanistan it was 0 but in the year 2007 the inflow of FDI into Pakistan increased to US$ 4273 million and into Afghanistan it was at US$ 288 during 2007.
+Got connection from Socket[addr=/10.105.1.3,port=56071,localport=4080]
+false
+Extracting from 0:The value for Land area (sq. km) in Pakistan was 770,880 as of 2011.
+Got connection from Socket[addr=/10.105.1.3,port=56077,localport=4080]
+true
+Extracting from 1:The value for Land area (sq. km) in Pakistan was 770,880 as of 2011.
+Got connection from Socket[addr=/10.105.1.3,port=58057,localport=4080]
+true
+Extracting from 1:In 2013, Andorra had the longest life expectancy for women (86.7 years) and Qatar had the longest for men (81.2 years).
+Got connection from Socket[addr=/10.105.1.3,port=36116,localport=4080]
+true
+Extracting from 1:At 17,075,400 square kilometres (6,592,800 sq mi), Russia is the largest country in the world, covering more than one-eighth of the Earth's inhabited land area.
+Got connection from Socket[addr=/10.105.1.3,port=36123,localport=4080]
+false
+Extracting from 0:At 17,075,400 square kilometres (6,592,800 sq mi), Russia is the largest country in the world, covering more than one-eighth of the Earth's inhabited land area.
+Got connection from Socket[addr=/10.105.1.3,port=36300,localport=4080]
+false
+Extracting from 0:At 17,075,400 square kilometres (6,592,800 sq mi), Russia is the largest country in the world, covering more than one-eighth of the Earth's inhabited land area.
+Got connection from Socket[addr=/10.105.1.3,port=43299,localport=4080]
+false
+Extracting from 0:China�s total electricity generated in 2013 amounted to 5322 billion kWh (TWh), including 3959 TWh from coal power stations (74%), 896 TWh from hydro power stations, 140 TWh from wind, 8.7 TWh from solar PV, 112 TWh from nuclear, and the rest from other sources.
+Got connection from Socket[addr=/10.105.1.3,port=43308,localport=4080]
+true
+Extracting from 1:China�s total electricity generated in 2013 amounted to 5322 billion kWh (TWh), including 3959 TWh from coal power stations (74%), 896 TWh from hydro power stations, 140 TWh from wind, 8.7 TWh from solar PV, 112 TWh from nuclear, and the rest from other sources.
+Got connection from Socket[addr=/10.105.1.3,port=46709,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=46727,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+Got connection from Socket[addr=/10.105.1.3,port=34767,localport=4080]
+false
+Extracting from 0:The value for Land area (sq. km) in Pakistan was 770,880 as of 2011.
+Got connection from Socket[addr=/10.105.1.3,port=34807,localport=4080]
+false
+Extracting from 0:Land area (sq. km) in China was last measured at 9327489.90 in 2011, according to the World Bank.
+Got connection from Socket[addr=/10.105.1.3,port=34816,localport=4080]
+true
+Extracting from 1:Land area (sq. km) in China was last measured at 9327489.90 in 2011, according to the World Bank.
+Got connection from Socket[addr=/10.105.1.3,port=38890,localport=4080]
+false
+Extracting from 0: In 2013, the United States generated about 4,058 billion kilowatthours of electricity. 
+Got connection from Socket[addr=/10.105.1.3,port=38897,localport=4080]
+true
+Extracting from 1: In 2013, the United States generated about 4,058 billion kilowatthours of electricity. 
+Got connection from Socket[addr=/10.105.1.3,port=38949,localport=4080]
+true
+Extracting from 1:In 2013 Germany's electricity production reached 631.4 TWh.
+Got connection from Socket[addr=/10.105.1.3,port=38981,localport=4080]
+true
+Extracting from 1:Public broadcaster ARD/ZDF said 55.6 million people in Germany use the internet, or 79 percent of the population aged 14 and over. 
+Got connection from Socket[addr=/10.105.1.3,port=39184,localport=4080]
+true
+Extracting from 1:The property tycoon developed more than 700 hotels, malls and condominiums in Singapore and Hong Kong of China.
+Got connection from Socket[addr=/10.105.1.3,port=39586,localport=4080]
+true
+Extracting from 1:Bangladesh has about 4,000 garment factories that export more than $10 billion worth of products a year, mainly to the United States and Europe.
+Got connection from Socket[addr=/10.105.1.3,port=40420,localport=4080]
+true
+Extracting from 1:it sell the fuel at $ 1.53 per liter , while the average price of diesel in Britain be $ 1.75 per liter , accord to the Automobile Association .
+Got connection from Socket[addr=/10.105.1.3,port=41483,localport=4080]
+true
+Extracting from 1:Vietnam is planning for a one-metre (3.3 feet) rise in sea levels by 2100, which would inundate about 31,000 square kilometres (12,400 square miles) of land -- an area about the size of Belgium -- unless dykes and drainage systems are strengthened, a UN discussion paper said in December.
+Got connection from Socket[addr=/10.105.1.3,port=41652,localport=4080]
+true
+Extracting from 1:Sharing land borders with Norway, Finland, Estonia, Latvia, Lithuania, Poland, Belarus, Ukraine, Georgia, Azerbaijan, Kazakhstan, China, Mongolia and the Democratic People's Republic of Korea, Russia covers an area of more than 17 million square km stretching from Europe to Asia.
+Got connection from Socket[addr=/10.105.1.3,port=42355,localport=4080]
+true
+Extracting from 1:Canada 's inflation rate track down to 1.7 percent in the 12 month to August , follow July 's increase to 1.8 percent from 1.0 percent in June .
+Got connection from Socket[addr=/10.105.1.3,port=42738,localport=4080]
+true
+Extracting from 1:the market be wary at the moment by concern that the monetary authority in China may start raise interest rate soon to keep a lid on mount inflationary pressure -- figure earlier show that China 's inflation rate jump to 2.7 percent in February over a year earlier from 1.5 percent in January .
+Got connection from Socket[addr=/10.105.1.3,port=42755,localport=4080]
+false
+Extracting from 0:the market be wary at the moment by concern that the monetary authority in China may start raise interest rate soon to keep a lid on mount inflationary pressure -- figure earlier show that China 's inflation rate jump to 2.7 percent in February over a year earlier from 1.5 percent in January .
+Got connection from Socket[addr=/10.105.1.3,port=43225,localport=4080]
+false
+Extracting from 0:India 's central bank have already raise interest rate three time this year but inflation have remain stubbornly high and stand at 10.55 percent , the highest among the group of 20 lead nation .
+Got connection from Socket[addr=/10.105.1.3,port=43230,localport=4080]
+true
+Extracting from 1:India 's central bank have already raise interest rate three time this year but inflation have remain stubbornly high and stand at 10.55 percent , the highest among the group of 20 lead nation .
+Got connection from Socket[addr=/10.105.1.3,port=58120,localport=4080]
+true
+Extracting from 1:Yemen airliner crash off comoro with 153 aboard moronus , June 30 , 2009 -lrb- afp -rrb- a Yemeni Airbus A310 jet carry 153 people crash into rough sea as it come into land in the Comoros island early Tuesday but rescuer pluck a child survirvor from the water , official say .
+Got connection from Socket[addr=/10.105.1.3,port=58440,localport=4080]
+true
+Extracting from 1:The European group was Hong Kong's 11th largest trading partner last year with 72 billion Hong Kong dollars (9.3 billion US dollars) worth of goods exchanged, the statement said.
+Got connection from Socket[addr=/10.105.1.3,port=60749,localport=4080]
+true
+Extracting from 1:Meanwhile, Myanmar's exports rose 12 percent to $7.6 billion in year through March from $6.78 billion the previous year, according to the report.
+Got connection from Socket[addr=/10.105.1.3,port=32820,localport=4080]
+true
+Extracting from 1:Pakistan typically exports about $10 billion of textile products each year, with about a quarter of that amount going to U.S. retailers.
+Got connection from Socket[addr=/10.105.1.3,port=32945,localport=4080]
+true
+Extracting from 1:In the document, the European Union pledged to reduce emissions by 283.2 megatons of carbon dioxide equivalent (Mte), followed by Canada with 105.4 Mte.
+Got connection from Socket[addr=/10.105.1.3,port=33373,localport=4080]
+true
+Extracting from 1:According to Finnish Forest Research Institute, Finland's forests absorb 42 million tonnes of carbon dioxide a year, which is well over half of Finnish carbon dioxide emissions, which were 70 million tonnes in 2008.
+Got connection from Socket[addr=/10.105.1.3,port=33424,localport=4080]
+true
+Extracting from 1:40,000 metric tons -- The annual emissions of one of the convention's least-polluting member countries, the Pacific island nation of Kiribati, according to U.S. data.
+Got connection from Socket[addr=/10.105.1.3,port=33581,localport=4080]
+true
+Extracting from 1:Total annual greenhouse gas emissions grew from 1.25 billion tonnes in 1994 to 1.90 billion tonnes in 2007, confirming India among the world's biggest emitters.
+Got connection from Socket[addr=/10.105.1.3,port=33743,localport=4080]
+true
+Extracting from 1:Even if China turned itself into a country of high energy efficiency, even higher than today's Japan, energy consumption would still reach 7.8 billion tonnes of standard coal by 2050 and greenhouse gas emissions would be 17 billion tonnes, the report said.
+Got connection from Socket[addr=/10.105.1.3,port=33806,localport=4080]
+true
+Extracting from 1:According to the authority's preliminary estimate, greenhouse gas emissions in Finland amounted to 70.1 million tons of carbon dioxide equivalent in 2008.
+Got connection from Socket[addr=/10.105.1.3,port=34072,localport=4080]
+true
+Extracting from 1:40,000 metric tons -- The annual emissions of one of the convention's least-polluting member countries, the Pacific island nation of Kiribati, according to U.S. data.
+Got connection from Socket[addr=/10.105.1.3,port=35517,localport=4080]
+true
+Extracting from 1:Baidu, the nation's biggest search engine, had 63.9 percent of China's search engine market as of the end of September, followed by 31.3 percent for Google China, according to Internet research firm Analysys International.
+Got connection from Socket[addr=/10.105.1.3,port=35534,localport=4080]
+false
+Extracting from 0:Baidu, the nation's biggest search engine, had 63.9 percent of China's search engine market as of the end of September, followed by 31.3 percent for Google China, according to Internet research firm Analysys International.
+Got connection from Socket[addr=/10.105.1.3,port=35923,localport=4080]
+false
+Extracting from 0:Brazil has 36.4 million active internet users in July: survey RIO DE JANEIRO, Aug. 20 (Xinhua) The number of active internet users in Brazil jumped to 36.4 million in July, up 10 percent from June, according to a survey released on Thursday by consulting company Ibope Nielsen Online.
+Got connection from Socket[addr=/10.105.1.3,port=35945,localport=4080]
+true
+Extracting from 1:Brazil has 36.4 million active internet users in July: survey RIO DE JANEIRO, Aug. 20 (Xinhua) The number of active internet users in Brazil jumped to 36.4 million in July, up 10 percent from June, according to a survey released on Thursday by consulting company Ibope Nielsen Online.
+Got connection from Socket[addr=/10.105.1.3,port=35958,localport=4080]
+false
+Extracting from 0:Brazil has 36.4 million active internet users in July: survey RIO DE JANEIRO, Aug. 20 (Xinhua) The number of active internet users in Brazil jumped to 36.4 million in July, up 10 percent from June, according to a survey released on Thursday by consulting company Ibope Nielsen Online.
+Got connection from Socket[addr=/10.105.1.3,port=36235,localport=4080]
+false
+Extracting from 0:The states of Brazil's more developed southeast had the highest Internet use -- 48.1 percent, compared to 30 percent in the poorer northeast, the agency said.
+Got connection from Socket[addr=/10.105.1.3,port=36244,localport=4080]
+true
+Extracting from 1:The states of Brazil's more developed southeast had the highest Internet use -- 48.1 percent, compared to 30 percent in the poorer northeast, the agency said.
+Got connection from Socket[addr=/10.105.1.3,port=36369,localport=4080]
+true
+Extracting from 1:The Internet provider can control all your activity, what you and your company do on the Internet, the expert said More than 3 million people in Bulgaria have Internet access, and the National Statistical 
+Got connection from Socket[addr=/10.105.1.3,port=36513,localport=4080]
+true
+Extracting from 1:Studies cited by the ITU indicated that 93 percent of US teenagers use the Internet, while in South Korea, 30 percent of under-18s spend at least two hours a day online.
+Got connection from Socket[addr=/10.105.1.3,port=36754,localport=4080]
+true
+Extracting from 1:Only 21 percent of the total households in Brazil, or 12 million, have access to broadband Internet services.
+Got connection from Socket[addr=/10.105.1.3,port=36763,localport=4080]
+false
+Extracting from 0:Only 21 percent of the total households in Brazil, or 12 million, have access to broadband Internet services.
+Got connection from Socket[addr=/10.105.1.3,port=36881,localport=4080]
+false
+Extracting from 0:Internet use grew 16.6 percent in Latin America last year, nearly triple 5.7 percent growth seen in Canada and the U.S., according to comScore Inc., an Internet researcher.
+Got connection from Socket[addr=/10.105.1.3,port=36925,localport=4080]
+true
+Extracting from 1:Internet use grew 16.6 percent in Latin America last year, nearly triple 5.7 percent growth seen in Canada and the U.S., according to comScore Inc., an Internet researcher.
+Got connection from Socket[addr=/10.105.1.3,port=39037,localport=4080]
+true
+Extracting from 1:Infocomm Development Authority of Singapore's figures show that household Internet access increased from 65 percent in 2003 to 81 percent last year.
+Got connection from Socket[addr=/10.105.1.3,port=39388,localport=4080]
+true
+Extracting from 1:Indonesian internet users rise up 17 percent to 2.3 million
+Got connection from Socket[addr=/10.105.1.3,port=47588,localport=4080]
+true
+Extracting from 1:By the end of last year, the number of Internet users in China had reached 384 million users, covering about 28.9 percent of the country's total population.
+Got connection from Socket[addr=/10.105.1.3,port=47787,localport=4080]
+true
+Extracting from 1:By June 2010, China had 440 million netizens, accounting for 33 percent of its total population, said Hu Qiheng, chairwoman of the Internet Society of China, at the forum.
+Got connection from Socket[addr=/10.105.1.3,port=47863,localport=4080]
+true
+Extracting from 1:Brazil's Internet access booms RIO DE JANEIRO, Sept 8, 2010 (AFP) Internet access in Brazil surged by a phenomenal 21 percent in 2009 with 67.9 million online, the national statistic office said Wednesday.
+Got connection from Socket[addr=/10.105.1.3,port=47868,localport=4080]
+false
+Extracting from 0:Brazil's Internet access booms RIO DE JANEIRO, Sept 8, 2010 (AFP) Internet access in Brazil surged by a phenomenal 21 percent in 2009 with 67.9 million online, the national statistic office said Wednesday.
+Got connection from Socket[addr=/10.105.1.3,port=48185,localport=4080]
+false
+Extracting from 0:The number of active internet users in Brazil jumped to 36.4 million in July, up 10 percent from June, according to a survey released on Thursday by consulting company Ibope Nielsen Online.
+Got connection from Socket[addr=/10.105.1.3,port=48200,localport=4080]
+true
+Extracting from 1:The number of active internet users in Brazil jumped to 36.4 million in July, up 10 percent from June, according to a survey released on Thursday by consulting company Ibope Nielsen Online.
+Got connection from Socket[addr=/10.105.1.3,port=48595,localport=4080]
+true
+Extracting from 1:According to the International Telecommunication Union, as of June 2010, Singapore Internet usage has a 77.8 percent penetration rate, said Dr Sundeep Muppidi of the Asian Media Information and Communication Center (AMIC).
+Got connection from Socket[addr=/10.105.1.3,port=49745,localport=4080]
+true
+Extracting from 1:According to statistics provided by US officials, the average life expectancy for women in Afghanistan is 44 years old and one women in eight die during childbirth -- one of the highest maternal mortality rates in the world.
+Got connection from Socket[addr=/10.105.1.3,port=50841,localport=4080]
+true
+Extracting from 1:Afghanistan, which is mostly rural, has one of the lowest life expectancy rates in the world at 44 years for both men and women.
+Got connection from Socket[addr=/10.105.1.3,port=50919,localport=4080]
+true
+Extracting from 1:Along with early retirement, Greece has one of Europe's highest longevity rates -- with an average life expectancy of 77.1 years for men and 81.9 for women.
+Got connection from Socket[addr=/10.105.1.3,port=51057,localport=4080]
+true
+Extracting from 1:Cuba has a work force of 4.9 million people, a life expectancy of 77 years, and an infant mortality rate of 5.8 per 1,000 live births.
+Got connection from Socket[addr=/10.105.1.3,port=51150,localport=4080]
+true
+Extracting from 1:In stark contrast to the leaders, in Zimbabwe life expectancy is just 47 years and per capita income 176 dollars.
+Got connection from Socket[addr=/10.105.1.3,port=51242,localport=4080]
+true
+Extracting from 1:It does not top any individual category -- average income in Liechtenstein is a wallet-busting 81,011 dollars and Japan's life expectancy is 83.6 years -- but Norway's all-round performance gave it superiority in the UN Development Programme (UNDP) 20th annual rankings.
+Got connection from Socket[addr=/10.105.1.3,port=51353,localport=4080]
+true
+Extracting from 1:Life expectancy in Zimbabwe, plagued by AIDS and poverty, has fallen to 47 years from 61 years over the past quarter century.
+Got connection from Socket[addr=/10.105.1.3,port=51412,localport=4080]
+true
+Extracting from 1:Malawi, like other southern African countries, has seen its life expectancy drop from about 60 years in the early 1990s to below 40 years presently due to the HIV/AIDS pandemic.
+Got connection from Socket[addr=/10.105.1.3,port=51420,localport=4080]
+false
+Extracting from 0:Malawi, like other southern African countries, has seen its life expectancy drop from about 60 years in the early 1990s to below 40 years presently due to the HIV/AIDS pandemic.
+Got connection from Socket[addr=/10.105.1.3,port=51798,localport=4080]
+false
+Extracting from 0:The average life expectancy in Guinea-Bissau is just 46 years.
+Got connection from Socket[addr=/10.105.1.3,port=51935,localport=4080]
+false
+Extracting from 0:Japan has the world's highest life expectancy -- early 83 years -- according to the World Bank.
+Got connection from Socket[addr=/10.105.1.3,port=51975,localport=4080]
+false
+Extracting from 0:Zimbabwe, where life expectancy is around 47 years and 15 percent of the population need food aid, would lose 47 percent; Nigeria -- Africa's most populous nation with a population of 152 million -- and Ethiopia would each lose 46 percent, and Liberia's population would fall by 45 percent.
+Got connection from Socket[addr=/10.105.1.3,port=51989,localport=4080]
+true
+Extracting from 1:Zimbabwe, where life expectancy is around 47 years and 15 percent of the population need food aid, would lose 47 percent; Nigeria -- Africa's most populous nation with a population of 152 million -- and Ethiopia would each lose 46 percent, and Liberia's population would fall by 45 percent.
+Got connection from Socket[addr=/10.105.1.3,port=53395,localport=4080]
+true
+Extracting from 1:2008 inflation reached 13.3 percent in Russia.
+Got connection from Socket[addr=/10.105.1.3,port=53399,localport=4080]
+false
+Extracting from 0:2008 inflation reached 13.3 percent in Russia.
+Got connection from Socket[addr=/10.105.1.3,port=53402,localport=4080]
+false
+Extracting from 0:2008 inflation reached 13.3 percent in Russia.
+Got connection from Socket[addr=/10.105.1.3,port=53403,localport=4080]
+false
+Extracting from 0:2008 inflation reached 13.3 percent in Russia.
+Got connection from Socket[addr=/10.105.1.3,port=45321,localport=4080]
+true
+Extracting from 1:The Reserve Bank of India has already hiked benchmark interest rates twice in two months to curb inflation, currently running at a 17-month high of 9.9 percent.
+Got connection from Socket[addr=/10.105.1.3,port=45352,localport=4080]
+true
+Extracting from 1:There was also news that China's inflation rate jumped to 2.7 percent in February from 1.5 percent in January.
+Got connection from Socket[addr=/10.105.1.3,port=45435,localport=4080]
+true
+Extracting from 1:Britain's inflation rate remained at 1.8 percent in July, surprising many economists who had forecast the price measure to fall further below the Bank of England's 2 percent target, according to official figures out Tuesday.
+Got connection from Socket[addr=/10.105.1.3,port=45489,localport=4080]
+true
+Extracting from 1:Rising food and electricity costs pushed up Kenya's annual inflation in August to 18.4 percent from 17.8 percent in the previous month, the country's statistics bureau said on Tuesday.
+Got connection from Socket[addr=/10.105.1.3,port=45547,localport=4080]
+true
+Extracting from 1:Turkey's consumer price index (CPI), the main gauge of inflation, rose 5.73 percent in June from a year earlier, official figures showed Friday.
+Got connection from Socket[addr=/10.105.1.3,port=45665,localport=4080]
+false
+Extracting from 0:Indian wholesale inflation continued to slow to 8.51 percent in August from 9.78 percent in July on cheaper manufactured products, fuels and non-food articles, said a release by the Ministry Commerce and Industry Tuesday.
+Got connection from Socket[addr=/10.105.1.3,port=45851,localport=4080]
+true
+Extracting from 1:Higher prices for clothes and plane tickets helped keep Britain's inflation rate at 3.1 percent in August, the ninth straight month it has stayed above the official target of 2 percent, official statisticians said Tuesday.
+Got connection from Socket[addr=/10.105.1.3,port=45947,localport=4080]
+false
+Extracting from 0:ccording to Bank Negara Malaysia, the country's central bank, headline inflation moderated in September to 1.8 percent, and inflation is expected to remain moderate going into 2011.
+Got connection from Socket[addr=/10.105.1.3,port=46022,localport=4080]
+false
+Extracting from 0:According to Bruckbauer's estimate, Austria's inflation for this year and next will remain at the low rates of 1.8 percent and 2 percent, respectively.
+Got connection from Socket[addr=/10.105.1.3,port=46081,localport=4080]
+false
+Extracting from 0:According to Serbia's Statistics bureau, inflation in June was 6.4 percent on an annual rate, above the 2010 forecast for 6.0 percent.
+Got connection from Socket[addr=/10.105.1.3,port=46087,localport=4080]
+true
+Extracting from 1:According to Serbia's Statistics bureau, inflation in June was 6.4 percent on an annual rate, above the 2010 forecast for 6.0 percent.
+Got connection from Socket[addr=/10.105.1.3,port=46134,localport=4080]
+true
+Extracting from 1:According to the BBS statistics, Nahar said Bangladesh's annual average food inflation was recorded at 7.18 percent in the last fiscal year 2008-09, compared with 12.28 percent in the previous 2007-08 fiscal year.
+Got connection from Socket[addr=/10.105.1.3,port=46234,localport=4080]
+true
+Extracting from 1:Higher prices for clothes and plane tickets helped keep Britain's inflation rate at 3.1 percent in August, the ninth straight month it has stayed above the official target of 2 percent, official statisticians said Tuesday.
+Got connection from Socket[addr=/10.105.1.3,port=46246,localport=4080]
+true
+Extracting from 1:According to the bank, Brazil's inflation will return to the target of 4.5 percent set by the government in 2012.
+Got connection from Socket[addr=/10.105.1.3,port=46258,localport=4080]
+true
+Extracting from 1:The biggest domestic economic issue for India is inflation, which hit double figures earlier this year but dropped to 8.51 percent year-on-year in August.
+Got connection from Socket[addr=/10.105.1.3,port=46281,localport=4080]
+true
+Extracting from 1:According to the figures released by Jordan's Department of Statistics (DoS), inflation in March alone stood at 5.1 percent driven by increase in costs of transport and basic commodities such as meat, sugar and poultry.
+Got connection from Socket[addr=/10.105.1.3,port=46371,localport=4080]
+true
+Extracting from 1:Annual average inflation -- a different measure that is crucial for countries like Lithuania aiming to adopt the euro -- fell to 7.9 percent in July from 8.7 percent in June and 9.4 percent in May.
+Got connection from Socket[addr=/10.105.1.3,port=46745,localport=4080]
+true
+Extracting from 1:Annual inflation in Azerbaijan remained in single digits up to 2008 when it suddenly spiked to 16.70 percent followed 2009's 20.80 percent record high in a decade.
+Got connection from Socket[addr=/10.105.1.3,port=46789,localport=4080]
+true
+Extracting from 1:Annual inflation in recession-hit Britain had surged to 2.9 percent in December, partly due to higher crude costs and changes in taxation levels, official data showed last month.
+Got connection from Socket[addr=/10.105.1.3,port=46830,localport=4080]
+true
+Extracting from 1:Another indicator of private consumption, namely sales of passenger cars, rose by 15.1 percent year-on-year in May 2010, said the MIER, adding that the inflation in Malaysia was expected to be at 2.2 percent for the year 2010.
+Got connection from Socket[addr=/10.105.1.3,port=46933,localport=4080]
+true
+Extracting from 1:This is the fourth time Uganda is recording single digit inflation after a period of about 20 months when the inflation was 9.4 percent for the year ending April 2008.
+Got connection from Socket[addr=/10.105.1.3,port=47126,localport=4080]
+true
+Extracting from 1:According to the BBS statistics, Nahar said Bangladesh's annual average food inflation was recorded at 7.18 percent in the last fiscal year 2008-09, compared with 12.28 percent in the previous 2007-08 fiscal year.

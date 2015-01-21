@@ -113,8 +113,26 @@ public class RuleBasedDriver {
 	 * typed dependencies. Primarily written to facilitate talking with MultiR
 	 */
 	public ArrayList<Relation> extractFromMultiRDepString(String tokenizedSent, String deps, CoreMap sentence) {
-		TypedDependency = new TypedDependency(reln, gov, dep);
+		
 		String depsArr[] = deps.split("|");
+		String tokens[] = tokenizedSent.split(" ");
+		int numTokens = tokens.length;
+		Word wordArr[] = new Word[numTokens];
+		for(int i = 0; i < numTokens; i++) {
+			wordArr[i].setVal(tokens[i]);
+			wordArr[i].setIdx(i);
+		}
+		ArrayList<Pair< String, Pair<Word, Word> > > pairList = new ArrayList<Pair<String,Pair<Word,Word>>>();
+		for(String dep: depsArr) {
+			//dep is given in the form indexOne Relation indexTwo
+			String depBreakUp[] = dep.split(" ");
+			int govIdx = Integer.parseInt(depBreakUp[0]);
+			String rel = depBreakUp[1];
+			int depIdx = Integer.parseInt(depBreakUp[2]);
+			Word govWord = new Word(govIdx, tokens[govIdx]);
+			Word depWord = new Word(depIdx, tokens[depIdx]);
+			pairList.add(new Pair<String, Pair<Word, Word> >(rel, new Pair<Word, Word>(govWord, depWord)));
+		}
 		return null;
 	}
 	

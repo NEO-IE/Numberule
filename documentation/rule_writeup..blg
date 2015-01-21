@@ -1,0 +1,5 @@
+[0] Config.pm:318> INFO - This is Biber 1.8
+[0] Config.pm:321> INFO - Logfile is 'rule_writeup..blg'
+[56] biber:275> INFO - === Thu Jan  1, 2015, 12:25:51
+[79] Utils.pm:185> ERROR - Cannot find control file 'rule_writeup..bcf'! - did you pass the "backend=biber" option to BibLaTeX?
+[79] Biber.pm:109> INFO - ERRORS: 1

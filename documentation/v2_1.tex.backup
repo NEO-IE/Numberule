@@ -1,0 +1,45 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+%opening
+\title{}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{Improvements: 2 to 2.1}
+\subsection{Ignoring modifiers preceded by \emph{to}}
+The earlier version ignores extractions if the path has any modifier like increase, decrease, rose.
+The idea was to ignore sentences that only communicate change in quantities. For example, 
+\emph{The internet user percent has increased by 3.4 over the last year due to telecom reforms.}
+
+However, vanilla implementation of this idea leads to false negatives. Consider:
+\emph{The population of India \textbf{increased to} 1.3 billion.}
+
+
+\subsection{Keywords}
+
+
+\subsection{Handling Redundant Extractions and Spurious pairs}
+
+For a given augmented entity phrase E\footnote{the augmented phrases are as defined in the earlier writeup}, and a given augmented relation phrase R, Let
+\begin{itemize}
+
+
+\item $N_1$, $N_2$, ..., $N_i$ be the numbers such that modified shortest path hypothesis leads to extractions 
+$R_C(E, R, N_1)$, $R_C(E, R, N_2)$, ... , $R_C(E, R, N_n)$ where $R_C$ is the relation code.
+\item Let $|E, N_i|$ be the shortest distance from the central entity of the entity phrase to the $ith$ number. 
+
+\item Let $|E, N_k| \leq |E, N_i| \  \forall i \in [1, n]$. 
+
+\end{itemize}
+
+Then, we ignore all the extractions except $R_C(E, R, N_k)$.
+
+\end{document}

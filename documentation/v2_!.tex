@@ -1,0 +1,27 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+%opening
+\title{}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{Improvements: 2 to 2.1}
+\subsection{Ignoring prepositions}
+The earlier version ignores extractions if the path has any modifier like increase, decrease, rose.
+The idea was to ignore sentences that only communicate change in quantities. For example, 
+\emph{The internet user percent has increased by 3.4 over the last year due to telecom reforms.}
+
+However, vanilla implementation of this idea leads to false negatives. Consider:
+\emph{The population of India \textbf{increased to} 1.3 billion.}
+
+
+
+\end{document}

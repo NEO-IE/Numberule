@@ -22,7 +22,8 @@ public class Word {
 	}
 	@Override
 	public String toString() {
-		return "(" + val + ", " + idx.toString() + ")";
+//		return "(" + val + ", " + idx.toString() + ")";
+		return val;
 	}
 	public String getVal() {
 		return val;

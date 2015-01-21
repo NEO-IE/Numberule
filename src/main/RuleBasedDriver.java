@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -20,8 +19,6 @@ import java.util.regex.Pattern;
 import meta.RelationUnitMap;
 
 import org.apache.commons.io.FileUtils;
-
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 import util.Country;
 import util.Number;
@@ -99,10 +96,10 @@ public class RuleBasedDriver {
 	 */
 	public static void main(String args[]) throws Exception {
 		RuleBasedDriver rbased = new RuleBasedDriver(true);
-//		String fileString = FileUtils.readFileToString(new File("gold_set"));
-//		String outFile = "gold_output_4";
+//		String fileString = FileUtils.readFileToString(new File("entire_sentence_set"));
+//		String outFile = "entire_sentence_output";
 //		rbased.batchExtract(fileString, outFile);
-		
+		System.out.println("here");
 		String fileString = FileUtils.readFileToString(new File("debug"));
 		System.out.println(rbased.extract(fileString));
 	
@@ -110,18 +107,29 @@ public class RuleBasedDriver {
 		
 	}
 	
+	
+	/**
+	 * takes a tokenized sentence, and the corresponding
+	 * typed dependencies. Primarily written to facilitate talking with MultiR
+	 */
+	public ArrayList<Relation> extractFromMultiRDepString(String tokenizedSent, String deps, CoreMap sentence) {
+		TypedDependency = new TypedDependency(reln, gov, dep);
+		String depsArr[] = deps.split("|");
+		return null;
+	}
+	
 	public ArrayList<Relation> extract(String sentenceString) throws IOException {
 		ArrayList<Relation> res = new ArrayList<Relation>();
 		Annotation doc = new Annotation(sentenceString);
 		pipeline.annotate(doc);
+		TreebankLanguagePack tlp = new PennTreebankLanguagePack();
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
-		int i = 0;
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
 			
 			// Step 1 : Get the typed dependencies
 			Tree tree = sentence.get(TreeAnnotation.class);
-			TreebankLanguagePack tlp = new PennTreebankLanguagePack();
+	
 			GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
 			GrammaticalStructure gs = gsf.newGrammaticalStructure(tree);
 
@@ -130,10 +138,11 @@ public class RuleBasedDriver {
 			// Collection<TypedDependency> td =
 			// gs.typedDependenciesCCprocessed();
 			Iterator<TypedDependency> tdi = td.iterator();
-//			while(tdi.hasNext()) {
-//				System.out.println(tdi.next());
-//			}
-//			tdi = td.iterator();
+			
+			while(tdi.hasNext()) {
+				System.out.println(tdi.next());
+			}
+			tdi = td.iterator();
 //			// Step 2 : Make a graph out of them
 			Graph depGraph = Graph.makeDepGraph(tdi);
 
@@ -151,7 +160,7 @@ public class RuleBasedDriver {
 		Annotation doc = new Annotation(fileString);
 		pipeline.annotate(doc);
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
-		int i = 0;
+		int i = 1;
 		PrintWriter pw = new PrintWriter(new FileWriter(outFile));
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
@@ -179,8 +188,13 @@ public class RuleBasedDriver {
 			pw.write("\n---\n");
 			pw.write("sentence " + i++ + "\n");
 			pw.write(sentence + "\n\n");
+			System.out.println("\n------------------------------------------------------");
+			System.out.println("\nSentence ===> " + sentence);
 			// Step 4 : Extract the relations that exists in these pairs
-			pw.write(getExtractions(depGraph, pairs) + "\n");
+			 
+			ArrayList<Relation> res = getExtractions(depGraph, pairs);
+			System.out.println("Extractions == > " + res);
+			pw.write(res + "\n");
 			pw.write("---\n");
 			///*/System.out.println(getExtractions(depGraph, pairs) + "\n");
 		}
@@ -198,9 +212,11 @@ public class RuleBasedDriver {
 		
 		//The hashcode of Relation does not include argument2
 		for (Pair<Country, Number> pair : pairs) {
+			System.out.println("\nPair == > " + pair);
 			// System.out.println(depGraph.getWordsOnPath(pair.country,
 			// pair.number));
 			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(pair.first, pair.second);
+			System.out.println("Path == > " + wordsOnDependencyGraphPath);
 			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair,wordsOnDependencyGraphPath, depGraph);
 			for (Relation rel : rels) {
 				

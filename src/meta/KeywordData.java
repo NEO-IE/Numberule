@@ -22,7 +22,7 @@ public class KeywordData {
 		modifiers = new String[]
 				{"change", "up", "down", "males", "females", "male", "female",
 				"growth", "increase", "decrease", "decreased", "increased", 
-				"changed", "grown", "grew", "surge", "surged"};
+				"changed", "grown", "grew", "surge", "surged", "rose"};
 		String keywordJson = FileUtils.readFileToString(new File(keyWordFile));
 		
 		//System.out.println(keywordJson);

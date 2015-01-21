@@ -349,3 +349,490 @@ Extracting from 1:This is the fourth time Uganda is recording single digit infla
 Got connection from Socket[addr=/10.105.1.3,port=47126,localport=4080]
 true
 Extracting from 1:According to the BBS statistics, Nahar said Bangladesh's annual average food inflation was recorded at 7.18 percent in the last fiscal year 2008-09, compared with 12.28 percent in the previous 2007-08 fiscal year.
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=33450,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=33451,localport=4080]
+false
+Extracting from 0:what is the population of india?
+attr(is-2, what-1)
+root(ROOT-0, is-2)
+det(population-4, the-3)
+nsubj(is-2, population-4)
+prep(population-4, of-5)
+pobj(of-5, india-6)
+Got connection from Socket[addr=/10.105.1.3,port=33501,localport=4080]
+false
+Extracting from 0:population of india and mortality rate in india
+root(ROOT-0, population-1)
+prep(population-1, of-2)
+nn(rate-6, india-3)
+cc(india-3, and-4)
+conj(india-3, mortality-5)
+pobj(of-2, rate-6)
+prep(population-1, in-7)
+pobj(in-7, india-8)
+Got connection from Socket[addr=/10.105.1.3,port=33517,localport=4080]
+true
+Extracting from 1:population of india and mortality rate in india
+root(ROOT-0, population-1)
+prep(population-1, of-2)
+nn(rate-6, india-3)
+cc(india-3, and-4)
+conj(india-3, mortality-5)
+pobj(of-2, rate-6)
+prep(population-1, in-7)
+pobj(in-7, india-8)
+Got connection from Socket[addr=/10.105.1.3,port=33607,localport=4080]
+true
+Extracting from 1:How has cost of living affected travel practices
+advmod(has-2, How-1)
+root(ROOT-0, has-2)
+dobj(has-2, cost-3)
+prep(cost-3, of-4)
+pcomp(of-4, living-5)
+amod(practices-8, affected-6)
+nn(practices-8, travel-7)
+dobj(living-5, practices-8)
+Got connection from Socket[addr=/10.105.1.3,port=33812,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=33845,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=33893,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=33894,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=33896,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=33897,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=33916,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=34185,localport=4080]
+true
+Extracting from 1:Internet user percent is Columbia stands at 11
+nn(percent-3, Internet-1)
+nn(percent-3, user-2)
+nsubj(Columbia-5, percent-3)
+cop(Columbia-5, is-4)
+root(ROOT-0, Columbia-5)
+rcmod(Columbia-5, stands-6)
+prep(stands-6, at-7)
+pobj(at-7, 11-8)
+Got connection from Socket[addr=/10.105.1.3,port=34193,localport=4080]
+false
+Extracting from 0:Internet user percent is Columbia stands at 11
+nn(percent-3, Internet-1)
+nn(percent-3, user-2)
+nsubj(Columbia-5, percent-3)
+cop(Columbia-5, is-4)
+root(ROOT-0, Columbia-5)
+rcmod(Columbia-5, stands-6)
+prep(stands-6, at-7)
+pobj(at-7, 11-8)
+Got connection from Socket[addr=/10.105.1.3,port=34211,localport=4080]
+true
+Extracting from 1:Internet user percent is Pakistan stands at 11
+nn(percent-3, Internet-1)
+nn(percent-3, user-2)
+nsubj(Pakistan-5, percent-3)
+cop(Pakistan-5, is-4)
+root(ROOT-0, Pakistan-5)
+rcmod(Pakistan-5, stands-6)
+prep(stands-6, at-7)
+pobj(at-7, 11-8)
+Got connection from Socket[addr=/10.105.1.3,port=34220,localport=4080]
+true
+Extracting from 1:Internet user percent is Pakistan stands at 11 %
+nn(percent-3, Internet-1)
+nn(percent-3, user-2)
+nsubj(Pakistan-5, percent-3)
+cop(Pakistan-5, is-4)
+root(ROOT-0, Pakistan-5)
+rcmod(Pakistan-5, stands-6)
+prep(stands-6, at-7)
+num(%-9, 11-8)
+pobj(at-7, %-9)
+Got connection from Socket[addr=/10.105.1.3,port=34255,localport=4080]
+true
+Extracting from 1:Internet user percent is Pakistan stands at 11 %
+nn(percent-3, Internet-1)
+nn(percent-3, user-2)
+nsubj(Pakistan-5, percent-3)
+cop(Pakistan-5, is-4)
+root(ROOT-0, Pakistan-5)
+rcmod(Pakistan-5, stands-6)
+prep(stands-6, at-7)
+num(%-9, 11-8)
+pobj(at-7, %-9)
+Got connection from Socket[addr=/10.105.1.3,port=34264,localport=4080]
+false
+Extracting from 0:Internet user percent is Pakistan stands at 11 %
+nn(percent-3, Internet-1)
+nn(percent-3, user-2)
+nsubj(Pakistan-5, percent-3)
+cop(Pakistan-5, is-4)
+root(ROOT-0, Pakistan-5)
+rcmod(Pakistan-5, stands-6)
+prep(stands-6, at-7)
+num(%-9, 11-8)
+pobj(at-7, %-9)
+Got connection from Socket[addr=/10.105.1.3,port=34292,localport=4080]
+false
+Extracting from 0:Internet users in Pakistan are 11 %
+nn(users-2, Internet-1)
+nsubj(%-7, users-2)
+prep(users-2, in-3)
+pobj(in-3, Pakistan-4)
+cop(%-7, are-5)
+num(%-7, 11-6)
+root(ROOT-0, %-7)
+Got connection from Socket[addr=/10.105.1.3,port=34502,localport=4080]
+false
+Extracting from 0:The US has a total area of more than 3.5 million square miles, making it the third largest country in the world after Russia and Canada.
+det(US-2, The-1)
+nsubj(has-3, US-2)
+root(ROOT-0, has-3)
+det(area-6, a-4)
+amod(area-6, total-5)
+dobj(has-3, area-6)
+prep(area-6, of-7)
+mwe(than-9, more-8)
+quantmod(million-11, than-9)
+number(million-11, 3.5-10)
+num(miles-13, million-11)
+amod(miles-13, square-12)
+pobj(of-7, miles-13)
+partmod(miles-13, making-15)
+nsubj(country-20, it-16)
+det(country-20, the-17)
+amod(country-20, third-18)
+amod(country-20, largest-19)
+xcomp(making-15, country-20)
+prep(country-20, in-21)
+det(world-23, the-22)
+pobj(in-21, world-23)
+prep(world-23, after-24)
+pobj(after-24, Russia-25)
+cc(Russia-25, and-26)
+conj(Russia-25, Canada-27)
+Got connection from Socket[addr=/10.105.1.3,port=34511,localport=4080]
+true
+Extracting from 1:The US has a total area of more than 3.5 million square miles, making it the third largest country in the world after Russia and Canada.
+det(US-2, The-1)
+nsubj(has-3, US-2)
+root(ROOT-0, has-3)
+det(area-6, a-4)
+amod(area-6, total-5)
+dobj(has-3, area-6)
+prep(area-6, of-7)
+mwe(than-9, more-8)
+quantmod(million-11, than-9)
+number(million-11, 3.5-10)
+num(miles-13, million-11)
+amod(miles-13, square-12)
+pobj(of-7, miles-13)
+partmod(miles-13, making-15)
+nsubj(country-20, it-16)
+det(country-20, the-17)
+amod(country-20, third-18)
+amod(country-20, largest-19)
+xcomp(making-15, country-20)
+prep(country-20, in-21)
+det(world-23, the-22)
+pobj(in-21, world-23)
+prep(world-23, after-24)
+pobj(after-24, Russia-25)
+cc(Russia-25, and-26)
+conj(Russia-25, Canada-27)
+Got connection from Socket[addr=/10.105.1.3,port=34596,localport=4080]
+true
+Extracting from 1:With an area of 1.29 million square km and Lima as its capital, Peru has a population of some 28.22 million, including Amerindians, Indian- Europeans, Europeans and others.
+prep(has-16, With-1)
+det(area-3, an-2)
+pobj(With-1, area-3)
+prep(area-3, of-4)
+number(million-6, 1.29-5)
+num(km-8, million-6)
+amod(km-8, square-7)
+pobj(of-4, km-8)
+cc(km-8, and-9)
+conj(km-8, Lima-10)
+prep(Lima-10, as-11)
+poss(capital-13, its-12)
+pobj(as-11, capital-13)
+nsubj(has-16, Peru-15)
+root(ROOT-0, has-16)
+det(population-18, a-17)
+dobj(has-16, population-18)
+prep(population-18, of-19)
+quantmod(million-22, some-20)
+number(million-22, 28.22-21)
+pobj(of-19, million-22)
+prep(population-18, including-24)
+pobj(including-24, Amerindians-25)
+appos(Amerindians-25, Indian-27)
+dep(Indian-27, Europeans-29)
+conj(Europeans-29, Europeans-31)
+cc(Europeans-29, and-32)
+conj(Europeans-29, others-33)
+Got connection from Socket[addr=/10.105.1.3,port=34905,localport=4080]
+true
+Extracting from 1:
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=51008,localport=4080]
+true
+Extracting from 1:
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=51070,localport=4080]
+true
+Extracting from 1:
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=51259,localport=4080]
+true
+Extracting from 1:
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=51457,localport=4080]
+true
+Extracting from 1:
+For input string: "1,000"
+For input string: "1,000"
+For input string: "6,894.757"
+For input string: "1,550.0031"
+For input string: "3,183.0988618"
+For input string: "1,550.0031"
+Hi, I am here
+Using concept classifier parser.coOccurMethods.ConceptClassifier
+Hi, I am here
+Got connection from Socket[addr=/10.105.1.3,port=51492,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=51694,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=51711,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=51721,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=45938,localport=4080]
+true
+Extracting from 1:Chile is the longest and narrowest nation in the world, with a total area of 756, 626 sq km.
+nsubj(nation-7, Chile-1)
+cop(nation-7, is-2)
+dep(longest-4, the-3)
+nn(nation-7, longest-4)
+cc(longest-4, and-5)
+conj(longest-4, narrowest-6)
+root(ROOT-0, nation-7)
+prep(nation-7, in-8)
+det(world-10, the-9)
+pobj(in-8, world-10)
+prep(nation-7, with-12)
+det(area-15, a-13)
+amod(area-15, total-14)
+pobj(with-12, area-15)
+prep(area-15, of-16)
+pobj(of-16, 756-17)
+num(km-21, 626-19)
+nn(km-21, sq-20)
+appos(756-17, km-21)
+Got connection from Socket[addr=/10.105.1.3,port=46060,localport=4080]
+true
+Extracting from 1:Malawi, like other southern African countries, has seen its life expectancy drop from about 60 years in the early 1990s to below 40 years presently due to the HIV/AIDS pandemic.
+nsubj(seen-10, Malawi-1)
+prep(seen-10, like-3)
+amod(countries-7, other-4)
+amod(countries-7, southern-5)
+amod(countries-7, African-6)
+pobj(like-3, countries-7)
+aux(seen-10, has-9)
+root(ROOT-0, seen-10)
+poss(drop-14, its-11)
+nn(drop-14, life-12)
+nn(drop-14, expectancy-13)
+dobj(seen-10, drop-14)
+dep(about-16, from-15)
+prep(seen-10, about-16)
+num(years-18, 60-17)
+pobj(about-16, years-18)
+prep(years-18, in-19)
+det(1990s-22, the-20)
+amod(1990s-22, early-21)
+pobj(in-19, 1990s-22)
+prep(seen-10, to-23)
+amod(years-26, below-24)
+num(years-26, 40-25)
+pobj(to-23, years-26)
+advmod(due-28, presently-27)
+prep(seen-10, due-28)
+prep(due-28, to-29)
+det(pandemic-32, the-30)
+nn(pandemic-32, HIV\/AIDS-31)
+pobj(to-29, pandemic-32)
+Got connection from Socket[addr=/10.105.1.3,port=46077,localport=4080]
+true
+Extracting from 1:India, like other southern African countries, has seen its life expectancy drop from about 60 years in the early 1990s to below 40 years presently due to the HIV/AIDS pandemic.
+nsubj(seen-10, India-1)
+prep(seen-10, like-3)
+amod(countries-7, other-4)
+amod(countries-7, southern-5)
+amod(countries-7, African-6)
+pobj(like-3, countries-7)
+aux(seen-10, has-9)
+root(ROOT-0, seen-10)
+poss(drop-14, its-11)
+nn(drop-14, life-12)
+nn(drop-14, expectancy-13)
+dobj(seen-10, drop-14)
+dep(about-16, from-15)
+prep(seen-10, about-16)
+num(years-18, 60-17)
+pobj(about-16, years-18)
+prep(years-18, in-19)
+det(1990s-22, the-20)
+amod(1990s-22, early-21)
+pobj(in-19, 1990s-22)
+prep(seen-10, to-23)
+amod(years-26, below-24)
+num(years-26, 40-25)
+pobj(to-23, years-26)
+advmod(due-28, presently-27)
+prep(seen-10, due-28)
+prep(due-28, to-29)
+det(pandemic-32, the-30)
+nn(pandemic-32, HIV\/AIDS-31)
+pobj(to-29, pandemic-32)

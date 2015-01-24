@@ -35,7 +35,7 @@ public class Graph {
 	
 	
 	
-	public final static int MAX = 1000;
+	public final static int MAX = 2000;
 	
 	
 	private Graph() {
@@ -55,7 +55,7 @@ public class Graph {
 	 */
 	
 	public static Graph makeDepGraph(Iterator<TypedDependency> tdi) {
-		//Graph depGraph = new Graph();
+		Graph depGraph = new Graph();
 
 		/**
 		 * Add nodes to the graph
@@ -69,7 +69,6 @@ public class Graph {
 			Word govWord = new Word(govNode.index(), govNode.value().toLowerCase());
 			Word depWord = new Word(depNode.index(), depNode.value().toLowerCase());
 			pairList.add(new Pair< String, Pair <Word, Word> > (td1.reln().toString(), new Pair<Word, Word>(govWord, depWord)));
-			/*
 			depGraph.addNode(depNode.index(), depWord);
 			depGraph.addNode(govNode.index(), govWord);
 			
@@ -93,19 +92,20 @@ public class Graph {
 		for(Word w : depGraph.wordNodeMap.keySet()) {
 			depGraph.valIdxMap.put(w.getVal(), w.getIdx());
 		}
-		*/
-		}
 		//depGraph.allPairs();
-		return Graph.makeDepGraphFromList(pairList);
+		return depGraph;
 
 	}
 
 	/**
-	 * The list is supposed to be ordered like dependent -> gov node
+	 * The list is supposed to be ordered like dependent -> gov node.
+	 * Not all the nodes may appear in a relationship, and thus we need
+	 * to supply a list of the word nodes as well.
 	 * @param pairList
+	 * @param wordArr 
 	 * @return
 	 */
-	public static Graph makeDepGraphFromList(ArrayList<Pair< String, Pair< Word, Word> > > pairList) {
+	public static Graph makeDepGraphFromList(ArrayList<Pair< String, Pair< Word, Word> > > pairList, Word[] wordArr) {
 		Graph depGraph = new Graph();
 
 
@@ -135,7 +135,7 @@ public class Graph {
 		}
 		// depGraph.listModifiers();
 		
-		for(Word w : depGraph.wordNodeMap.keySet()) {
+		for(Word w : wordArr) {
 			depGraph.valIdxMap.put(w.getVal(), w.getIdx());
 		}
 		//depGraph.allPairs();
@@ -161,7 +161,10 @@ public class Graph {
 	 * @return
 	 */
 	public ArrayList<Word> getNbr(Word curr) {
-	
+		if(!adjMap.containsKey(curr)) {
+			return null;
+			
+		}
 		return adjMap.get(curr);
 	}
 

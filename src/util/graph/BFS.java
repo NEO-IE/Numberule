@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import cern.colt.matrix.linalg.EigenvalueDecomposition;
 import util.Word;
 
 public class BFS {
@@ -16,7 +17,11 @@ public class BFS {
 		visited[src.getIdx()] = true;
 		while (!q.isEmpty()) {
 			Word curr = q.poll();
-			for (Word nbrWord : g.getNbr(curr)) {
+			ArrayList<Word> neighbors = g.getNbr(curr);
+			if(null == neighbors) {
+				continue;
+			}
+			for (Word nbrWord: neighbors) {
 				int nbr = nbrWord.getIdx();
 				if (!visited[nbr]) {
 					q.add(nbrWord);
@@ -31,6 +36,9 @@ public class BFS {
 	public static ArrayList<Word> getPath(Graph g, Word src, Word dest) {
 		Word par[] = BFS.run(g, src);
 		ArrayList<Word> path = new ArrayList<Word>();
+		if(null == par[0]) { //nothing found
+			return path;
+		}
 		path.add(dest);
 		Word at = dest;
 		while (at != src) {

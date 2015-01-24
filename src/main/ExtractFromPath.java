@@ -113,7 +113,7 @@ public class ExtractFromPath {
 
 			if (null != (keyword = getKeyword(path, kwd.KEYWORDS.get(i),depGraph))) {
 				assert (keyword != null);
-				System.out.println("Keyword ==> " + keyword);
+				//System.out.println("Keyword ==> " + keyword);
 				res.add(new Relation(argPair.first, argPair.second, keyword,
 						kwd.relName.get(i)));
 			}

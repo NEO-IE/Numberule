@@ -1,6 +1,7 @@
 package main;
 import iitb.shared.EntryWithScore;
 
+import java.awt.Label;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -41,6 +42,7 @@ import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
+import edu.stanford.nlp.util.Triple;
 import eval.UnitExtractor;
 
 //sg
@@ -50,7 +52,7 @@ public class RuleBasedDriver {
 	private static Pattern numberPat, yearPat;
 	private HashSet<String> countryList;
 	private  boolean unitsActive;
-	private static final String countriesFileName = "data/countries_list";
+	private static final String countriesFileName = "/mnt/a99/d0/aman/scala/workspace/StanfordCoreNLPInterface/data/countries_list";
 	private  UnitExtractor ue = null;
 	int cumulativeLen; //to obtain sentence offsets
 	public RuleBasedDriver(boolean unitsActive) {
@@ -111,29 +113,42 @@ public class RuleBasedDriver {
 	/**
 	 * takes a tokenized sentence, and the corresponding
 	 * typed dependencies. Primarily written to facilitate talking with MultiR
+	 * @throws IOException 
 	 */
-	public ArrayList<Relation> extractFromMultiRDepString(String tokenizedSent, String deps, CoreMap sentence) {
+	public ArrayList<Relation> extractFromMultiRDepString(List<CoreLabel> tokens, List<Triple<Integer, String, Integer> > deps, CoreMap sentence) throws IOException {
+		ArrayList<Relation> res = new ArrayList<Relation>();
+
+		//System.out.println(sentence);
+		int numTokens = tokens.size();
+		Word wordArr[] = new Word[numTokens + 1];
+		wordArr[0] = new Word(0, "ROOT");
 		
-		String depsArr[] = deps.split("|");
-		String tokens[] = tokenizedSent.split(" ");
-		int numTokens = tokens.length;
-		Word wordArr[] = new Word[numTokens];
-		for(int i = 0; i < numTokens; i++) {
-			wordArr[i].setVal(tokens[i]);
-			wordArr[i].setIdx(i);
+		for(int i = 1; i <= numTokens; i++) {
+			wordArr[i] = new Word(i, tokens.get(i - 1).toString());
 		}
+		
 		ArrayList<Pair< String, Pair<Word, Word> > > pairList = new ArrayList<Pair<String,Pair<Word,Word>>>();
-		for(String dep: depsArr) {
+		for(Triple<Integer, String, Integer> dep: deps) {
 			//dep is given in the form indexOne Relation indexTwo
-			String depBreakUp[] = dep.split(" ");
-			int govIdx = Integer.parseInt(depBreakUp[0]);
-			String rel = depBreakUp[1];
-			int depIdx = Integer.parseInt(depBreakUp[2]);
-			Word govWord = new Word(govIdx, tokens[govIdx]);
-			Word depWord = new Word(depIdx, tokens[depIdx]);
+			int govIdx = dep.first;
+			String rel = dep.second;
+			int depIdx = dep.third;
+//			Word govWord = new Word(govIdx, tokens.get(govIdx).toString());
+//			Word depWord = new Word(depIdx, tokens.get(depIdx).toString());
+			Word govWord = wordArr[govIdx];
+			Word depWord = wordArr[depIdx];
 			pairList.add(new Pair<String, Pair<Word, Word> >(rel, new Pair<Word, Word>(govWord, depWord)));
 		}
-		return null;
+		Graph depGraph = Graph.makeDepGraphFromList(pairList, wordArr);
+
+		// Step 3 : Identify all the country number word pairs
+		ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph,
+				sentence);
+		
+		// Step 4 : Extract the relations that exists in these pairs
+		res.addAll(getExtractions(depGraph, pairs));
+		
+		return res;
 	}
 	
 	public ArrayList<Relation> extract(String sentenceString) throws IOException {
@@ -230,11 +245,11 @@ public class RuleBasedDriver {
 		
 		//The hashcode of Relation does not include argument2
 		for (Pair<Country, Number> pair : pairs) {
-			System.out.println("\nPair == > " + pair);
+			//System.out.println("\nPair == > " + pair);
 			// System.out.println(depGraph.getWordsOnPath(pair.country,
 			// pair.number));
 			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(pair.first, pair.second);
-			System.out.println("Path == > " + wordsOnDependencyGraphPath);
+			//System.out.println("Path == > " + wordsOnDependencyGraphPath);
 			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair,wordsOnDependencyGraphPath, depGraph);
 			for (Relation rel : rels) {
 				

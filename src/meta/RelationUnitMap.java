@@ -2,6 +2,7 @@ package meta;
 
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class RelationUnitMap {
 	private static HashMap<String, String> unitMap = null;
@@ -21,5 +22,8 @@ public class RelationUnitMap {
 	}
 	public static String getUnit(String rel) {
 			return unitMap.get(rel);
+	}
+	public static Set<String> getRelations(){
+		return unitMap.keySet();
 	}
 }

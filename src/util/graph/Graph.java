@@ -243,5 +243,8 @@ public class Graph {
 		return getWordsOnPath(nodeWordMap.get(country.getIdx()), currNumber).size();
 	
 	}
-
+	
+	public Word getWordForIndex(int idx) {
+		return nodeWordMap.get(idx);
+	}
 }

@@ -31,6 +31,10 @@ public class Number extends Word {
 		hasUnit = n.hasUnit;
 	}
 	
+	@Override
+	public String toString(){
+		return super.getVal() + " " + unit;
+	}
 	
 
 }

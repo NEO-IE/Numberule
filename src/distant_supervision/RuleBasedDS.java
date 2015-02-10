@@ -123,6 +123,9 @@ public class RuleBasedDS {
 				System.out.println(" num: "+ num + "\t degree: "+ erd.doc.get(num).size());
 				edges += erd.doc.get(num).size();
 				bw.write(" num: "+ num + "\t degree: "+ erd.doc.get(num).size()+"\n");
+				for(String sent: erd.doc.get(num)){
+					bw.write(sent+"\n");
+				}
 			}
 			System.out.println("Edges: "+edges+"\n\n");
 			bw.write("Edges: "+edges+"\n\n\n");

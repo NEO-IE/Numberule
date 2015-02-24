@@ -116,14 +116,7 @@ public class RuleBasedDriver {
 	}
 	
 	
-	/**
-	 * takes a tokenized sentence, and the corresponding
-	 * typed dependencies. Primarily written to facilitate talking with MultiR
-	 * @throws IOException 
-	 */
-	public ArrayList<Relation> extractFromMultiRDepString(List<Triple<Integer, String, Integer> > deps, CoreMap sentence) throws IOException {
-		ArrayList<Relation> res = new ArrayList<Relation>();
-		
+	public Graph getDepGraph(List<Triple<Integer, String, Integer> > deps, CoreMap sentence){
 		List<CoreLabel> tokens = sentence.get(CoreAnnotations.TokensAnnotation.class);
 		int numTokens = tokens.size();
 		Word wordArr[] = new Word[numTokens + 1];
@@ -153,6 +146,18 @@ public class RuleBasedDriver {
 			pairList.add(new Pair<String, Pair<Word, Word> >(rel, new Pair<Word, Word>(govWord, depWord)));
 		}
 		Graph depGraph = Graph.makeDepGraphFromList(pairList, wordArr);
+		return depGraph;
+	}
+	
+	/**
+	 * takes a tokenized sentence, and the corresponding
+	 * typed dependencies. Primarily written to facilitate talking with MultiR
+	 * @throws IOException 
+	 */
+	public ArrayList<Relation> extractFromMultiRDepString(List<Triple<Integer, String, Integer> > deps, CoreMap sentence) throws IOException {
+		ArrayList<Relation> res = new ArrayList<Relation>();
+		
+		Graph depGraph = getDepGraph(deps, sentence);
 
 		// Step 3 : Identify all the country number word pairs
 		ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph,
@@ -282,56 +287,30 @@ public class RuleBasedDriver {
 		return yearPat.matcher(token).matches();
 	}
 
-	public ArrayList<Pair<Country, Number>> getPairs(CoreMap sentence, boolean unitsActive) {
-		ArrayList<Country> countries = new ArrayList<Country>();
-		ArrayList<Number> numbers = new ArrayList<Number>();
-		ArrayList<Pair<Country, Number>> res = new ArrayList<Pair<Country, Number>>();
-		float values[][] = new float[1][1];
-		for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
-			// this is the text of the token
-			String word = token.get(TextAnnotation.class);
-			//System.out.println(word  + " - " + depGraph.getIdx(word) + depGraph.nodeWordMap.get(depGraph.getIdx(word)));
-			if (isCountry(word)) {	
-				countries.add(new Country(token));
+	public boolean unitRelationMatch(String rel, Pair<Country, Number> arg){
+		Unit unit = ue.quantDict.getUnitFromBaseName(arg.second.getUnit());
+		if (unit != null && !unit.getBaseName().equals("")) {
+			Unit SIUnit = unit.getParentQuantity()
+					.getCanonicalUnit();
+			if (
+					SIUnit != null && !RelationUnitMap.getUnit(rel).equals(SIUnit.getBaseName()) 
+					||
+					SIUnit == null && !RelationUnitMap.getUnit(rel).equals(unit.getBaseName())
+					) {
+				return false; // Incorrect unit, this cannot be the
+							// relation.
 			}
-			if (isNumber(word) && !isYear(word)) {
-				Number num = new Number(new Number(token));
-				if (unitsActive) {
-					/*
-					int beginPos = token.beginPosition() - cumulativeLen;
-					int endPos = token.endPosition() - cumulativeLen;
-					*/
-					String sentString = sentence.toString();
-					int beginIdx = sentString.indexOf(word);
-					int endIdx = beginIdx + word.length();
-					String utString = sentString.substring(0, beginIdx) + "<b>" + word + "</b>" + sentString.substring(endIdx); 
-					/*unitString = sentence.toString().substring(0, beginPos) + //before 
-								"<b>" + token + "</b>"+  //the token
-								((sentence.size() == endPos) ? "" : sentence.toString().substring(endPos)); //after*/
-				//	System.out.println("Unit String: "+ utString);
-					List<? extends EntryWithScore<Unit>> unitsS = ue.parser
-							.getTopKUnitsValues(utString, "b", 1, 0, values);
-
-					// check for unit here....
-					if (unitsS != null) {
-						num.setUnit(unitsS.get(0).getKey().getBaseName());
-					//	System.out.println("unit: "+unitsS.toString());
-					}
-				}
-				numbers.add(num);
-			}
-
-		}
-		for (int i = 0, lc = countries.size(); i < lc; i++) {
-			for (int j = 0, ln = numbers.size(); j < ln; j++) {
-				res.add(new Pair<Country, Number>(countries.get(i), numbers
-						.get(j)));
+		}else if(unit == null && !arg.second.getUnit().equals("") && 
+				RelationUnitMap.getUnit(rel).equals(arg.second.getUnit())){ //for the cases where units are compound units.
+			return true;
+		}else {
+			if (!RelationUnitMap.getUnit(rel).equals(
+					"")) {
+				return false; // this cannot be the correct relation.
 			}
 		}
-		cumulativeLen += sentence.toString().length();
-		return res;
+		return true;
 	}
-
 	
 	ArrayList<Relation> getExtractions(Graph depGraph,
 			ArrayList<Pair<Country, Number>> pairs, boolean augmentPhrases) throws IOException {
@@ -349,26 +328,8 @@ public class RuleBasedDriver {
 			for (Relation rel : rels) {
 				
 				if (unitsActive) {
-					Unit unit = ue.quantDict.getUnitFromBaseName(pair.second
-							.getUnit());
-					if (unit != null && !unit.getBaseName().equals("")) {
-						Unit SIUnit = unit.getParentQuantity()
-								.getCanonicalUnit();
-						if (
-								SIUnit != null && !RelationUnitMap.getUnit(rel.getRelName()).equals(SIUnit.getBaseName()) 
-								||
-								SIUnit == null && !RelationUnitMap.getUnit(rel.getRelName()).equals(unit.getBaseName())
-								) {
-							continue; // Incorrect unit, this cannot be the
-										// relation.
-						}
-					}else if(unit == null && !pair.second.getUnit().equals("") && RelationUnitMap.getUnit(rel.getRelName()).equals(pair.second.getUnit())){ //for the cases where units are compound units.
-						//do nothing, seems legit
-					}else {
-						if (!RelationUnitMap.getUnit(rel.getRelName()).equals(
-								"")) {
-							continue; // this cannot be the correct relation.
-						}
+					if(!unitRelationMatch(rel.getRelName(), pair)){
+						continue;  //if unit doesn't match, try next relation.
 					}
 				}
 				if(augmentPhrases) {

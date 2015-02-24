@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import cern.colt.matrix.linalg.EigenvalueDecomposition;
 import util.Word;
 
 public class BFS {

@@ -21,8 +21,6 @@ import meta.RelationUnitMap;
 
 import org.apache.commons.io.FileUtils;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
 import util.Country;
 import util.Number;
 import util.Pair;
@@ -187,10 +185,61 @@ public class RuleBasedDriver {
 		pw.close();
 	}
 
-	private static boolean isYear(String token) {
+	public boolean isYear(String token) {
 		return yearPat.matcher(token).matches();
 	}
 
+	public ArrayList<Pair<Country, Number>> getPairs(CoreMap sentence, boolean unitsActive) {
+		ArrayList<Country> countries = new ArrayList<Country>();
+		ArrayList<Number> numbers = new ArrayList<Number>();
+		ArrayList<Pair<Country, Number>> res = new ArrayList<Pair<Country, Number>>();
+		float values[][] = new float[1][1];
+		for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
+			// this is the text of the token
+			String word = token.get(TextAnnotation.class);
+			//System.out.println(word  + " - " + depGraph.getIdx(word) + depGraph.nodeWordMap.get(depGraph.getIdx(word)));
+			if (isCountry(word)) {	
+				countries.add(new Country(token));
+			}
+			if (isNumber(word) && !isYear(word)) {
+				Number num = new Number(new Number(token));
+				if (unitsActive) {
+					/*
+					int beginPos = token.beginPosition() - cumulativeLen;
+					int endPos = token.endPosition() - cumulativeLen;
+					*/
+					String sentString = sentence.toString();
+					int beginIdx = sentString.indexOf(word);
+					int endIdx = beginIdx + word.length();
+					String utString = sentString.substring(0, beginIdx) + "<b>" + word + "</b>" + sentString.substring(endIdx); 
+					/*unitString = sentence.toString().substring(0, beginPos) + //before 
+								"<b>" + token + "</b>"+  //the token
+								((sentence.size() == endPos) ? "" : sentence.toString().substring(endPos)); //after*/
+				//	System.out.println("Unit String: "+ utString);
+					List<? extends EntryWithScore<Unit>> unitsS = ue.parser
+							.getTopKUnitsValues(utString, "b", 1, 0, values);
+
+					// check for unit here....
+					if (unitsS != null) {
+						num.setUnit(unitsS.get(0).getKey().getBaseName());
+					//	System.out.println("unit: "+unitsS.toString());
+					}
+				}
+				numbers.add(num);
+			}
+
+		}
+		for (int i = 0, lc = countries.size(); i < lc; i++) {
+			for (int j = 0, ln = numbers.size(); j < ln; j++) {
+				res.add(new Pair<Country, Number>(countries.get(i), numbers
+						.get(j)));
+			}
+		}
+		cumulativeLen += sentence.toString().length();
+		return res;
+	}
+
+	
 	ArrayList<Relation> getExtractions(Graph depGraph,
 			ArrayList<Pair<Country, Number>> pairs) throws IOException {
 		ArrayList<Relation> result = new ArrayList<Relation>();
@@ -298,14 +347,16 @@ public class RuleBasedDriver {
 		return rel;
 	}
 
-	private boolean isCountry(String token) {
+	public boolean isCountry(String token) {
 		return countryList.contains(token.toLowerCase());
 	}
 
-	private static boolean isNumber(String token) {
+	public boolean isNumber(String token) {
 		return numberPat.matcher(token.toString()).matches();
 	}
 
+	
+	
 	/**
 	 * Returns the list of country number pairs in the graph Uses the indexes
 	 * defined by the dependency graph which is passed as an argument

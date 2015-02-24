@@ -1,9 +1,18 @@
 package util;
 
+import edu.stanford.nlp.ling.CoreLabel;
+
 
 public class Number extends Word {
 	String unit;
 	boolean hasUnit;
+	CoreLabel token;
+	
+	public Number(CoreLabel token){
+		super(-1, token.toString()); //dummy word.
+		this.token = token;
+	}
+	
 	public Number(Integer idx, String str) {
 		super(idx, str);
 		hasUnit = false;

@@ -10,7 +10,7 @@ import org.json.simple.parser.ParseException;
 
 
 public class KeywordData {
-	public String keyWordFile = "data/keywords.json";
+	public String keyWordFile = "/mnt/a99/d0/aman/scala/workspace/StanfordCoreNLPInterface/data/keywords.json";
 	public String modifiers[];
 	public ArrayList<String> relName;
 	public ArrayList<ArrayList<String>> KEYWORDS;
@@ -19,7 +19,10 @@ public class KeywordData {
 	
 	
 	public KeywordData() throws IOException{
-		modifiers = new String[]{"change", "up", "down", "males", "females", "male", "female", "growth", "increase", "decrease", "decreased", "increased", "changed"};
+		modifiers = new String[]
+				{"change", "up", "down", "males", "females", "male", "female",
+				"growth", "increase", "decrease", "decreased", "increased", 
+				"changed", "grown", "grew", "surge", "surged", "rose"};
 		String keywordJson = FileUtils.readFileToString(new File(keyWordFile));
 		
 		//System.out.println(keywordJson);

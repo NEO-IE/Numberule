@@ -11,18 +11,34 @@ import java.util.ArrayList;
 public class Word {
 	private String val; //the string content of the word
 	private Integer idx; //the index of the word in that sentence
+	//the start and the end offset of this word in this sentence
+	private int startOff;
+	private int endOff;
 	public Word(Integer idx, String str) {
 		this.idx = idx;
 		this.val = str.toLowerCase();
 	}
-	
+	public Word(Integer idx, String str, Integer startOff, Integer endOff) {
+		this.idx = idx;
+		this.val = str.toLowerCase();
+		this.startOff = startOff;
+		this.endOff = endOff;
+	}
 	public Word(Word w) {
 		val = new String(w.getVal());
 		idx = w.idx;
+		startOff = w.startOff;
+		endOff = w.endOff;
 	}
+	public Word() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	@Override
 	public String toString() {
 		return "(" + val + ", " + idx.toString() + ")";
+//		return val;
 	}
 	public String getVal() {
 		return val;
@@ -73,5 +89,21 @@ public class Word {
 			}
 		}
 		return false;
+	}
+
+	public void setStartOff(Integer startOff) {
+		this.startOff = startOff;
+	}
+
+	public void setEndOff(Integer endOff) {
+		this.endOff = endOff;
+	}
+
+	public Integer getStartOff() {
+		return startOff;
+	}
+
+	public Integer getEndOff() {
+		return endOff;
 	}
 }

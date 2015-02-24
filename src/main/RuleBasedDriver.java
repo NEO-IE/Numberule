@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -28,6 +27,7 @@ import util.Relation;
 import util.Word;
 import util.graph.Graph;
 import catalog.Unit;
+import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
@@ -42,6 +42,7 @@ import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
+import edu.stanford.nlp.util.Triple;
 import eval.UnitExtractor;
 
 //sg
@@ -51,9 +52,10 @@ public class RuleBasedDriver {
 	private static Pattern numberPat, yearPat;
 	private HashSet<String> countryList;
 	private  boolean unitsActive;
-	private static final String countriesFileName = "data/countries_list";
+	private static final String countriesFileName = "/mnt/a99/d0/aman/scala/workspace/StanfordCoreNLPInterface/data/countries_list";
 	private  UnitExtractor ue = null;
 	int cumulativeLen; //to obtain sentence offsets
+	private final int NUM_PAIRS_MAX = 20;
 	public RuleBasedDriver(boolean unitsActive) {
 		this.unitsActive = unitsActive;
 		numberPat = Pattern.compile("^[\\+-]?\\d+([,\\.]\\d+)*([eE]-?\\d+)?$");
@@ -76,7 +78,7 @@ public class RuleBasedDriver {
 		} catch (IOException e) {
 			System.err.println(e);
 		}
-
+		
 		try {
 			ue = new UnitExtractor();
 		} catch (Exception e) {
@@ -90,6 +92,14 @@ public class RuleBasedDriver {
 		 * throw new Exception("Failed to load Quantity Taxonomy file."); }
 		 */
 	}
+	
+	public RuleBasedDriver(UnitExtractor ue, boolean unitsActive) {
+		
+		this(unitsActive);
+		this.ue = ue;
+		
+		
+	}
 
 	/**
 	 * @param args
@@ -97,29 +107,76 @@ public class RuleBasedDriver {
 	 */
 	public static void main(String args[]) throws Exception {
 		RuleBasedDriver rbased = new RuleBasedDriver(true);
-//		String fileString = FileUtils.readFileToString(new File("gold_set"));
-//		String outFile = "gold_output_4";
+//		String fileString = FileUtils.readFileToString(new File("entire_sentence_set"));
+//		String outFile = "entire_sentence_output";
 //		rbased.batchExtract(fileString, outFile);
-		
+		System.out.println("here");
 		String fileString = FileUtils.readFileToString(new File("debug"));
 		System.out.println(rbased.extract(fileString));
-	
-
-		
 	}
 	
-	public ArrayList<Relation> extract(String sentenceString) throws IOException {
+	
+	/**
+	 * takes a tokenized sentence, and the corresponding
+	 * typed dependencies. Primarily written to facilitate talking with MultiR
+	 * @throws IOException 
+	 */
+	public ArrayList<Relation> extractFromMultiRDepString(List<Triple<Integer, String, Integer> > deps, CoreMap sentence) throws IOException {
 		ArrayList<Relation> res = new ArrayList<Relation>();
+		
+		List<CoreLabel> tokens = sentence.get(CoreAnnotations.TokensAnnotation.class);
+		int numTokens = tokens.size();
+		Word wordArr[] = new Word[numTokens + 1];
+		wordArr[0] = new Word(0, "ROOT", 0, 0);
+		int offSet = 0;
+		for(int i = 1; i <= numTokens; i++) {
+			
+			CoreLabel token = tokens.get(i - 1);
+
+			String tokenStr = tokens.get(i - 1).toString();
+			int begOffset = token.get(CoreAnnotations.TokenBeginAnnotation.class);
+			int endOffset = token.get(CoreAnnotations.TokenEndAnnotation.class);
+			wordArr[i] = new Word(i, tokenStr, begOffset, endOffset);
+			offSet += (tokenStr.length() + 1);
+		}
+		
+		ArrayList<Pair< String, Pair<Word, Word> > > pairList = new ArrayList<Pair<String,Pair<Word,Word>>>();
+		for(Triple<Integer, String, Integer> dep: deps) {
+			//dep is given in the form indexOne Relation indexTwo
+			int govIdx = dep.first;
+			String rel = dep.second;
+			int depIdx = dep.third;
+//			Word govWord = new Word(govIdx, tokens.get(govIdx).toString());
+//			Word depWord = new Word(depIdx, tokens.get(depIdx).toString());
+			Word govWord = wordArr[govIdx];
+			Word depWord = wordArr[depIdx];
+			pairList.add(new Pair<String, Pair<Word, Word> >(rel, new Pair<Word, Word>(govWord, depWord)));
+		}
+		Graph depGraph = Graph.makeDepGraphFromList(pairList, wordArr);
+
+		// Step 3 : Identify all the country number word pairs
+		ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph,
+				sentence);
+		
+		
+		// Step 4 : Extract the relations that exists in these pairs
+		res.addAll(getExtractions(depGraph, pairs, false));
+		
+		return res;
+	}
+	
+	
+	public Graph constructDepGraph(String sentenceString){
 		Annotation doc = new Annotation(sentenceString);
 		pipeline.annotate(doc);
+		TreebankLanguagePack tlp = new PennTreebankLanguagePack();
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
-		int i = 0;
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
 			
 			// Step 1 : Get the typed dependencies
 			Tree tree = sentence.get(TreeAnnotation.class);
-			TreebankLanguagePack tlp = new PennTreebankLanguagePack();
+	
 			GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
 			GrammaticalStructure gs = gsf.newGrammaticalStructure(tree);
 
@@ -128,10 +185,41 @@ public class RuleBasedDriver {
 			// Collection<TypedDependency> td =
 			// gs.typedDependenciesCCprocessed();
 			Iterator<TypedDependency> tdi = td.iterator();
-//			while(tdi.hasNext()) {
-//				System.out.println(tdi.next());
-//			}
-//			tdi = td.iterator();
+			
+			while(tdi.hasNext()) {
+				System.out.println(tdi.next());
+			}
+			tdi = td.iterator();
+			return Graph.makeDepGraph(tdi);
+		}
+		return null;
+	}
+	
+	public ArrayList<Relation> extract(String sentenceString) throws IOException {
+		ArrayList<Relation> res = new ArrayList<Relation>();
+		Annotation doc = new Annotation(sentenceString);
+		pipeline.annotate(doc);
+		TreebankLanguagePack tlp = new PennTreebankLanguagePack();
+		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
+		for (CoreMap sentence : sentences) {
+			// Get dependency graph
+			
+			// Step 1 : Get the typed dependencies
+			Tree tree = sentence.get(TreeAnnotation.class);
+	
+			GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
+			GrammaticalStructure gs = gsf.newGrammaticalStructure(tree);
+
+			//Collection<TypedDependency> td = gs.typedDependenciesCollapsed();
+			Collection<TypedDependency> td = gs.allTypedDependencies();
+			// Collection<TypedDependency> td =
+			// gs.typedDependenciesCCprocessed();
+			Iterator<TypedDependency> tdi = td.iterator();
+			
+			while(tdi.hasNext()) {
+				System.out.println(tdi.next());
+			}
+			tdi = td.iterator();
 //			// Step 2 : Make a graph out of them
 			Graph depGraph = Graph.makeDepGraph(tdi);
 
@@ -140,7 +228,7 @@ public class RuleBasedDriver {
 					sentence);
 			
 			// Step 4 : Extract the relations that exists in these pairs
-			res.addAll(getExtractions(depGraph, pairs));
+			res.addAll(getExtractions(depGraph, pairs, true));
 		}
 		return res;
 	}
@@ -149,7 +237,7 @@ public class RuleBasedDriver {
 		Annotation doc = new Annotation(fileString);
 		pipeline.annotate(doc);
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
-		int i = 0;
+		int i = 1;
 		PrintWriter pw = new PrintWriter(new FileWriter(outFile));
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
@@ -177,8 +265,13 @@ public class RuleBasedDriver {
 			pw.write("\n---\n");
 			pw.write("sentence " + i++ + "\n");
 			pw.write(sentence + "\n\n");
+			System.out.println("\n------------------------------------------------------");
+			System.out.println("\nSentence ===> " + sentence);
 			// Step 4 : Extract the relations that exists in these pairs
-			pw.write(getExtractions(depGraph, pairs) + "\n");
+			 
+			ArrayList<Relation> res = getExtractions(depGraph, pairs, true);
+			System.out.println("Extractions == > " + res);
+			pw.write(res + "\n");
 			pw.write("---\n");
 			///*/System.out.println(getExtractions(depGraph, pairs) + "\n");
 		}
@@ -241,15 +334,17 @@ public class RuleBasedDriver {
 
 	
 	ArrayList<Relation> getExtractions(Graph depGraph,
-			ArrayList<Pair<Country, Number>> pairs) throws IOException {
+			ArrayList<Pair<Country, Number>> pairs, boolean augmentPhrases) throws IOException {
 		ArrayList<Relation> result = new ArrayList<Relation>();
 		HashMap< Pair<Word, Word>, Relation> alreadyExtractedRelMap = new HashMap<Pair<Word,Word>, Relation>();
 		
 		//The hashcode of Relation does not include argument2
 		for (Pair<Country, Number> pair : pairs) {
+			//System.out.println("\nPair == > " + pair);
 			// System.out.println(depGraph.getWordsOnPath(pair.country,
 			// pair.number));
 			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(pair.first, pair.second);
+			//System.out.println("Path == > " + wordsOnDependencyGraphPath);
 			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair,wordsOnDependencyGraphPath, depGraph);
 			for (Relation rel : rels) {
 				
@@ -276,7 +371,9 @@ public class RuleBasedDriver {
 						}
 					}
 				}
-				rel= augment(depGraph, rel);
+				if(augmentPhrases) {
+					rel= augment(depGraph, rel);
+				}
 				Pair<Word, Word> argRelPairKey = new Pair<Word, Word>(rel.getCountry(),rel.getKeyword());
 				if(alreadyExtractedRelMap.containsKey(argRelPairKey)) { //the same arg1, relation, and keyword have already been extracted?
 					Number prevNumber = alreadyExtractedRelMap.get(argRelPairKey).getNumber();
@@ -355,7 +452,16 @@ public class RuleBasedDriver {
 		return numberPat.matcher(token.toString()).matches();
 	}
 
-	
+	public ArrayList<Pair<Country, Number>> getPairs(Graph depGraph, String sentenceString) {
+		Annotation doc = new Annotation(sentenceString);
+		pipeline.annotate(doc);
+		TreebankLanguagePack tlp = new PennTreebankLanguagePack();
+		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
+		for (CoreMap sentence : sentences) {
+			return getPairs(depGraph, sentence);
+		}
+		return null;
+	}
 	
 	/**
 	 * Returns the list of country number pairs in the graph Uses the indexes
@@ -365,47 +471,46 @@ public class RuleBasedDriver {
 	 * @param sentence
 	 * @return
 	 */
-	ArrayList<Pair<Country, Number>> getPairs(Graph depGraph, CoreMap sentence) {
+	public ArrayList<Pair<Country, Number>> getPairs(Graph depGraph, CoreMap sentence) {
 		ArrayList<Country> countries = new ArrayList<Country>();
 		ArrayList<Number> numbers = new ArrayList<Number>();
 		ArrayList<Pair<Country, Number>> res = new ArrayList<Pair<Country, Number>>();
 		float values[][] = new float[1][1];
+		int idx = 1;
 		for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
 			// this is the text of the token
-			String word = token.get(TextAnnotation.class);
+			String tokenStr = token.get(TextAnnotation.class);
+			Word currWord = depGraph.getWordForIndex(idx);
+			idx++;
 			//System.out.println(word  + " - " + depGraph.getIdx(word) + depGraph.nodeWordMap.get(depGraph.getIdx(word)));
-			if (isCountry(word)) {	
-				countries.add(new Country(depGraph.getIdx(word), word));
+			if (isCountry(tokenStr)) {	
+				countries.add(new Country(currWord.getIdx(), currWord.getVal(), currWord.getStartOff(), currWord.getEndOff()));
 			}
 			
-			if (isNumber(word) && !isYear(word)) {
-				Number num = new Number(depGraph.getIdx(word), word);
+			if (isNumber(tokenStr) && !isYear(tokenStr)) {
+				Number num = new Number(currWord.getIdx(), currWord.getVal(), currWord.getStartOff(), currWord.getEndOff());
 				if (unitsActive) {
-					/*
-					int beginPos = token.beginPosition() - cumulativeLen;
-					int endPos = token.endPosition() - cumulativeLen;
-					*/
 					String sentString = sentence.toString();
-					int beginIdx = sentString.indexOf(word);
-					int endIdx = beginIdx + word.length();
-					String utString = sentString.substring(0, beginIdx) + "<b>" + word + "</b>" + sentString.substring(endIdx); 
-					/*unitString = sentence.toString().substring(0, beginPos) + //before 
-								"<b>" + token + "</b>"+  //the token
-								((sentence.size() == endPos) ? "" : sentence.toString().substring(endPos)); //after*/
-				//	System.out.println("Unit String: "+ utString);
+					int beginIdx = sentString.indexOf(tokenStr);
+					int endIdx = beginIdx + tokenStr.length();
+					String utString = sentString.substring(0, beginIdx) + "<b>" + tokenStr + "</b>" + sentString.substring(endIdx); 
+			
 					List<? extends EntryWithScore<Unit>> unitsS = ue.parser
 							.getTopKUnitsValues(utString, "b", 1, 0, values);
 
 					// check for unit here....
 					if (unitsS != null) {
 						num.setUnit(unitsS.get(0).getKey().getBaseName());
-					//	System.out.println("unit: "+unitsS.toString());
+				
 					}
 				}
 				numbers.add(num);
 			}
+	
 
 		}
+		
+		
 		for (int i = 0, lc = countries.size(); i < lc; i++) {
 			for (int j = 0, ln = numbers.size(); j < ln; j++) {
 				res.add(new Pair<Country, Number>(countries.get(i), numbers

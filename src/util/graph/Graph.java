@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 import meta.ModifyingTypes;
 import util.Number;
+import util.Pair;
 import util.Word;
 import edu.stanford.nlp.trees.TreeGraphNode;
 import edu.stanford.nlp.trees.TypedDependency;
@@ -34,7 +35,7 @@ public class Graph {
 	
 	
 	
-	public final static int MAX = 1000;
+	public final static int MAX = 2000;
 	
 	
 	private Graph() {
@@ -52,12 +53,14 @@ public class Graph {
 	 * @param tdi
 	 * @return
 	 */
+	
 	public static Graph makeDepGraph(Iterator<TypedDependency> tdi) {
 		Graph depGraph = new Graph();
 
 		/**
 		 * Add nodes to the graph
 		 */
+		ArrayList<Pair< String, Pair <Word, Word> > >  pairList = new ArrayList<>(); //java 7 ftw 
 		while (tdi.hasNext()) {
 			TypedDependency td1 = tdi.next();
 			TreeGraphNode depNode = td1.dep();
@@ -65,7 +68,7 @@ public class Graph {
 
 			Word govWord = new Word(govNode.index(), govNode.value().toLowerCase());
 			Word depWord = new Word(depNode.index(), depNode.value().toLowerCase());
-			
+			pairList.add(new Pair< String, Pair <Word, Word> > (td1.reln().toString(), new Pair<Word, Word>(govWord, depWord)));
 			depGraph.addNode(depNode.index(), depWord);
 			depGraph.addNode(govNode.index(), govWord);
 			
@@ -94,6 +97,52 @@ public class Graph {
 
 	}
 
+	/**
+	 * The list is supposed to be ordered like dependent -> gov node.
+	 * Not all the nodes may appear in a relationship, and thus we need
+	 * to supply a list of the word nodes as well.
+	 * @param pairList
+	 * @param wordArr 
+	 * @return
+	 */
+	public static Graph makeDepGraphFromList(ArrayList<Pair< String, Pair< Word, Word> > > pairList, Word[] wordArr) {
+		Graph depGraph = new Graph();
+
+
+		for(Pair<String, Pair< Word, Word>> relWordPair: pairList) {
+			Pair<Word, Word> wordPair = relWordPair.second;
+			Word govWord = wordPair.first;
+			Word depWord = wordPair.second;
+			String reln = relWordPair.first;
+			
+			depGraph.addNode(depWord.getIdx(), depWord);
+			depGraph.addNode(govWord.getIdx(), govWord);
+			
+			//undirected, add edges between depWord and govWord
+			depGraph.addEdge(depWord, govWord);
+			depGraph.addEdge(govWord, depWord);
+	
+			// governor is being modified
+			
+			if (ModifyingTypes.isRelDep(reln) || ModifyingTypes.isKeywordDep(reln)) {
+				
+				//dependencies are bidirectional
+				depGraph.addModifier(govWord, depWord, reln);
+				depGraph.addModifier(depWord, govWord, reln);
+			}
+
+			// System.out.println(govNode.value() + " -> " + depNode.value());
+		}
+		// depGraph.listModifiers();
+		
+		for(Word w : wordArr) {
+			depGraph.valIdxMap.put(w.getVal(), w.getIdx());
+		}
+		//depGraph.allPairs();
+		return depGraph;
+
+	}
+
 	// undirected graph
 	public void addEdge(Word a, Word b) {
 
@@ -112,7 +161,10 @@ public class Graph {
 	 * @return
 	 */
 	public ArrayList<Word> getNbr(Word curr) {
-	
+		if(!adjMap.containsKey(curr)) {
+			return null;
+			
+		}
 		return adjMap.get(curr);
 	}
 
@@ -191,5 +243,8 @@ public class Graph {
 		return getWordsOnPath(nodeWordMap.get(country.getIdx()), currNumber).size();
 	
 	}
-
+	
+	public Word getWordForIndex(int idx) {
+		return nodeWordMap.get(idx);
+	}
 }

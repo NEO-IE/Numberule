@@ -19,6 +19,12 @@ public class Number extends Word {
 		unit = "";
 	}
 	
+	public Number(Integer idx, String str, int startOff, int endOff) {
+		super(idx, str, startOff, endOff);
+		hasUnit = false;
+		unit = "";
+	}
+	
 	public void setUnit(String unit) {
 		this.unit = unit;
 		hasUnit = true;
@@ -34,6 +40,10 @@ public class Number extends Word {
 		hasUnit = n.hasUnit;
 	}
 	
+	@Override
+	public String toString(){
+		return super.getVal() + " " + unit;
+	}
 	
 
 }

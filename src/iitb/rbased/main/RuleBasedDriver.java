@@ -170,6 +170,20 @@ public class RuleBasedDriver {
 		
 		return res;
 	}
+
+	/**
+	 * This is a weak version of the extract relation version and is written specifically to be used with the numbertron.
+	 * The idea is to create the graph, spot the country and the number, and then check for:
+	 * a) Absence of delta words
+	 * b) Unit coherence
+	 * @param deps
+	 * @param sentence
+	 * @return
+	 * @throws IOException
+	 */
+	public ArrayList<Relation> spotPossibleRelations(List<Triple<Integer, String, Integer> > deps, CoreMap sentence) throws IOException {
+
+	}
 	
 	
 	public Graph constructDepGraph(String sentenceString){

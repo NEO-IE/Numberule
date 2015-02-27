@@ -1105,3 +1105,65 @@ pobj(of-3, India-4)
 cop(billion-7, is-5)
 number(billion-7, 1.3-6)
 root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=43532,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=43542,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=43557,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=43561,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=44017,localport=4080]
+false
+Extracting from 0:urban population of rural india is 13 million 
+amod(population-2, urban-1)
+nsubj(million-8, population-2)
+prep(population-2, of-3)
+amod(india-5, rural-4)
+pobj(of-3, india-5)
+cop(million-8, is-6)
+number(million-8, 13-7)
+root(ROOT-0, million-8)
+Got connection from Socket[addr=/10.105.1.3,port=44032,localport=4080]
+true
+Extracting from 1:urban population of rural india is 13 million 
+amod(population-2, urban-1)
+nsubj(million-8, population-2)
+prep(population-2, of-3)
+amod(india-5, rural-4)
+pobj(of-3, india-5)
+cop(million-8, is-6)
+number(million-8, 13-7)
+root(ROOT-0, million-8)

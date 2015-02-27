@@ -1,11 +1,12 @@
-package util.graph;
+package iitb.rbased.util.graph;
+
+import iitb.rbased.util.Word;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import util.Word;
 
 public class BFS {
 	public static Word[] run(Graph g, Word src) {

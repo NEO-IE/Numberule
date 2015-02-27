@@ -1,15 +1,16 @@
 //sg
-package util.graph;
+package iitb.rbased.util.graph;
+
+import iitb.rbased.meta.ModifyingTypes;
+import iitb.rbased.util.Pair;
+import iitb.rbased.util.Word;
+import iitb.rbased.util.Number;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import meta.ModifyingTypes;
-import util.Number;
-import util.Pair;
-import util.Word;
 import edu.stanford.nlp.trees.TreeGraphNode;
 import edu.stanford.nlp.trees.TypedDependency;
 

@@ -1,15 +1,16 @@
-package main;
+package iitb.rbased.main;
+import iitb.rbased.meta.KeywordData;
+import iitb.rbased.util.Country;
+import iitb.rbased.util.Number;
+import iitb.rbased.util.Pair;
+import iitb.rbased.util.Relation;
+import iitb.rbased.util.Word;
+import iitb.rbased.util.graph.Graph;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import meta.KeywordData;
-import util.Country;
-import util.Pair;
-import util.Relation;
-import util.Word;
-import util.Number;
-import util.graph.Graph;
 
 //sg
 

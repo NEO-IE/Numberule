@@ -1,4 +1,14 @@
-package dependencyStats;
+package iitb.rbased.dependencyStats;
+
+import iitb.rbased.main.ExtractFromPath;
+import iitb.rbased.main.RuleBasedDriver;
+import iitb.rbased.meta.KeywordData;
+import iitb.rbased.meta.RelationUnitMap;
+import iitb.rbased.util.Country;
+import iitb.rbased.util.Pair;
+import iitb.rbased.util.Number;
+import iitb.rbased.util.Word;
+import iitb.rbased.util.graph.Graph;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,23 +20,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import util.Country;
-import util.Number;
-import util.Pair;
-import util.Word;
-import util.graph.Graph;
-import main.ExtractFromPath;
-import main.RuleBasedDriver;
-import meta.KeywordData;
-import meta.RelationUnitMap;
-import derbyDatabase.Corpus;
-import derbyDatabase.CustomCorpusInformationSpecification;
-import derbyDatabase.SentDependencyInformation;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.util.CoreMap;
 import edu.stanford.nlp.util.Triple;
+import edu.washington.multirframework.corpus.Corpus;
+import edu.washington.multirframework.corpus.CustomCorpusInformationSpecification;
+import edu.washington.multirframework.corpus.SentDependencyInformation;
 
 public class DependencyStats {
 

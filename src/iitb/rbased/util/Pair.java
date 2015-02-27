@@ -1,4 +1,4 @@
-package util;
+package iitb.rbased.util;
 
 public class Pair<F, S> {
 	public F first;

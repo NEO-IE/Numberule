@@ -1,4 +1,13 @@
-package main;
+package iitb.rbased.main;
+import iitb.rbased.meta.RelationUnitMap;
+import iitb.rbased.util.Country;
+import iitb.rbased.util.Number;
+
+
+import iitb.rbased.util.Pair;
+import iitb.rbased.util.Relation;
+import iitb.rbased.util.Word;
+import iitb.rbased.util.graph.Graph;
 import iitb.shared.EntryWithScore;
 
 import java.io.BufferedReader;
@@ -16,16 +25,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
-import meta.RelationUnitMap;
-
 import org.apache.commons.io.FileUtils;
 
-import util.Country;
-import util.Number;
-import util.Pair;
-import util.Relation;
-import util.Word;
-import util.graph.Graph;
 import catalog.Unit;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;

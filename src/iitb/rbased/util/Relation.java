@@ -4,7 +4,7 @@
  * The extractor will return an object of this class, and then we'll need to augment the 
  * argument or the relation involved.
  */
-package util;
+package iitb.rbased.util;
 
 /**
  * Represents a relation in the sentence

@@ -207,7 +207,9 @@ public class RuleBasedDriver {
 		for (Pair<Country, Number> pair : pairs) {
 			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(pair.first, pair.second);
 			//System.out.println("Path == > " + wordsOnDependencyGraphPath);
-			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair,wordsOnDependencyGraphPath, depGraph);
+			
+			
+			boolean modified = ExtractFromPath.isModified(depGraph, pair, path);
 			for (Relation rel : rels) {
 				
 				if (unitsActive) {

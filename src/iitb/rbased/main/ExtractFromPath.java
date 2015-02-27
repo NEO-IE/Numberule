@@ -1,4 +1,5 @@
 package iitb.rbased.main;
+
 import iitb.rbased.meta.KeywordData;
 import iitb.rbased.util.Country;
 import iitb.rbased.util.Number;
@@ -10,7 +11,6 @@ import iitb.rbased.util.graph.Graph;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
-
 
 //sg
 
@@ -46,84 +46,115 @@ public class ExtractFromPath {
 	 */
 
 	/**
-	 * The following 2 functions simply test for existence of a keyword on the specified path
-	 * The function is called once for each of the relations (i.e. with the keyword set of each of the relation
-	 * and checks if one of the words on the path is the keyword
+	 * The following 2 functions simply test for existence of a keyword on the
+	 * specified path The function is called once for each of the relations
+	 * (i.e. with the keyword set of each of the relation and checks if one of
+	 * the words on the path is the keyword
+	 * 
 	 * @param path
 	 * @param keywords
-	 * @param depGraph 
+	 * @param depGraph
 	 * @return Keyword on the path if one is found
 	 */
 	static Word getKeyword(ArrayList<Word> path, ArrayList<String> keywords, Graph depGraph) {
-		for (String kw : keywords) { //for each of the keywords
+		for (String kw : keywords) { // for each of the keywords
 			kw = kw.toLowerCase();
-			for (Word wordOnPath : path) { //iterate over the word and see if there is a match
+			for (Word wordOnPath : path) { // iterate over the word and see if
+											// there is a match
 				if (wordOnPath.getVal().toLowerCase().equals(kw)) {
 					return wordOnPath;
-				}else{
+				} else {
 					HashSet<Word> modWords = depGraph.getKeywordModifiers(wordOnPath);
-					if(modWords == null)
-						continue; //no modifier words.
-					for(Word modWord: modWords){
-						if(modWord.getVal().toLowerCase().equals(kw)){
+					if (modWords == null)
+						continue; // no modifier words.
+					for (Word modWord : modWords) {
+						if (modWord.getVal().toLowerCase().equals(kw)) {
 							return modWord;
 						}
 					}
 				}
 			}
 		}
-		return  null;
+		return null;
 	}
-	
+
 	/**
 	 * Returns all the relations that can exist between the argPair, path is the
 	 * list of words that appear in the dependency graph between the argPair
 	 * 
 	 * @param argPair
 	 * @param path
-	 * @param depGraph 
+	 * @param depGraph
 	 * @return
 	 */
-	public static ArrayList<Relation> getExtractions(
-			Pair<Country, Number> argPair, ArrayList<Word> path, Graph depGraph) {
+	public static ArrayList<Relation> getExtractions(Pair<Country, Number> argPair, ArrayList<Word> path, Graph depGraph) {
 
-		KeywordData kwd = null;
-		try {
-			kwd = new KeywordData();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		ArrayList<Relation> res = new ArrayList<Relation>();
+
 		
+
+		// checking if the label before the number is to. Checking one more
+		// label to accompany units if any.
+
+		
+		/**
+		 * Check if the number is a modified quantity and not the actual
+		 * quantity. For example,
+		 * "Increase in population as opposed to decrease in population"
+		 */
 		Integer numNode = depGraph.getIdx(argPair.second.getVal());
-		
-		//checking if the label before the number is to. Checking one more label to accompany units if any.
-		
 		String prevLabel = depGraph.getLabel(numNode - 1);
 		String prev_prevLabel = depGraph.getLabel(numNode - 2);
-		boolean prepositionPresent = prevLabel != null && prevLabel.equals("to") || prev_prevLabel != null && prev_prevLabel.equals("to"); //increased to
-			//ignore modifier for this number
-		if(!prepositionPresent && modifierPresent(argPair, path, kwd)){
-				return res;
+		boolean prepositionPresent = prevLabel != null && prevLabel.equals("to") || prev_prevLabel != null
+				&& prev_prevLabel.equals("to"); // increased to
+		// ignore modifier for this number
+		if (!prepositionPresent && modifierPresent(argPair, path)) {
+			return res;
 		}
-		
-		Word keyword = null;
-		for (int i = 0; i < kwd.NUM_RELATIONS; i++) {
 
-			if (null != (keyword = getKeyword(path, kwd.KEYWORDS.get(i),depGraph))) {
+		Word keyword = null;
+		for (int i = 0; i < KeywordData.NUM_RELATIONS; i++) {
+
+			if (null != (keyword = getKeyword(path, KeywordData.KEYWORDS.get(i), depGraph))) {
 				assert (keyword != null);
-				//System.out.println("Keyword ==> " + keyword);
-				res.add(new Relation(argPair.first, argPair.second, keyword,
-						kwd.relName.get(i)));
+				// System.out.println("Keyword ==> " + keyword);
+				res.add(new Relation(argPair.first, argPair.second, keyword, KeywordData.relName.get(i)));
 			}
 		}
 		return res;
 	}
-	public static boolean modifierPresent(Pair<Country, Number> argPair, ArrayList<Word> path, KeywordData kwd){
+
+	/**
+	 * check if the dependency path involves a modification.
+	 * 
+	 * @return
+	 */
+	public static boolean isModified(Graph depGraph, Pair<Country, Number> argPair,
+			ArrayList<Word> path, KeywordData kwd) {
+		Integer numNode = depGraph.getIdx(argPair.second.getVal());
+		String prevLabel = depGraph.getLabel(numNode - 1);
+		String prev_prevLabel = depGraph.getLabel(numNode - 2);
+		boolean prepositionPresent = prevLabel != null && prevLabel.equals("to") || prev_prevLabel != null
+				&& prev_prevLabel.equals("to"); // increased to
+		// ignore modifier for this number
+		if (!prepositionPresent && modifierPresent(argPair, path)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if a modifier is present in the dependency path
+	 * @param argPair
+	 * @param path
+	 * @param kwd
+	 * @return
+	 */
+	public static boolean modifierPresent(Pair<Country, Number> argPair, ArrayList<Word> path) {
 		boolean modifierPresent = false;
 		// if modifiers are present, cannot be extraction
-		for (String mod : kwd.modifiers) {
+		for (String mod : KeywordData.modifiers) {
 			modifierPresent = modifierPresent || Word.wordListContainsVal(path, mod);
 			if (modifierPresent) {
 				return true; // return empty result

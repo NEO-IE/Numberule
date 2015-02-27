@@ -186,9 +186,9 @@ public class RuleBasedDriver {
 			// gs.typedDependenciesCCprocessed();
 			Iterator<TypedDependency> tdi = td.iterator();
 			
-			while(tdi.hasNext()) {
-				System.out.println(tdi.next());
-			}
+//			while(tdi.hasNext()) {
+//				System.out.println(tdi.next());
+//			}
 			tdi = td.iterator();
 			return Graph.makeDepGraph(tdi);
 		}
@@ -404,7 +404,7 @@ public class RuleBasedDriver {
 	public ArrayList<Pair<Country, Number>> getPairs(Graph depGraph, String sentenceString) {
 		Annotation doc = new Annotation(sentenceString);
 		pipeline.annotate(doc);
-		TreebankLanguagePack tlp = new PennTreebankLanguagePack();
+		//TreebankLanguagePack tlp = new PennTreebankLanguagePack();
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
 		for (CoreMap sentence : sentences) {
 			return getPairs(depGraph, sentence);

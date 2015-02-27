@@ -182,10 +182,58 @@ public class RuleBasedDriver {
 	 * @throws IOException
 	 */
 	public ArrayList<Relation> spotPossibleRelations(List<Triple<Integer, String, Integer> > deps, CoreMap sentence) throws IOException {
+	ArrayList<Relation> res = new ArrayList<Relation>();
+		
+		Graph depGraph = getDepGraph(deps, sentence);
 
+		// Step 3 : Identify all the country number word pairs
+		ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph,
+				sentence);
+		
+		
+		// Step 4 : Extract the relations that exists in these pairs
+		res.addAll(getSpots(depGraph, pairs));
+		
+		return res;
+		
 	}
 	
-	
+
+	ArrayList<Relation> getSpots(Graph depGraph, ArrayList<Pair<Country, Number>> pairs) throws IOException {
+		
+		ArrayList<Relation> result = new ArrayList<Relation>();
+		HashMap< Pair<Word, Word>, Relation> alreadyExtractedRelMap = new HashMap<Pair<Word,Word>, Relation>();
+		
+		for (Pair<Country, Number> pair : pairs) {
+			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(pair.first, pair.second);
+			//System.out.println("Path == > " + wordsOnDependencyGraphPath);
+			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair,wordsOnDependencyGraphPath, depGraph);
+			for (Relation rel : rels) {
+				
+				if (unitsActive) {
+					if(!unitRelationMatch(rel.getRelName(), pair)){
+						continue;  //if unit doesn't match, try next relation.
+					}
+				}
+				
+				Pair<Word, Word> argRelPairKey = new Pair<Word, Word>(rel.getCountry(),rel.getKeyword());
+				if(alreadyExtractedRelMap.containsKey(argRelPairKey)) { //the same arg1, relation, and keyword have already been extracted?
+					Number prevNumber = alreadyExtractedRelMap.get(argRelPairKey).getNumber();
+					Number currNumber = rel.getNumber();
+					if(depGraph.distance(rel.getCountry(), currNumber) < depGraph.distance(rel.getCountry(), prevNumber)) { //the current number is closer?
+						alreadyExtractedRelMap.put(argRelPairKey, rel);
+					} //else nothing to do, the relation already present in the map is the one that should be there
+				} else { //new relation, must extract	
+					alreadyExtractedRelMap.put(argRelPairKey, rel);
+				}
+			}
+		}
+		for(Relation rel : alreadyExtractedRelMap.values()) {
+			result.add(rel);
+		}
+		return result;
+	}
+
 	public Graph constructDepGraph(String sentenceString){
 		Annotation doc = new Annotation(sentenceString);
 		pipeline.annotate(doc);

@@ -102,13 +102,12 @@ public class ExtractFromPath {
 		
 		String prevLabel = depGraph.getLabel(numNode - 1);
 		String prev_prevLabel = depGraph.getLabel(numNode - 2);
-		if( prevLabel != null && prevLabel.equals("to") || prev_prevLabel != null && prev_prevLabel.equals("to")){
+		boolean prepositionPresent = prevLabel != null && prevLabel.equals("to") || prev_prevLabel != null && prev_prevLabel.equals("to"); //increased to
 			//ignore modifier for this number
-		}else{
-			if(modifierPresent(argPair, path, kwd)){
+		if(!prepositionPresent && modifierPresent(argPair, path, kwd)){
 				return res;
-			}
 		}
+		
 		Word keyword = null;
 		for (int i = 0; i < kwd.NUM_RELATIONS; i++) {
 

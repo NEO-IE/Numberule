@@ -116,14 +116,7 @@ public class RuleBasedDriver {
 	}
 	
 	
-	/**
-	 * takes a tokenized sentence, and the corresponding
-	 * typed dependencies. Primarily written to facilitate talking with MultiR
-	 * @throws IOException 
-	 */
-	public ArrayList<Relation> extractFromMultiRDepString(List<Triple<Integer, String, Integer> > deps, CoreMap sentence) throws IOException {
-		ArrayList<Relation> res = new ArrayList<Relation>();
-		
+	public Graph getDepGraph(List<Triple<Integer, String, Integer> > deps, CoreMap sentence){
 		List<CoreLabel> tokens = sentence.get(CoreAnnotations.TokensAnnotation.class);
 		int numTokens = tokens.size();
 		Word wordArr[] = new Word[numTokens + 1];
@@ -153,6 +146,18 @@ public class RuleBasedDriver {
 			pairList.add(new Pair<String, Pair<Word, Word> >(rel, new Pair<Word, Word>(govWord, depWord)));
 		}
 		Graph depGraph = Graph.makeDepGraphFromList(pairList, wordArr);
+		return depGraph;
+	}
+	
+	/**
+	 * takes a tokenized sentence, and the corresponding
+	 * typed dependencies. Primarily written to facilitate talking with MultiR
+	 * @throws IOException 
+	 */
+	public ArrayList<Relation> extractFromMultiRDepString(List<Triple<Integer, String, Integer> > deps, CoreMap sentence) throws IOException {
+		ArrayList<Relation> res = new ArrayList<Relation>();
+		
+		Graph depGraph = getDepGraph(deps, sentence);
 
 		// Step 3 : Identify all the country number word pairs
 		ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph,
@@ -278,10 +283,35 @@ public class RuleBasedDriver {
 		pw.close();
 	}
 
-	private static boolean isYear(String token) {
+	public boolean isYear(String token) {
 		return yearPat.matcher(token).matches();
 	}
 
+	public boolean unitRelationMatch(String rel, Pair<Country, Number> arg){
+		Unit unit = ue.quantDict.getUnitFromBaseName(arg.second.getUnit());
+		if (unit != null && !unit.getBaseName().equals("")) {
+			Unit SIUnit = unit.getParentQuantity()
+					.getCanonicalUnit();
+			if (
+					SIUnit != null && !RelationUnitMap.getUnit(rel).equals(SIUnit.getBaseName()) 
+					||
+					SIUnit == null && !RelationUnitMap.getUnit(rel).equals(unit.getBaseName())
+					) {
+				return false; // Incorrect unit, this cannot be the
+							// relation.
+			}
+		}else if(unit == null && !arg.second.getUnit().equals("") && 
+				RelationUnitMap.getUnit(rel).equals(arg.second.getUnit())){ //for the cases where units are compound units.
+			return true;
+		}else {
+			if (!RelationUnitMap.getUnit(rel).equals(
+					"")) {
+				return false; // this cannot be the correct relation.
+			}
+		}
+		return true;
+	}
+	
 	ArrayList<Relation> getExtractions(Graph depGraph,
 			ArrayList<Pair<Country, Number>> pairs, boolean augmentPhrases) throws IOException {
 		ArrayList<Relation> result = new ArrayList<Relation>();
@@ -298,26 +328,8 @@ public class RuleBasedDriver {
 			for (Relation rel : rels) {
 				
 				if (unitsActive) {
-					Unit unit = ue.quantDict.getUnitFromBaseName(pair.second
-							.getUnit());
-					if (unit != null && !unit.getBaseName().equals("")) {
-						Unit SIUnit = unit.getParentQuantity()
-								.getCanonicalUnit();
-						if (
-								SIUnit != null && !RelationUnitMap.getUnit(rel.getRelName()).equals(SIUnit.getBaseName()) 
-								||
-								SIUnit == null && !RelationUnitMap.getUnit(rel.getRelName()).equals(unit.getBaseName())
-								) {
-							continue; // Incorrect unit, this cannot be the
-										// relation.
-						}
-					}else if(unit == null && !pair.second.getUnit().equals("") && RelationUnitMap.getUnit(rel.getRelName()).equals(pair.second.getUnit())){ //for the cases where units are compound units.
-						//do nothing, seems legit
-					}else {
-						if (!RelationUnitMap.getUnit(rel.getRelName()).equals(
-								"")) {
-							continue; // this cannot be the correct relation.
-						}
+					if(!unitRelationMatch(rel.getRelName(), pair)){
+						continue;  //if unit doesn't match, try next relation.
 					}
 				}
 				if(augmentPhrases) {
@@ -393,11 +405,11 @@ public class RuleBasedDriver {
 		return rel;
 	}
 
-	private boolean isCountry(String token) {
+	public boolean isCountry(String token) {
 		return countryList.contains(token.toLowerCase());
 	}
 
-	private static boolean isNumber(String token) {
+	public boolean isNumber(String token) {
 		return numberPat.matcher(token.toString()).matches();
 	}
 

@@ -10,7 +10,7 @@ import org.json.simple.parser.ParseException;
 
 
 public class KeywordData {
-	public String keyWordFile = "/mnt/a99/d0/aman/scala/workspace/StanfordCoreNLPInterface/data/keywords.json";
+	public String keyWordFile = "/mnt/a99/d0/ashishm/workspace/depbased/data/keywords.json";
 	public String modifiers[];
 	public ArrayList<String> relName;
 	public ArrayList<ArrayList<String>> KEYWORDS;

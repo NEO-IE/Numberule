@@ -10,6 +10,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
+
+import catalog.QuantityCatalog;
+import catalog.Unit;
 import util.Country;
 import util.Number;
 import util.Pair;
@@ -22,22 +29,26 @@ import meta.RelationUnitMap;
 import derbyDatabase.Corpus;
 import derbyDatabase.CustomCorpusInformationSpecification;
 import derbyDatabase.SentDependencyInformation;
+import derbyDatabase.TokenOffsetInformation.SentenceRelativeCharacterOffsetBeginAnnotation;
+import derbyDatabase.TokenOffsetInformation.SentenceRelativeCharacterOffsetEndAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.pipeline.Annotation;	
 import edu.stanford.nlp.util.CoreMap;
 import edu.stanford.nlp.util.Triple;
+import edu.washington.multirframework.argumentidentification.NERNumberRelationMatching;
 
 public class DependencyStats {
 
-	public static String corpusPath = "jdbc:derby:/mnt/a99/d0/aman/MultirExperiments/data/numbers_short";
+	public static String corpusPath = "jdbc:derby:/mnt/a99/d0/aman/MultirExperiments/data/numbers_corpus";
 	public CustomCorpusInformationSpecification cis;
 	public Corpus corpus = null;
 	public RuleBasedDriver rbd = null;
 	public KeywordData kwd = null;
 	public Set<String> rels = null;
+	public QuantityCatalog quantDict;
 	
-	public DependencyStats() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, IOException{
+	public DependencyStats() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, IOException, ParserConfigurationException, SAXException{
 		cis = new CustomCorpusInformationSpecification();
 		cis = (CustomCorpusInformationSpecification)ClassLoader.getSystemClassLoader().loadClass("derbyDatabase.DefaultCorpusInformationSpecification").newInstance();
 		corpus = new Corpus(corpusPath, cis, true);
@@ -47,6 +58,7 @@ public class DependencyStats {
 		
 		kwd = new KeywordData();
 		rels = RelationUnitMap.getRelations();
+		quantDict = new QuantityCatalog((Element) null);
 	}
 	
 	public void statsProcessor() throws SQLException, IOException{
@@ -64,6 +76,7 @@ public class DependencyStats {
 		int count =0;
 		long startms = System.currentTimeMillis();
 		long timeSpentInQueries = 0;
+		System.out.println("Initiating Processing");
 		while(di.hasNext()){
 			Annotation d = di.next();
 			if(null == d) {
@@ -74,6 +87,14 @@ public class DependencyStats {
 
 			for(CoreMap sentence : sentences){
 				//int sentGlobalID = sentence.get(SentGlobalID.class);
+				List<CoreLabel> tokens = sentence.get(CoreAnnotations.TokensAnnotation.class);
+				for(int i =0; i < tokens.size(); i++){
+					CoreLabel token = tokens.get(i);
+					int begOffset = token.get(SentenceRelativeCharacterOffsetBeginAnnotation.class);
+					int endOffset = token.get(SentenceRelativeCharacterOffsetEndAnnotation.class);
+					token.set(CoreAnnotations.TokenBeginAnnotation.class, begOffset);
+					token.set(CoreAnnotations.TokenEndAnnotation.class, endOffset);
+				}
 				processSentence(sentence);
 			}
 			count++;
@@ -82,7 +103,6 @@ public class DependencyStats {
 				System.out.println(count + " documents processed");
 				System.out.println("Time took = " + (endms-startms));
 				startms = endms;
-				System.out.println("Time spent in querying db = " + timeSpentInQueries);
 				timeSpentInQueries = 0;
 			}
 		}
@@ -105,8 +125,45 @@ public class DependencyStats {
 				continue; //not a valid candidate.
 			}
 			for(String rel: rels){
-				if(rbd.unitRelationMatch(rel, arg)){  //units match for this relation - argument pair.
-					dumpKeyword(sentence, wordsOnDependencyGraphPath, rel);
+				if(rbd.unitRelationMatch(rel, arg) && rel.equals("POP")){  //units match for this relation - argument pair.
+					
+					Double value = NERNumberRelationMatching.getDoubleVal(arg.second.getVal());
+					if(value == null){
+						break;
+					}
+					String unitStr = arg.second.getUnit();
+					
+					Unit unit = null;
+					Unit multiplier = null;
+					if(quantDict != null && unitStr != null	){
+						String unit_parts[] = unitStr.split("\\[");						// Looking for multiplier, e.g, sq km [million], [billion], etc.
+						if(unit_parts.length == 1){ 									//no multiplier
+							unit = quantDict.getUnitFromBaseName(unit_parts[0]);
+						}else{
+							unit = quantDict.getUnitFromBaseName(unit_parts[0].trim());	
+							String mult = unit_parts[1].split("\\]")[0];
+							multiplier = quantDict.getUnitFromBaseName(mult);
+						}
+					}else if(quantDict == null){
+						System.err.println("QuantDict is null");
+					}
+						
+					if(unit != null){
+						Unit SIUnit = unit.getParentQuantity().getCanonicalUnit();
+						if(SIUnit != null){
+							boolean success[] = new boolean[1];
+							value = (double) quantDict.convert(value.floatValue(), unit, SIUnit, success);
+						}
+					}
+				
+					if(multiplier != 	null && multiplier.getParentQuantity()!= null){
+						boolean success[] = new boolean[1];
+						value = (double) quantDict.convert(value.floatValue(), multiplier, multiplier.getParentQuantity().getCanonicalUnit(), success);
+					}
+					
+					if(value > 500000){
+						dumpKeyword(sentence, wordsOnDependencyGraphPath, rel);
+					}
 				}
 			}
 		}
@@ -129,7 +186,7 @@ public class DependencyStats {
         output.close();
 	}
 	
-	public static void main(String args[]) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, IOException{
+	public static void main(String args[]) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, IOException, ParserConfigurationException, SAXException{
 		DependencyStats ds = new DependencyStats();
 		ds.statsProcessor();
 	}

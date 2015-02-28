@@ -52,7 +52,7 @@ public class RuleBasedDriver {
 	private static Pattern numberPat, yearPat;
 	private HashSet<String> countryList;
 	private  boolean unitsActive;
-	private static final String countriesFileName = "/mnt/a99/d0/aman/scala/workspace/StanfordCoreNLPInterface/data/countries_list";
+	private static final String countriesFileName = "/mnt/a99/d0/ashishm/workspace/depbased/data/countries_list";
 	private  UnitExtractor ue = null;
 	int cumulativeLen; //to obtain sentence offsets
 	private final int NUM_PAIRS_MAX = 20;
@@ -454,13 +454,21 @@ public class RuleBasedDriver {
 					String sentString = sentence.toString();
 					int beginIdx = sentString.indexOf(tokenStr);
 					int endIdx = beginIdx + tokenStr.length();
-					String utString = sentString.substring(0, beginIdx) + "<b>" + tokenStr + "</b>" + sentString.substring(endIdx); 
+					String front = sentString.substring(0, beginIdx);
+					if(front.length() > 20){
+						front = front.substring(front.length()-20);
+					}
+					String back = sentString.substring(endIdx);
+					if(back.length() > 20){
+						back = back.substring(0, 20);
+					}
+					String utString = front + "<b>" + tokenStr + "</b>" + back; 
 			
 					List<? extends EntryWithScore<Unit>> unitsS = ue.parser
 							.getTopKUnitsValues(utString, "b", 1, 0, values);
 
 					// check for unit here....
-					if (unitsS != null) {
+					if (unitsS != null && unitsS.size() > 0) {
 						num.setUnit(unitsS.get(0).getKey().getBaseName());
 				
 					}

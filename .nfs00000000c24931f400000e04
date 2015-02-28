@@ -1028,3 +1028,142 @@ det(TV-53, the-51)
 nn(TV-53, Press-52)
 nsubj(reported-54, TV-53)
 root(ROOT-0, reported-54)
+Got connection from Socket[addr=/10.105.1.3,port=45821,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=45885,localport=4080]
+true
+Extracting from 1:The population of India increased by 1.3 billion
+det(population-2, The-1)
+root(ROOT-0, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+partmod(India-4, increased-5)
+prep(increased-5, by-6)
+number(billion-8, 1.3-7)
+pobj(by-6, billion-8)
+Got connection from Socket[addr=/10.105.1.3,port=46122,localport=4080]
+true
+Extracting from 1:The population of India by 1.3 billion
+det(population-2, The-1)
+root(ROOT-0, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+prep(population-2, by-5)
+number(billion-7, 1.3-6)
+pobj(by-5, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=46513,localport=4080]
+true
+Extracting from 1:The land area of the contiguous US is 2,959,064 square miles (7,663,941 km2).
+det(area-3, The-1)
+nn(area-3, land-2)
+nsubj(miles-11, area-3)
+prep(area-3, of-4)
+det(US-7, the-5)
+amod(US-7, contiguous-6)
+pobj(of-4, US-7)
+cop(miles-11, is-8)
+num(miles-11, 2,959,064-9)
+amod(miles-11, square-10)
+root(ROOT-0, miles-11)
+num(km2-14, 7,663,941-13)
+appos(miles-11, km2-14)
+Got connection from Socket[addr=/10.105.1.3,port=55896,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=45470,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=45498,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=43532,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=43542,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=43557,localport=4080]
+false
+Extracting from 0:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=43561,localport=4080]
+true
+Extracting from 1:The population of India is 1.3 billion
+det(population-2, The-1)
+nsubj(billion-7, population-2)
+prep(population-2, of-3)
+pobj(of-3, India-4)
+cop(billion-7, is-5)
+number(billion-7, 1.3-6)
+root(ROOT-0, billion-7)
+Got connection from Socket[addr=/10.105.1.3,port=44017,localport=4080]
+false
+Extracting from 0:urban population of rural india is 13 million 
+amod(population-2, urban-1)
+nsubj(million-8, population-2)
+prep(population-2, of-3)
+amod(india-5, rural-4)
+pobj(of-3, india-5)
+cop(million-8, is-6)
+number(million-8, 13-7)
+root(ROOT-0, million-8)
+Got connection from Socket[addr=/10.105.1.3,port=44032,localport=4080]
+true
+Extracting from 1:urban population of rural india is 13 million 
+amod(population-2, urban-1)
+nsubj(million-8, population-2)
+prep(population-2, of-3)
+amod(india-5, rural-4)
+pobj(of-3, india-5)
+cop(million-8, is-6)
+number(million-8, 13-7)
+root(ROOT-0, million-8)

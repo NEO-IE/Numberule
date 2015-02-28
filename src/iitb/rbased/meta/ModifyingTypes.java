@@ -15,8 +15,9 @@ import java.util.HashSet;
 public class ModifyingTypes {
 	static HashSet<String> relDepTypes;
 	static HashSet<String> keywordDepTypes;
-	final static String RelationModTypes = "/mnt/a99/d0/aman/scala/workspace/rulebasedextractor/data/modtypes";
-	final static String KeywordModTypes = "/mnt/a99/d0/aman/scala/workspace/rulebasedextractor/data/keyword_mod_types";
+
+	final static String RelationModTypes = "/mnt/a99/d0/ashishm/workspace/depbased/data/modtypes";
+	final static String KeywordModTypes = "/mnt/a99/d0/ashishm/workspace/depbased/data/keyword_mod_types";
 	static
 	{
 		relDepTypes = new HashSet<>();

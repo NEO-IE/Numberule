@@ -59,6 +59,7 @@ local.properties
 .settings/
 .loadpath
 /src/main/resources/rebel.xml
+DepKeyWords/*
 # External tool builders
 .externalToolBuilders/
  

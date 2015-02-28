@@ -1,4 +1,7 @@
-package server;
+package iitb.rbased.server;
+
+import iitb.rbased.main.RuleBasedDriver;
+import iitb.rbased.util.Relation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,9 +10,6 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-
-import main.RuleBasedDriver;
-import util.Relation;
 
 public class ExtractorServer {
 	public static void main(String[] args) throws IOException {

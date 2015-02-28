@@ -29,7 +29,6 @@ public class RuleBasedDS {
 		String input_file = "/mnt/a99/d0/aman/number_sentences_egypt.tsv";
 
 		RuleBasedDriver rbd = new RuleBasedDriver(true);
-		KeywordData kwd = new KeywordData();
 		UnitExtractor ue = new UnitExtractor();
 		Set<String> relations = RelationUnitMap.getRelations();
 
@@ -57,7 +56,7 @@ public class RuleBasedDS {
 							.getWordsOnPath(pair.first, pair.second);
 
 					if (ExtractFromPath.modifierPresent(pair,
-							wordsOnDependencyGraphPath, kwd)) {
+							wordsOnDependencyGraphPath)) {
 						continue;
 					}
 					// pair doesn't contains modifier in its shortest dependency

@@ -35,7 +35,6 @@ public class DependencyStats {
 	public CustomCorpusInformationSpecification cis;
 	public Corpus corpus = null;
 	public RuleBasedDriver rbd = null;
-	public KeywordData kwd = null;
 	public Set<String> rels = null;
 	
 	public DependencyStats() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, IOException{
@@ -46,7 +45,7 @@ public class DependencyStats {
 		
 		rbd = new RuleBasedDriver(true); //no need for units.
 		
-		kwd = new KeywordData();
+
 		rels = RelationUnitMap.getRelations();
 	}
 	
@@ -102,7 +101,7 @@ public class DependencyStats {
 		
 		for(Pair<Country,Number> arg: args){
 			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(arg.first, arg.second);
-			if(ExtractFromPath.modifierPresent(arg, wordsOnDependencyGraphPath, kwd)){
+			if(ExtractFromPath.modifierPresent(arg, wordsOnDependencyGraphPath)){
 				continue; //not a valid candidate.
 			}
 			for(String rel: rels){

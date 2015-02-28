@@ -131,7 +131,7 @@ public class ExtractFromPath {
 	 * @return
 	 */
 	public static boolean isModified(Graph depGraph, Pair<Country, Number> argPair,
-			ArrayList<Word> path, KeywordData kwd) {
+			ArrayList<Word> path) {
 		Integer numNode = depGraph.getIdx(argPair.second.getVal());
 		String prevLabel = depGraph.getLabel(numNode - 1);
 		String prev_prevLabel = depGraph.getLabel(numNode - 2);

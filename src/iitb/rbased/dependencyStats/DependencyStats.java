@@ -2,8 +2,7 @@ package iitb.rbased.dependencyStats;
 
 import iitb.rbased.main.ExtractFromPath;
 import iitb.rbased.main.RuleBasedDriver;
-import iitb.rbased.meta.KeywordData;
-import iitb.rbased.meta.RelationUnitMap;
+import iitb.rbased.meta.RelationMetadata;
 import iitb.rbased.util.Country;
 import iitb.rbased.util.Pair;
 import iitb.rbased.util.Number;
@@ -27,15 +26,6 @@ import org.xml.sax.SAXException;
 
 import catalog.QuantityCatalog;
 import catalog.Unit;
-import util.Country;
-import util.Number;
-import util.Pair;
-import util.Word;
-import util.graph.Graph;
-import main.ExtractFromPath;
-import main.RuleBasedDriver;
-import meta.KeywordData;
-import meta.RelationUnitMap;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;	
@@ -58,15 +48,17 @@ public class DependencyStats {
 	public QuantityCatalog quantDict;
 	
 	public DependencyStats() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, IOException, ParserConfigurationException, SAXException{
+		String cisString = "edu.washington.multirframework.corpus.DefaultCorpusInformationSpecification";
+		
 		cis = new CustomCorpusInformationSpecification();
-		cis = (CustomCorpusInformationSpecification)ClassLoader.getSystemClassLoader().loadClass("derbyDatabase.DefaultCorpusInformationSpecification").newInstance();
+		cis = (CustomCorpusInformationSpecification)ClassLoader.getSystemClassLoader().loadClass(cisString).newInstance();
 		corpus = new Corpus(corpusPath, cis, true);
 		corpus.setCorpusToTrain("emptyFile");
 		
 		rbd = new RuleBasedDriver(true); //no need for units.
 		
 
-		rels = RelationUnitMap.getRelations();
+		rels = RelationMetadata.getRelations();
 		quantDict = new QuantityCatalog((Element) null);
 	}
 	
@@ -84,7 +76,6 @@ public class DependencyStats {
 		}
 		int count =0;
 		long startms = System.currentTimeMillis();
-		long timeSpentInQueries = 0;
 		System.out.println("Initiating Processing");
 		while(di.hasNext()){
 			Annotation d = di.next();
@@ -104,7 +95,12 @@ public class DependencyStats {
 					token.set(CoreAnnotations.TokenBeginAnnotation.class, begOffset);
 					token.set(CoreAnnotations.TokenEndAnnotation.class, endOffset);
 				}
-				processSentence(sentence);
+				try{
+					processSentence(sentence);
+				}catch(Exception e){
+					System.out.println(sentence);
+					e.printStackTrace();
+				}
 			}
 			count++;
 			if( count % 1000 == 0){
@@ -112,7 +108,6 @@ public class DependencyStats {
 				System.out.println(count + " documents processed");
 				System.out.println("Time took = " + (endms-startms));
 				startms = endms;
-				timeSpentInQueries = 0;
 			}
 		}
     	long end = System.currentTimeMillis();
@@ -171,7 +166,16 @@ public class DependencyStats {
 					}
 					
 					if(value > 500000){
-						dumpKeyword(sentence, wordsOnDependencyGraphPath, rel);
+						File file = new File(rel);
+						BufferedWriter output = null;
+						if(file.exists()){
+							output = new BufferedWriter(new FileWriter(file, true));
+						}else{
+							output = new BufferedWriter(new FileWriter(file));
+						}
+						output.append(sentence+"\t"+arg.first+"\t"+arg.second+"\t"+unitStr+"\n");
+						output.close();
+						//dumpKeyword(sentence, wordsOnDependencyGraphPath, rel);
 					}
 				}
 			}

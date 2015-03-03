@@ -3,7 +3,7 @@ package iitb.rbased.distant_supervision;
 import iitb.rbased.main.ExtractFromPath;
 import iitb.rbased.main.RuleBasedDriver;
 import iitb.rbased.meta.KeywordData;
-import iitb.rbased.meta.RelationUnitMap;
+import iitb.rbased.meta.RelationMetadata;
 import iitb.rbased.util.Country;
 import iitb.rbased.util.Number;
 import iitb.rbased.util.Pair;
@@ -30,7 +30,7 @@ public class RuleBasedDS {
 
 		RuleBasedDriver rbd = new RuleBasedDriver(true);
 		UnitExtractor ue = new UnitExtractor();
-		Set<String> relations = RelationUnitMap.getRelations();
+		Set<String> relations = RelationMetadata.getRelations();
 
 		BufferedReader br = new BufferedReader(new FileReader(input_file));
 
@@ -69,17 +69,17 @@ public class RuleBasedDS {
 							Unit SIUnit = unit.getParentQuantity()
 									.getCanonicalUnit();
 							if (SIUnit != null
-									&& !RelationUnitMap.getUnit(rel).equals(
+									&& !RelationMetadata.getUnit(rel).equals(
 											SIUnit.getBaseName())
 									|| SIUnit == null
-									&& !RelationUnitMap.getUnit(rel).equals(
+									&& !RelationMetadata.getUnit(rel).equals(
 											unit.getBaseName())) {
 								continue; // Incorrect unit, this cannot be the
 											// relation.
 							}
 						} else if (unit == null
 								&& !pair.second.getUnit().equals("")
-								&& RelationUnitMap.getUnit(rel).equals(
+								&& RelationMetadata.getUnit(rel).equals(
 										pair.second.getUnit())) { // for the
 																	// cases
 																	// where
@@ -88,7 +88,7 @@ public class RuleBasedDS {
 																	// units.
 							// do nothing, seems legit
 						} else {
-							if (!RelationUnitMap.getUnit(rel).equals("")) {
+							if (!RelationMetadata.getUnit(rel).equals("")) {
 								continue; // this cannot be the correct
 											// relation.
 							}

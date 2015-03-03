@@ -1,7 +1,7 @@
 package iitb.rbased.main;
 
 import iitb.rbased.meta.KeywordData;
-import iitb.rbased.meta.RelationUnitMap;
+import iitb.rbased.meta.RelationMetadata;
 import iitb.rbased.util.Country;
 import iitb.rbased.util.Number;
 import iitb.rbased.util.Pair;
@@ -340,13 +340,13 @@ public class RuleBasedDriver {
 		Unit unit = ue.quantDict.getUnitFromBaseName(arg.second.getUnit());
 		if (unit != null && !unit.getBaseName().equals("")) {
 			Unit SIUnit = unit.getParentQuantity().getCanonicalUnit();
-			if (SIUnit != null && !RelationUnitMap.getUnit(rel).equals(SIUnit.getBaseName()) || SIUnit == null
-					&& !RelationUnitMap.getUnit(rel).equals(unit.getBaseName())) {
+			if (SIUnit != null && !RelationMetadata.getUnit(rel).equals(SIUnit.getBaseName()) || SIUnit == null
+					&& !RelationMetadata.getUnit(rel).equals(unit.getBaseName())) {
 				return false; // Incorrect unit, this cannot be the
 								// relation.
 			}
 		} else if (unit == null && !arg.second.getUnit().equals("")
-				&& RelationUnitMap.getUnit(rel).equals(arg.second.getUnit())) { // for
+				&& RelationMetadata.getUnit(rel).equals(arg.second.getUnit())) { // for
 																				// the
 																				// cases
 																				// where
@@ -356,7 +356,7 @@ public class RuleBasedDriver {
 																				// units.
 			return true;
 		} else {
-			if (!RelationUnitMap.getUnit(rel).equals("")) {
+			if (!RelationMetadata.getUnit(rel).equals("")) {
 				return false; // this cannot be the correct relation.
 			}
 		}

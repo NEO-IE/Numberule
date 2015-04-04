@@ -542,16 +542,17 @@ public class RuleBasedDriver {
 					if (unitsS != null && unitsS.size() > 0) {
 						
 						//setting the unit
-						num.setUnit(unitsS.get(0).getKey().getBaseName());
+						String curUnit = unitsS.get(0).getKey().getBaseName(); 
+						num.setUnit(curUnit);
 						
 						//STORE FLATTENED VALUE;
 						
 						QuantityCatalog qu = ue.quantDict;
 						
-						String unit_parts[] = unitsS.toString().split("\\[");						// Looking for multiplier, e.g, sq km [million], [billion], etc.
+						String unit_parts[] = curUnit.split("\\[");	// Looking for multiplier, e.g, sq km [million], [billion], etc.
 						Unit b_unit;
 						Unit multiplier = null;
-						if(unit_parts.length == 1){ 									//no multiplier
+						if(unit_parts.length == 1){ 							//no multiplier
 							b_unit = qu.getUnitFromBaseName(unit_parts[0]);
 						}else{
 							b_unit = qu.getUnitFromBaseName(unit_parts[0].trim());

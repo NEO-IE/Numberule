@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 
+import catalog.QuantityCatalog;
 import catalog.Unit;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
@@ -335,7 +336,7 @@ public class RuleBasedDriver {
 	public boolean isYear(String token) {
 		return yearPat.matcher(token).matches();
 	}
-
+	
 	public boolean unitRelationMatch(String rel, Pair<Country, Number> arg) {
 		Unit unit = ue.quantDict.getUnitFromBaseName(arg.second.getUnit());
 		if (unit != null && !unit.getBaseName().equals("")) {
@@ -513,6 +514,9 @@ public class RuleBasedDriver {
 			}
 
 			if (isNumber(tokenStr) && !isYear(tokenStr)) {
+				
+				Float num_val = Number.getDoubleValue(tokenStr).floatValue();
+				
 				Number num = new Number(currWord.getIdx(), currWord.getVal(), currWord.getStartOff(),
 						currWord.getEndOff());
 				if (unitsActive) {
@@ -536,8 +540,41 @@ public class RuleBasedDriver {
 
 					// check for unit here....
 					if (unitsS != null && unitsS.size() > 0) {
+						
+						//setting the unit
 						num.setUnit(unitsS.get(0).getKey().getBaseName());
-
+						
+						//STORE FLATTENED VALUE;
+						
+						QuantityCatalog qu = ue.quantDict;
+						
+						String unit_parts[] = unitsS.toString().split("\\[");						// Looking for multiplier, e.g, sq km [million], [billion], etc.
+						Unit b_unit;
+						Unit multiplier = null;
+						if(unit_parts.length == 1){ 									//no multiplier
+							b_unit = qu.getUnitFromBaseName(unit_parts[0]);
+						}else{
+							b_unit = qu.getUnitFromBaseName(unit_parts[0].trim());
+							String mult = unit_parts[1].split("\\]")[0];
+							multiplier = qu.getUnitFromBaseName(mult);
+						} 
+						
+						//flat the value and store it in num_val
+						if(b_unit != null){
+							Unit SIUnit = b_unit.getParentQuantity().getCanonicalUnit();
+							if(SIUnit != null){
+								boolean success[] = new boolean[1];
+								num_val =  qu.convert(num_val, b_unit, 
+										SIUnit, success);
+							}
+						}
+					
+						if(multiplier != null && multiplier.getParentQuantity()!= null){
+							boolean success[] = new boolean[1];
+							num_val = qu.convert(num_val.floatValue(), multiplier, 
+									multiplier.getParentQuantity().getCanonicalUnit(), success);
+						}
+						num.setFlatVal(num_val);
 					}
 				}
 				numbers.add(num);

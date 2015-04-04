@@ -514,8 +514,8 @@ public class RuleBasedDriver {
 			}
 
 			if (isNumber(tokenStr) && !isYear(tokenStr)) {
-				
-				Float num_val = Float.valueOf(Unit.parseDecimalExpressionL(tokenStr));
+			
+				Float num_val = Number.getDoubleValue(Unit.parseDecimalExpressionL(tokenStr)).floatValue();
 				
 				Number num = new Number(currWord.getIdx(), currWord.getVal(), currWord.getStartOff(),
 						currWord.getEndOff());

@@ -1,13 +1,8 @@
 package iitb.rbased.dependencyStats;
 
-import iitb.rbased.main.ExtractFromPath;
 import iitb.rbased.main.RuleBasedDriver;
 import iitb.rbased.meta.RelationMetadata;
-import iitb.rbased.util.Country;
-import iitb.rbased.util.Pair;
-import iitb.rbased.util.Number;
 import iitb.rbased.util.Word;
-import iitb.rbased.util.graph.Graph;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,16 +20,12 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import catalog.QuantityCatalog;
-import catalog.Unit;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.pipeline.Annotation;	
+import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.util.CoreMap;
-import edu.stanford.nlp.util.Triple;
-import edu.washington.multirframework.argumentidentification.NERNumberRelationMatching;
 import edu.washington.multirframework.corpus.Corpus;
 import edu.washington.multirframework.corpus.CustomCorpusInformationSpecification;
-import edu.washington.multirframework.corpus.SentDependencyInformation;
 import edu.washington.multirframework.corpus.TokenOffsetInformation.SentenceRelativeCharacterOffsetBeginAnnotation;
 import edu.washington.multirframework.corpus.TokenOffsetInformation.SentenceRelativeCharacterOffsetEndAnnotation;
 
@@ -116,70 +107,70 @@ public class DependencyStats {
 		
 	public void processSentence(CoreMap sentence) throws IOException{
 		
-		List<Triple<Integer, String, Integer>> deps = sentence.get(SentDependencyInformation.DependencyAnnotation.class);
-		Graph depGraph = rbd.getDepGraph(deps, sentence);
-		ArrayList<Pair<Country, Number>> args = rbd.getPairs(depGraph,sentence);
-		if(args == null || args.size() == 0){
-			return ;
-		}
-		
-		for(Pair<Country,Number> arg: args){
-			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(arg.first, arg.second);
-			if(ExtractFromPath.modifierPresent(arg, wordsOnDependencyGraphPath)){
-				continue; //not a valid candidate.
-			}
-			for(String rel: rels){
-				if(rbd.unitRelationMatch(rel, arg) && rel.equals("POP")){  //units match for this relation - argument pair.
-					
-					Double value = NERNumberRelationMatching.getDoubleVal(arg.second.getVal());
-					if(value == null){
-						break;
-					}
-					String unitStr = arg.second.getUnit();
-					
-					Unit unit = null;
-					Unit multiplier = null;
-					if(quantDict != null && unitStr != null	){
-						String unit_parts[] = unitStr.split("\\[");						// Looking for multiplier, e.g, sq km [million], [billion], etc.
-						if(unit_parts.length == 1){ 									//no multiplier
-							unit = quantDict.getUnitFromBaseName(unit_parts[0]);
-						}else{
-							unit = quantDict.getUnitFromBaseName(unit_parts[0].trim());	
-							String mult = unit_parts[1].split("\\]")[0];
-							multiplier = quantDict.getUnitFromBaseName(mult);
-						}
-					}else if(quantDict == null){
-						System.err.println("QuantDict is null");
-					}
-						
-					if(unit != null){
-						Unit SIUnit = unit.getParentQuantity().getCanonicalUnit();
-						if(SIUnit != null){
-							boolean success[] = new boolean[1];
-							value = (double) quantDict.convert(value.floatValue(), unit, SIUnit, success);
-						}
-					}
-				
-					if(multiplier != 	null && multiplier.getParentQuantity()!= null){
-						boolean success[] = new boolean[1];
-						value = (double) quantDict.convert(value.floatValue(), multiplier, multiplier.getParentQuantity().getCanonicalUnit(), success);
-					}
-					
-					if(value > 500000){
-						File file = new File(rel);
-						BufferedWriter output = null;
-						if(file.exists()){
-							output = new BufferedWriter(new FileWriter(file, true));
-						}else{
-							output = new BufferedWriter(new FileWriter(file));
-						}
-						output.append(sentence+"\t"+arg.first+"\t"+arg.second+"\t"+unitStr+"\n");
-						output.close();
-						//dumpKeyword(sentence, wordsOnDependencyGraphPath, rel);
-					}
-				}
-			}
-		}
+//		List<Triple<Integer, String, Integer>> deps = sentence.get(SentDependencyInformation.DependencyAnnotation.class);
+//		Graph depGraph = rbd.getDepGraph(deps, sentence);
+//		ArrayList<Pair<Country, Number>> args = rbd.getPairs(depGraph,sentence);
+//		if(args == null || args.size() == 0){
+//			return ;
+//		}
+//		
+//		for(Pair<Country,Number> arg: args){
+//			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(arg.first, arg.second);
+//			if(ExtractFromPath.modifierPresent(arg, wordsOnDependencyGraphPath)){
+//				continue; //not a valid candidate.
+//			}
+//			for(String rel: rels){
+//				if(rbd.unitRelationMatch(rel, arg) && rel.equals("POP")){  //units match for this relation - argument pair.
+//					
+////					Double value = NERNumberRelationMatching.getDoubleVal(arg.second.getVal());
+////					if(value == null){
+//						break;
+//					}
+//					String unitStr = arg.second.getUnit();
+//					
+//					Unit unit = null;
+//					Unit multiplier = null;
+//					if(quantDict != null && unitStr != null	){
+//						String unit_parts[] = unitStr.split("\\[");						// Looking for multiplier, e.g, sq km [million], [billion], etc.
+//						if(unit_parts.length == 1){ 									//no multiplier
+//							unit = quantDict.getUnitFromBaseName(unit_parts[0]);
+//						}else{
+//							unit = quantDict.getUnitFromBaseName(unit_parts[0].trim());	
+//							String mult = unit_parts[1].split("\\]")[0];
+//							multiplier = quantDict.getUnitFromBaseName(mult);
+//						}
+//					}else if(quantDict == null){
+//						System.err.println("QuantDict is null");
+//					}
+//						
+//					if(unit != null){
+//						Unit SIUnit = unit.getParentQuantity().getCanonicalUnit();
+//						if(SIUnit != null){
+//							boolean success[] = new boolean[1];
+//							value = (double) quantDict.convert(value.floatValue(), unit, SIUnit, success);
+//						}
+//					}
+//				
+//					if(multiplier != 	null && multiplier.getParentQuantity()!= null){
+//						boolean success[] = new boolean[1];
+//						value = (double) quantDict.convert(value.floatValue(), multiplier, multiplier.getParentQuantity().getCanonicalUnit(), success);
+//					}
+//					
+//					if(value > 500000){
+//						File file = new File(rel);
+//						BufferedWriter output = null;
+//						if(file.exists()){
+//							output = new BufferedWriter(new FileWriter(file, true));
+//						}else{
+//							output = new BufferedWriter(new FileWriter(file));
+//						}
+//						output.append(sentence+"\t"+arg.first+"\t"+arg.second+"\t"+unitStr+"\n");
+//						output.close();
+//						//dumpKeyword(sentence, wordsOnDependencyGraphPath, rel);
+//					}
+//				}
+//			}
+//		}
 	}
 	
 	public void dumpKeyword(CoreMap sentence,ArrayList<Word> wordsOnDependencyGraphPath, String rel) throws IOException{

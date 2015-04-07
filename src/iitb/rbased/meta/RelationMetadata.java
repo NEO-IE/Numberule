@@ -10,21 +10,28 @@ public class RelationMetadata {
 	static {
 			unitMap = new HashMap<String, String>();
 			unitMap.put("AGL", "square metre");
+			
 			unitMap.put("FDI", "united states dollar");
 			unitMap.put("GOODS", "united states dollar");
+			unitMap.put("GDP", "united states dollar");
+			
 			unitMap.put("ELEC", "joule");
+			
 			unitMap.put("CO2", "kilogram");
+			
 			unitMap.put("DIESEL", "united states dollar per litre");
+			
 			unitMap.put("INF", "percent");
 			unitMap.put("INTERNET", "percent");
-			unitMap.put("GDP", "united states dollar");
+			
 			unitMap.put("LIFE", "second");
+			
 			unitMap.put("POP", "");
 			
 			relMap = new HashMap<String, String>();
 			relMap.put("AG.LND.TOTL.K2", "AGL");
 			relMap.put("BN.KLT.DINV.CD", "FDI");
-			relMap.put("BX.GSR	.MRCH.CD", "GOODS");
+			relMap.put("BX.GSR.MRCH.CD", "GOODS");
 			relMap.put("EG.ELC.PROD.KH", "ELEC");
 			relMap.put("EN.ATM.CO2E.KT", "CO2");
 			relMap.put("EP.PMP.DESL.CD", "DIESEL");

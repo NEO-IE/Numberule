@@ -59,7 +59,7 @@ public class RuleBasedDriver {
 	private  UnitExtractor ue = null;
 	int cumulativeLen; //to obtain sentence offsets
 
-	private final int NUM_PAIRS_MAX = 20;
+	
 
 	public RuleBasedDriver(boolean unitsActive) {
 		this.unitsActive = unitsActive;
@@ -125,7 +125,7 @@ public class RuleBasedDriver {
 		int numTokens = tokens.size();
 		Word wordArr[] = new Word[numTokens + 1];
 		wordArr[0] = new Word(0, "ROOT", 0, 0);
-		int offSet = 0;
+
 		for (int i = 1; i <= numTokens; i++) {
 
 			CoreLabel token = tokens.get(i - 1);
@@ -134,7 +134,7 @@ public class RuleBasedDriver {
 			int begOffset = token.get(CoreAnnotations.TokenBeginAnnotation.class);
 			int endOffset = token.get(CoreAnnotations.TokenEndAnnotation.class);
 			wordArr[i] = new Word(i, tokenStr, begOffset, endOffset);
-			offSet += (tokenStr.length() + 1);
+			
 		}
 
 		ArrayList<Pair<String, Pair<Word, Word>>> pairList = new ArrayList<Pair<String, Pair<Word, Word>>>();

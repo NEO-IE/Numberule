@@ -13,7 +13,7 @@ public class KeywordData {
 	public static String keyWordFile = "/mnt/a99/d0/aman/scala/workspace/rulebasedextractor/data/keywords.json";
 	public static final String modifiers[] = new String[] { "change", "up", "down", "males", "females", "male",
 			"female", "growth", "increase", "decrease", "decreased", "increased", "changed", "grown", "grew", "surge",
-			"surged", "rose" };
+			"surged", "rose", "risen" };
 	public static ArrayList<String> relName;
 	public static ArrayList<ArrayList<String>> KEYWORDS;
 

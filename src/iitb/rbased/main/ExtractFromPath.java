@@ -8,7 +8,6 @@ import iitb.rbased.util.Relation;
 import iitb.rbased.util.Word;
 import iitb.rbased.util.graph.Graph;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 

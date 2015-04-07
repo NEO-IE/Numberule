@@ -61,6 +61,7 @@ public class Number extends Word {
 			break;
 		}
 		if(null == number){
+			System.out.println(num);
 			return null;
 		}
 		Double numVal = number.doubleValue();

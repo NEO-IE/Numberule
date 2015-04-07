@@ -2,7 +2,6 @@ package iitb.rbased.distant_supervision;
 
 import iitb.rbased.main.ExtractFromPath;
 import iitb.rbased.main.RuleBasedDriver;
-import iitb.rbased.meta.KeywordData;
 import iitb.rbased.meta.RelationMetadata;
 import iitb.rbased.util.Country;
 import iitb.rbased.util.Number;
@@ -95,7 +94,7 @@ public class RuleBasedDS {
 						}
 
 						// THIS PAIR CAN EXPRESS RELATION REL
-						Pair LRPair = new Pair(pair.first, rel);
+						Pair<Country, String> LRPair = new Pair<Country, String>(pair.first, rel);
 						if (LRtoGraphMap.containsKey(LRPair)) {
 							NumberSentenceMap erd = LRtoGraphMap.get(LRPair);
 							if (erd.doc.containsKey(pair.second)) {

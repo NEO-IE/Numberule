@@ -3,6 +3,7 @@ package iitb.rbased.meta;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
@@ -16,11 +17,12 @@ public class KeywordData {
 			"surged", "rose", "risen" };
 	public static ArrayList<String> relName;
 	public static ArrayList<ArrayList<String>> KEYWORDS;
-
+	public static HashSet<String> KEYWORD_SET;
 	public static Integer NUM_RELATIONS;
 
 	static {
 		String keywordJson = null;
+		KEYWORD_SET = new HashSet<String>();
 		try {
 			keywordJson = FileUtils.readFileToString(new File(keyWordFile));
 		} catch (IOException e1) {
@@ -42,6 +44,9 @@ public class KeywordData {
 			for (String rel : relName) {
 				ArrayList<String> value = (ArrayList<String>) arr.get(rel);
 				KEYWORDS.add(value);
+				for(String kw: value) {
+					KEYWORD_SET.add(kw);
+				}
 			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

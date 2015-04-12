@@ -54,12 +54,10 @@ public class RuleBasedDriver {
 	private static Pattern numberPat, yearPat;
 	private HashSet<String> countryList;
 
-	private  boolean unitsActive;
+	private boolean unitsActive;
 	private static final String countriesFileName = "/mnt/a99/d0/ashishm/workspace/depbased/data/countries_list";
-	private  UnitExtractor ue = null;
-	int cumulativeLen; //to obtain sentence offsets
-
-	
+	private UnitExtractor ue = null;
+	int cumulativeLen; // to obtain sentence offsets
 
 	public RuleBasedDriver(boolean unitsActive) {
 		this.unitsActive = unitsActive;
@@ -111,13 +109,12 @@ public class RuleBasedDriver {
 	 */
 	public static void main(String args[]) throws Exception {
 		RuleBasedDriver rbased = new RuleBasedDriver(true);
-		// String fileString = FileUtils.readFileToString(new
-		// File("entire_sentence_set"));
-		// String outFile = "entire_sentence_output";
-		// rbased.batchExtract(fileString, outFile);
-		System.out.println("here");
-		String fileString = FileUtils.readFileToString(new File("debug"));
-		System.out.println(rbased.extract(fileString));
+		String fileString = FileUtils.readFileToString(new File("/mnt/a99/d0/aman/numbertrontestset.tsv"));
+		String outFile = "numbertronres1.tsv";
+		rbased.batchExtract(fileString, outFile);
+		// System.out.println("here");
+		// String fileString = FileUtils.readFileToString(new File("debug"));
+		// System.out.println(rbased.extract(fileString));
 	}
 
 	public Graph getDepGraph(List<Triple<Integer, String, Integer>> deps, CoreMap sentence) {
@@ -134,7 +131,7 @@ public class RuleBasedDriver {
 			int begOffset = token.get(CoreAnnotations.TokenBeginAnnotation.class);
 			int endOffset = token.get(CoreAnnotations.TokenEndAnnotation.class);
 			wordArr[i] = new Word(i, tokenStr, begOffset, endOffset);
-			
+
 		}
 
 		ArrayList<Pair<String, Pair<Word, Word>>> pairList = new ArrayList<Pair<String, Pair<Word, Word>>>();
@@ -207,11 +204,12 @@ public class RuleBasedDriver {
 		for (Pair<Country, Number> pair : pairs) {
 			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(pair.first, pair.second);
 			boolean modified = ExtractFromPath.isModified(depGraph, pair, wordsOnDependencyGraphPath);
-			if(modified) {
+			if (modified) {
 				continue;
 			}
 			/**
-			 * every relation for which the units are compatible is a possibility, add them all
+			 * every relation for which the units are compatible is a
+			 * possibility, add them all
 			 */
 			for (int i = 0; i < KeywordData.NUM_RELATIONS; i++) {
 				if (unitRelationMatch(KeywordData.relName.get(i), pair)) {
@@ -295,6 +293,7 @@ public class RuleBasedDriver {
 		pipeline.annotate(doc);
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
 		int i = 1;
+		int totalExtractions = 0;
 		PrintWriter pw = new PrintWriter(new FileWriter(outFile));
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
@@ -325,18 +324,23 @@ public class RuleBasedDriver {
 			// Step 4 : Extract the relations that exists in these pairs
 
 			ArrayList<Relation> res = getExtractions(depGraph, pairs, true);
+			totalExtractions += res.size();
 			System.out.println("Extractions == > " + res);
-			pw.write(res + "\n");
+			for(Relation r: res) {
+				pw.write(r + "\n");
+			}
+			
 			pw.write("---\n");
 			// /*/System.out.println(getExtractions(depGraph, pairs) + "\n");
 		}
 		pw.close();
+		System.out.println("Total extractions : " + totalExtractions);
 	}
 
 	public boolean isYear(String token) {
 		return yearPat.matcher(token).matches();
 	}
-	
+
 	public boolean unitRelationMatch(String rel, Pair<Country, Number> arg) {
 		Unit unit = ue.quantDict.getUnitFromBaseName(arg.second.getUnit());
 		if (unit != null && !unit.getBaseName().equals("")) {
@@ -348,13 +352,13 @@ public class RuleBasedDriver {
 			}
 		} else if (unit == null && !arg.second.getUnit().equals("")
 				&& RelationMetadata.getUnit(rel).equals(arg.second.getUnit())) { // for
-																				// the
-																				// cases
-																				// where
-																				// units
-																				// are
-																				// compound
-																				// units.
+																					// the
+																					// cases
+																					// where
+																					// units
+																					// are
+																					// compound
+																					// units.
 			return true;
 		} else {
 			if (!RelationMetadata.getUnit(rel).equals("")) {
@@ -514,9 +518,9 @@ public class RuleBasedDriver {
 			}
 
 			if (isNumber(tokenStr) && !isYear(tokenStr)) {
-			
+
 				Float num_val = Number.getDoubleValue(Unit.parseDecimalExpressionL(tokenStr)).floatValue();
-				
+
 				Number num = new Number(currWord.getIdx(), currWord.getVal(), currWord.getStartOff(),
 						currWord.getEndOff());
 				if (unitsActive) {
@@ -525,55 +529,60 @@ public class RuleBasedDriver {
 					int endIdx = beginIdx + tokenStr.length();
 
 					String front = sentString.substring(0, beginIdx);
-					if(front.length() > 20){
-						front = front.substring(front.length()-20);
+					if (front.length() > 20) {
+						front = front.substring(front.length() - 20);
 					}
 					String back = sentString.substring(endIdx);
-					if(back.length() > 20){
+					if (back.length() > 20) {
 						back = back.substring(0, 20);
 					}
-					String utString = front + "<b>" + tokenStr + "</b>" + back; 
-			
-					List<? extends EntryWithScore<Unit>> unitsS = ue.parser
-							.getTopKUnitsValues(utString, "b", 1, 0, values);
+					String utString = front + "<b>" + tokenStr + "</b>" + back;
 
+					List<? extends EntryWithScore<Unit>> unitsS = ue.parser.getTopKUnitsValues(utString, "b", 1, 0,
+							values);
 
 					// check for unit here....
 					if (unitsS != null && unitsS.size() > 0) {
-						
-						//setting the unit
-						String curUnit = unitsS.get(0).getKey().getBaseName(); 
+
+						// setting the unit
+						String curUnit = unitsS.get(0).getKey().getBaseName();
 						num.setUnit(curUnit);
-						
-						//STORE FLATTENED VALUE;
-						
+
+						// STORE FLATTENED VALUE;
+
 						QuantityCatalog qu = ue.quantDict;
-						
-						String unit_parts[] = curUnit.split("\\[");	// Looking for multiplier, e.g, sq km [million], [billion], etc.
+
+						String unit_parts[] = curUnit.split("\\["); // Looking
+																	// for
+																	// multiplier,
+																	// e.g, sq
+																	// km
+																	// [million],
+																	// [billion],
+																	// etc.
 						Unit b_unit;
 						Unit multiplier = null;
-						if(unit_parts.length == 1){ 							//no multiplier
+						if (unit_parts.length == 1) { // no multiplier
 							b_unit = qu.getUnitFromBaseName(unit_parts[0]);
-						}else{
+						} else {
 							b_unit = qu.getUnitFromBaseName(unit_parts[0].trim());
 							String mult = unit_parts[1].split("\\]")[0];
 							multiplier = qu.getUnitFromBaseName(mult);
-						} 
-						
-						//flat the value and store it in num_val
-						if(b_unit != null){
+						}
+
+						// flat the value and store it in num_val
+						if (b_unit != null) {
 							Unit SIUnit = b_unit.getParentQuantity().getCanonicalUnit();
-							if(SIUnit != null){
+							if (SIUnit != null) {
 								boolean success[] = new boolean[1];
-								num_val =  qu.convert(num_val, b_unit, 
-										SIUnit, success);
+								num_val = qu.convert(num_val, b_unit, SIUnit, success);
 							}
 						}
-					
-						if(multiplier != null && multiplier.getParentQuantity()!= null){
+
+						if (multiplier != null && multiplier.getParentQuantity() != null) {
 							boolean success[] = new boolean[1];
-							num_val = qu.convert(num_val.floatValue(), multiplier, 
-									multiplier.getParentQuantity().getCanonicalUnit(), success);
+							num_val = qu.convert(num_val.floatValue(), multiplier, multiplier.getParentQuantity()
+									.getCanonicalUnit(), success);
 						}
 						num.setFlatVal(num_val);
 					}

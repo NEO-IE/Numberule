@@ -523,6 +523,7 @@ public class RuleBasedDriver {
 
 				Number num = new Number(currWord.getIdx(), currWord.getVal(), currWord.getStartOff(),
 						currWord.getEndOff());
+				num.setFlatVal(num_val);
 				if (unitsActive) {
 					String sentString = sentence.toString();
 					int beginIdx = sentString.indexOf(tokenStr);

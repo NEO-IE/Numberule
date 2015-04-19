@@ -19,7 +19,7 @@ public class RelationMetadata {
 			
 			unitMap.put("CO2", "kilogram");
 			
-			unitMap.put("DIESEL", "united states dollar per litre");
+			//unitMap.put("DIESEL", "united states dollar per litre");
 			
 			unitMap.put("INF", "percent");
 			unitMap.put("INTERNET", "percent");
@@ -34,7 +34,7 @@ public class RelationMetadata {
 			relMap.put("BX.GSR.MRCH.CD", "GOODS");
 			relMap.put("EG.ELC.PROD.KH", "ELEC");
 			relMap.put("EN.ATM.CO2E.KT", "CO2");
-			relMap.put("EP.PMP.DESL.CD", "DIESEL");
+			//relMap.put("EP.PMP.DESL.CD", "DIESEL");
 			relMap.put("FP.CPI.TOTL.ZG", "INF");
 			relMap.put("IT.NET.USER.P2", "INTERNET");
 			relMap.put("NY.GDP.MKTP.CD", "GDP");

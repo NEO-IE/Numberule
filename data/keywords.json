@@ -8,6 +8,5 @@
 "INF" : ["Inflation", "Price", "Rise", "rate"], 
 "INTERNET" : ["Internet", "users", "usage", "penetration", "use", "user"], 
 "GDP" : ["Gross",  "domestic", "GDP", "gdp", "product"], 
-"LIFE" : ["life", "expectancy", "deaths", "rose"],  
-"DIESEL" : ["diesel", "price", "priced", "fuel", "prices"]
+"LIFE" : ["life", "expectancy", "deaths", "rose"]
 }

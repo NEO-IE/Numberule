@@ -3,7 +3,9 @@ package iitb.rbased.meta;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
@@ -19,10 +21,12 @@ public class KeywordData {
 	public static ArrayList<ArrayList<String>> KEYWORDS;
 	public static HashSet<String> KEYWORD_SET;
 	public static Integer NUM_RELATIONS;
-
+	public static HashMap<String, List<String>> REL_KEYWORD_MAP;
+	
 	static {
 		String keywordJson = null;
 		KEYWORD_SET = new HashSet<String>();
+		REL_KEYWORD_MAP = new HashMap<>();
 		try {
 			keywordJson = FileUtils.readFileToString(new File(keyWordFile));
 		} catch (IOException e1) {
@@ -43,6 +47,7 @@ public class KeywordData {
 
 			for (String rel : relName) {
 				ArrayList<String> value = (ArrayList<String>) arr.get(rel);
+				REL_KEYWORD_MAP.put(rel, value);
 				KEYWORDS.add(value);
 				for(String kw: value) {
 					KEYWORD_SET.add(kw);

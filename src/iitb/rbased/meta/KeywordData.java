@@ -13,7 +13,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class KeywordData {
-	public static String keyWordFile = "/mnt/a99/d0/aman/scala/workspace/rulebasedextractor/data/keywords.json";
+	public static String keyWordFile = "/mnt/a99/d0/aman/scala/workspace/rulebasedextractor/data/keywords_small.json";
 	public static final String modifiers[] = new String[] { "change", "up", "down", "males", "females", "male",
 			"female", "growth", "increase", "decrease", "decreased", "increased", "changed", "grown", "grew", "surge",
 			"surged", "rose", "risen" };

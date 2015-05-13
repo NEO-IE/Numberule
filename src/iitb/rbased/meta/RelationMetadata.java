@@ -1,3 +1,5 @@
+
+
 package iitb.rbased.meta;
 
 
@@ -10,23 +12,31 @@ public class RelationMetadata {
 	static {
 			unitMap = new HashMap<String, String>();
 			unitMap.put("AGL", "square metre");
+			//unitMap.put("N_AGL", "square metre");
+			
 			
 			unitMap.put("FDI", "united states dollar");
 			unitMap.put("GOODS", "united states dollar");
 			unitMap.put("GDP", "united states dollar");
+			//unitMap.put("N_FDI_GOODS_GDP", "united states dollar");
 			
 			unitMap.put("ELEC", "joule");
+			//unitMap.put("N_ELEC", "joule");
 			
 			unitMap.put("CO2", "kilogram");
+			//unitMap.put("N_CO2", "kilogram");
 			
 			//unitMap.put("DIESEL", "united states dollar per litre");
 			
 			unitMap.put("INF", "percent");
 			unitMap.put("INTERNET", "percent");
+			//unitMap.put("N_INF_INTERNET", "percent");
 			
 			unitMap.put("LIFE", "second");
+			//unitMap.put("N_LIFE", "second");
 			
 			unitMap.put("POP", "");
+			//unitMap.put("N_POP", "");
 			
 			relMap = new HashMap<String, String>();
 			relMap.put("AG.LND.TOTL.K2", "AGL");

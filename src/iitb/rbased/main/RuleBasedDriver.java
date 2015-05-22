@@ -44,6 +44,7 @@ import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.util.CoreMap;
+import edu.stanford.nlp.util.Interval;
 import edu.stanford.nlp.util.Triple;
 import eval.UnitExtractor;
 
@@ -109,16 +110,38 @@ public class RuleBasedDriver {
 	 */
 	public static void main(String args[]) throws Exception {
 		RuleBasedDriver rbased = new RuleBasedDriver(true);
-		String fileString = FileUtils.readFileToString(new File("/mnt/a99/d0/aman/numbertrontestset.tsv"));
-		String outFile = "numbertronres1.tsv";
-		rbased.batchExtract(fileString, outFile);
+		String inputFile = "/mnt/a99/d0/aman/test.in";
+		String fileString = FileUtils.readFileToString(new File(inputFile));
+		String outFile = "/mnt/a99/d0/aman/test.out";
+		BufferedReader br = new BufferedReader(new FileReader(inputFile));
+		String sent = null;
+
+		PrintWriter pw = new PrintWriter(outFile);
+
+		while ((sent = br.readLine()) != null) {
+			try {
+				pw.write(sent + "\n");
+				ArrayList<Relation> results = rbased.extract(sent);
+				for (Relation r : results) {
+					pw.write(r + "\n");
+					pw.flush();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		pw.close();
+		br.close();
+		// rbased.batchExtract(fileString, outFile);
 		// System.out.println("here");
 		// String fileString = FileUtils.readFileToString(new File("debug"));
 		// System.out.println(rbased.extract(fileString));
 	}
 
-	public Graph getDepGraph(List<Triple<Integer, String, Integer>> deps, CoreMap sentence) {
-		List<CoreLabel> tokens = sentence.get(CoreAnnotations.TokensAnnotation.class);
+	public Graph getDepGraph(List<Triple<Integer, String, Integer>> deps,
+			CoreMap sentence) {
+		List<CoreLabel> tokens = sentence
+				.get(CoreAnnotations.TokensAnnotation.class);
 		int numTokens = tokens.size();
 		Word wordArr[] = new Word[numTokens + 1];
 		wordArr[0] = new Word(0, "ROOT", 0, 0);
@@ -128,7 +151,8 @@ public class RuleBasedDriver {
 			CoreLabel token = tokens.get(i - 1);
 
 			String tokenStr = tokens.get(i - 1).toString();
-			int begOffset = token.get(CoreAnnotations.TokenBeginAnnotation.class);
+			int begOffset = token
+					.get(CoreAnnotations.TokenBeginAnnotation.class);
 			int endOffset = token.get(CoreAnnotations.TokenEndAnnotation.class);
 			wordArr[i] = new Word(i, tokenStr, begOffset, endOffset);
 
@@ -144,7 +168,8 @@ public class RuleBasedDriver {
 			// Word depWord = new Word(depIdx, tokens.get(depIdx).toString());
 			Word govWord = wordArr[govIdx];
 			Word depWord = wordArr[depIdx];
-			pairList.add(new Pair<String, Pair<Word, Word>>(rel, new Pair<Word, Word>(govWord, depWord)));
+			pairList.add(new Pair<String, Pair<Word, Word>>(rel,
+					new Pair<Word, Word>(govWord, depWord)));
 		}
 		Graph depGraph = Graph.makeDepGraphFromList(pairList, wordArr);
 		return depGraph;
@@ -156,7 +181,8 @@ public class RuleBasedDriver {
 	 * 
 	 * @throws IOException
 	 */
-	public ArrayList<Relation> extractFromMultiRDepString(List<Triple<Integer, String, Integer>> deps, CoreMap sentence)
+	public ArrayList<Relation> extractFromMultiRDepString(
+			List<Triple<Integer, String, Integer>> deps, CoreMap sentence)
 			throws IOException {
 		ArrayList<Relation> res = new ArrayList<Relation>();
 
@@ -182,7 +208,8 @@ public class RuleBasedDriver {
 	 * @return
 	 * @throws IOException
 	 */
-	public ArrayList<Relation> spotPossibleRelations(List<Triple<Integer, String, Integer>> deps, CoreMap sentence)
+	public ArrayList<Relation> spotPossibleRelations(
+			List<Triple<Integer, String, Integer>> deps, CoreMap sentence)
 			throws IOException {
 		ArrayList<Relation> res = new ArrayList<Relation>();
 
@@ -198,12 +225,15 @@ public class RuleBasedDriver {
 
 	}
 
-	ArrayList<Relation> getSpots(Graph depGraph, ArrayList<Pair<Country, Number>> pairs) throws IOException {
+	ArrayList<Relation> getSpots(Graph depGraph,
+			ArrayList<Pair<Country, Number>> pairs) throws IOException {
 
 		ArrayList<Relation> result = new ArrayList<Relation>();
 		for (Pair<Country, Number> pair : pairs) {
-			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(pair.first, pair.second);
-			boolean modified = ExtractFromPath.isModified(depGraph, pair, wordsOnDependencyGraphPath);
+			ArrayList<Word> wordsOnDependencyGraphPath = depGraph
+					.getWordsOnPath(pair.first, pair.second);
+			boolean modified = ExtractFromPath.isModified(depGraph, pair,
+					wordsOnDependencyGraphPath);
 			if (modified) {
 				continue;
 			}
@@ -213,7 +243,8 @@ public class RuleBasedDriver {
 			 */
 			for (int i = 0; i < KeywordData.NUM_RELATIONS; i++) {
 				if (unitRelationMatch(KeywordData.relName.get(i), pair)) {
-					result.add(new Relation(pair.first, pair.second, null, KeywordData.relName.get(i)));
+					result.add(new Relation(pair.first, pair.second, null,
+							KeywordData.relName.get(i)));
 				}
 			}
 
@@ -251,7 +282,8 @@ public class RuleBasedDriver {
 		return null;
 	}
 
-	public ArrayList<Relation> extract(String sentenceString) throws IOException {
+	public ArrayList<Relation> extract(String sentenceString)
+			throws IOException {
 		ArrayList<Relation> res = new ArrayList<Relation>();
 		Annotation doc = new Annotation(sentenceString);
 		pipeline.annotate(doc);
@@ -259,7 +291,7 @@ public class RuleBasedDriver {
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
 		for (CoreMap sentence : sentences) {
 			// Get dependency graph
-
+			System.out.println(sentence);
 			// Step 1 : Get the typed dependencies
 			Tree tree = sentence.get(TreeAnnotation.class);
 
@@ -272,15 +304,13 @@ public class RuleBasedDriver {
 			// gs.typedDependenciesCCprocessed();
 			Iterator<TypedDependency> tdi = td.iterator();
 
-			while (tdi.hasNext()) {
-				System.out.println(tdi.next());
-			}
 			tdi = td.iterator();
 			// // Step 2 : Make a graph out of them
 			Graph depGraph = Graph.makeDepGraph(tdi);
 
 			// Step 3 : Identify all the country number word pairs
-			ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph, sentence);
+			ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph,
+					sentence);
 
 			// Step 4 : Extract the relations that exists in these pairs
 			res.addAll(getExtractions(depGraph, pairs, true));
@@ -288,7 +318,8 @@ public class RuleBasedDriver {
 		return res;
 	}
 
-	public void batchExtract(String fileString, String outFile) throws IOException {
+	public void batchExtract(String fileString, String outFile)
+			throws IOException {
 		Annotation doc = new Annotation(fileString);
 		pipeline.annotate(doc);
 		List<CoreMap> sentences = doc.get(SentencesAnnotation.class);
@@ -314,22 +345,24 @@ public class RuleBasedDriver {
 			Graph depGraph = Graph.makeDepGraph(tdi);
 
 			// Step 3 : Identify all the country number word pairs
-			ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph, sentence);
+			ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph,
+					sentence);
 
 			pw.write("\n---\n");
 			pw.write("sentence " + i++ + "\n");
 			pw.write(sentence + "\n\n");
-			System.out.println("\n------------------------------------------------------");
+			System.out
+					.println("\n------------------------------------------------------");
 			System.out.println("\nSentence ===> " + sentence);
 			// Step 4 : Extract the relations that exists in these pairs
 
 			ArrayList<Relation> res = getExtractions(depGraph, pairs, true);
 			totalExtractions += res.size();
 			System.out.println("Extractions == > " + res);
-			for(Relation r: res) {
+			for (Relation r : res) {
 				pw.write(r + "\n");
 			}
-			
+
 			pw.write("---\n");
 			// /*/System.out.println(getExtractions(depGraph, pairs) + "\n");
 		}
@@ -345,8 +378,12 @@ public class RuleBasedDriver {
 		Unit unit = ue.quantDict.getUnitFromBaseName(arg.second.getUnit());
 		if (unit != null && !unit.getBaseName().equals("")) {
 			Unit SIUnit = unit.getParentQuantity().getCanonicalUnit();
-			if (SIUnit != null && !RelationMetadata.getUnit(rel).equals(SIUnit.getBaseName()) || SIUnit == null
-					&& !RelationMetadata.getUnit(rel).equals(unit.getBaseName())) {
+			if (SIUnit != null
+					&& !RelationMetadata.getUnit(rel).equals(
+							SIUnit.getBaseName())
+					|| SIUnit == null
+					&& !RelationMetadata.getUnit(rel)
+							.equals(unit.getBaseName())) {
 				return false; // Incorrect unit, this cannot be the
 								// relation.
 			}
@@ -368,7 +405,8 @@ public class RuleBasedDriver {
 		return true;
 	}
 
-	ArrayList<Relation> getExtractions(Graph depGraph, ArrayList<Pair<Country, Number>> pairs, boolean augmentPhrases)
+	ArrayList<Relation> getExtractions(Graph depGraph,
+			ArrayList<Pair<Country, Number>> pairs, boolean augmentPhrases)
 			throws IOException {
 		ArrayList<Relation> result = new ArrayList<Relation>();
 		HashMap<Pair<Word, Word>, Relation> alreadyExtractedRelMap = new HashMap<Pair<Word, Word>, Relation>();
@@ -378,9 +416,11 @@ public class RuleBasedDriver {
 			// System.out.println("\nPair == > " + pair);
 			// System.out.println(depGraph.getWordsOnPath(pair.country,
 			// pair.number));
-			ArrayList<Word> wordsOnDependencyGraphPath = depGraph.getWordsOnPath(pair.first, pair.second);
+			ArrayList<Word> wordsOnDependencyGraphPath = depGraph
+					.getWordsOnPath(pair.first, pair.second);
 			// System.out.println("Path == > " + wordsOnDependencyGraphPath);
-			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair, wordsOnDependencyGraphPath, depGraph);
+			ArrayList<Relation> rels = ExtractFromPath.getExtractions(pair,
+					wordsOnDependencyGraphPath, depGraph);
 			for (Relation rel : rels) {
 
 				if (unitsActive) {
@@ -391,7 +431,8 @@ public class RuleBasedDriver {
 				if (augmentPhrases) {
 					rel = augment(depGraph, rel);
 				}
-				Pair<Word, Word> argRelPairKey = new Pair<Word, Word>(rel.getCountry(), rel.getKeyword());
+				Pair<Word, Word> argRelPairKey = new Pair<Word, Word>(
+						rel.getCountry(), rel.getKeyword());
 				if (alreadyExtractedRelMap.containsKey(argRelPairKey)) { // the
 																			// same
 																			// arg1,
@@ -402,10 +443,15 @@ public class RuleBasedDriver {
 																			// already
 																			// been
 																			// extracted?
-					Number prevNumber = alreadyExtractedRelMap.get(argRelPairKey).getNumber();
+					Number prevNumber = alreadyExtractedRelMap.get(
+							argRelPairKey).getNumber();
 					Number currNumber = rel.getNumber();
-					if (depGraph.distance(rel.getCountry(), currNumber) < depGraph.distance(rel.getCountry(),
-							prevNumber)) { // the current number is closer?
+					if (depGraph.distance(rel.getCountry(), currNumber) < depGraph
+							.distance(rel.getCountry(), prevNumber)) { // the
+																		// current
+																		// number
+																		// is
+																		// closer?
 						alreadyExtractedRelMap.put(argRelPairKey, rel);
 					} // else nothing to do, the relation already present in the
 						// map is the one that should be there
@@ -464,9 +510,12 @@ public class RuleBasedDriver {
 		}
 
 		if (hasChaged) { // need to create a new relation
-			Word newCountry = new Word(rel.getCountry().getIdx(), countryValBuffer.toString());
-			Word newRelWord = new Word(rel.getKeyword().getIdx(), relValBuffer.toString());
-			Relation newRel = new Relation(newCountry, rel.getNumber(), newRelWord, rel.getRelName());
+			Word newCountry = new Word(rel.getCountry().getIdx(),
+					countryValBuffer.toString());
+			Word newRelWord = new Word(rel.getKeyword().getIdx(),
+					relValBuffer.toString());
+			Relation newRel = new Relation(newCountry, rel.getNumber(),
+					newRelWord, rel.getRelName());
 			return newRel;
 		}
 		return rel;
@@ -480,7 +529,8 @@ public class RuleBasedDriver {
 		return numberPat.matcher(token.toString()).matches();
 	}
 
-	public ArrayList<Pair<Country, Number>> getPairs(Graph depGraph, String sentenceString) {
+	public ArrayList<Pair<Country, Number>> getPairs(Graph depGraph,
+			String sentenceString) {
 		Annotation doc = new Annotation(sentenceString);
 		pipeline.annotate(doc);
 		// TreebankLanguagePack tlp = new PennTreebankLanguagePack();
@@ -499,7 +549,8 @@ public class RuleBasedDriver {
 	 * @param sentence
 	 * @return
 	 */
-	public ArrayList<Pair<Country, Number>> getPairs(Graph depGraph, CoreMap sentence) {
+	public ArrayList<Pair<Country, Number>> getPairs(Graph depGraph,
+			CoreMap sentence) {
 		ArrayList<Country> countries = new ArrayList<Country>();
 		ArrayList<Number> numbers = new ArrayList<Number>();
 		ArrayList<Pair<Country, Number>> res = new ArrayList<Pair<Country, Number>>();
@@ -513,16 +564,17 @@ public class RuleBasedDriver {
 			// System.out.println(word + " - " + depGraph.getIdx(word) +
 			// depGraph.nodeWordMap.get(depGraph.getIdx(word)));
 			if (isCountry(tokenStr)) {
-				countries.add(new Country(currWord.getIdx(), currWord.getVal(), currWord.getStartOff(), currWord
-						.getEndOff()));
+				countries.add(new Country(currWord.getIdx(), currWord.getVal(),
+						currWord.getStartOff(), currWord.getEndOff()));
 			}
 
 			if (isNumber(tokenStr) && !isYear(tokenStr)) {
 
-				Float num_val = Number.getDoubleValue(Unit.parseDecimalExpressionL(tokenStr)).floatValue();
+				Float num_val = Number.getDoubleValue(
+						Unit.parseDecimalExpressionL(tokenStr)).floatValue();
 
-				Number num = new Number(currWord.getIdx(), currWord.getVal(), currWord.getStartOff(),
-						currWord.getEndOff());
+				Number num = new Number(currWord.getIdx(), currWord.getVal(),
+						currWord.getStartOff(), currWord.getEndOff());
 				num.setFlatVal(num_val);
 				if (unitsActive) {
 					String sentString = sentence.toString();
@@ -539,8 +591,8 @@ public class RuleBasedDriver {
 					}
 					String utString = front + "<b>" + tokenStr + "</b>" + back;
 
-					List<? extends EntryWithScore<Unit>> unitsS = ue.parser.getTopKUnitsValues(utString, "b", 1, 0,
-							values);
+					List<? extends EntryWithScore<Unit>> unitsS = ue.parser
+							.getTopKUnitsValues(utString, "b", 1, 0, values);
 
 					// check for unit here....
 					if (unitsS != null && unitsS.size() > 0) {
@@ -566,24 +618,29 @@ public class RuleBasedDriver {
 						if (unit_parts.length == 1) { // no multiplier
 							b_unit = qu.getUnitFromBaseName(unit_parts[0]);
 						} else {
-							b_unit = qu.getUnitFromBaseName(unit_parts[0].trim());
+							b_unit = qu.getUnitFromBaseName(unit_parts[0]
+									.trim());
 							String mult = unit_parts[1].split("\\]")[0];
 							multiplier = qu.getUnitFromBaseName(mult);
 						}
 
 						// flat the value and store it in num_val
 						if (b_unit != null) {
-							Unit SIUnit = b_unit.getParentQuantity().getCanonicalUnit();
+							Unit SIUnit = b_unit.getParentQuantity()
+									.getCanonicalUnit();
 							if (SIUnit != null) {
 								boolean success[] = new boolean[1];
-								num_val = qu.convert(num_val, b_unit, SIUnit, success);
+								num_val = qu.convert(num_val, b_unit, SIUnit,
+										success);
 							}
 						}
 
-						if (multiplier != null && multiplier.getParentQuantity() != null) {
+						if (multiplier != null
+								&& multiplier.getParentQuantity() != null) {
 							boolean success[] = new boolean[1];
-							num_val = qu.convert(num_val.floatValue(), multiplier, multiplier.getParentQuantity()
-									.getCanonicalUnit(), success);
+							num_val = qu.convert(num_val.floatValue(),
+									multiplier, multiplier.getParentQuantity()
+											.getCanonicalUnit(), success);
 						}
 						num.setFlatVal(num_val);
 					}
@@ -592,16 +649,53 @@ public class RuleBasedDriver {
 			}
 
 		}
-
-		for (int i = 0, lc = countries.size(); i < lc; i++) {
-			for (int j = 0, ln = numbers.size(); j < ln; j++) {
-				res.add(new Pair<Country, Number>(countries.get(i), numbers.get(j)));
+		if (countries.size() == 1) { //okay to cross product if just one country is present
+			for (int i = 0, lc = countries.size(); i < lc; i++) {
+				for (int j = 0, ln = numbers.size(); j < ln; j++) {
+					res.add(new Pair<Country, Number>(countries.get(i), numbers
+							.get(j)));
+				}
+			}
+		} else {
+			for (int i = 0, lc = countries.size(); i < lc; i++) {
+				Number closestNum = null;
+				int closestDist = 100000;
+				Country currCount = countries.get(i);
+				for (int j = 0, ln = numbers.size(); j < ln; j++) {
+					int dist = getDist(currCount, numbers.get(j));
+					if(dist < closestDist) {
+						closestNum = numbers.get(j);
+						closestDist = dist;
+					}
+				}
+				if(closestNum != null) {
+					res.add(new Pair<Country, Number>(countries.get(i), closestNum));
+				}
+				
 			}
 		}
 		cumulativeLen += sentence.toString().length();
 		return res;
 	}
 
+	private int getDist(Country currCount, Number number) {
+		Interval<Integer> countryIntr = Interval.toInterval(currCount.getStartOff(), currCount.getEndOff());
+		Interval<Integer> numItr = Interval.toInterval(number.getStartOff(), number.getEndOff());
+		return findIntervalDistance(countryIntr, numItr);
+	}
+
+	 
+		private int findIntervalDistance(Interval<Integer> intr1,
+				Interval<Integer> intr2) {
+			int order = intr1.compareIntervalOrder(intr2);
+			if (order == -1) { // before
+				return intr2.first() - intr1.second();
+			} else if (order == 1) {
+				return intr1.first() - intr2.second();
+			} else {
+				return -1;
+			}
+		}
 	public void setUnitsActive(boolean unitsActive) {
 		this.unitsActive = unitsActive;
 	}

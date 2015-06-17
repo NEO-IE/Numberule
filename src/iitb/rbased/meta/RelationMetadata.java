@@ -11,6 +11,8 @@ public class RelationMetadata {
 	private static HashMap<String, String> relMap = null;
 	static {
 			unitMap = new HashMap<String, String>();
+			unitMap.put("NA", "xxxxxx");//hopefully will never be found
+			
 			unitMap.put("AGL", "square metre");
 			//unitMap.put("N_AGL", "square metre");
 			

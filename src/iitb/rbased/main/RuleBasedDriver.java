@@ -54,7 +54,7 @@ public class RuleBasedDriver {
 	private StanfordCoreNLP pipeline;
 	private static Pattern numberPat, yearPat;
 	private HashSet<String> countryList;
-
+	
 	private boolean unitsActive;
 	private static final String countriesFileName = "/mnt/a99/d0/ashishm/workspace/depbased/data/countries_list";
 	private UnitExtractor ue = null;
@@ -209,7 +209,7 @@ public class RuleBasedDriver {
 	 * @throws IOException
 	 */
 	public ArrayList<Relation> spotPossibleRelations(
-			List<Triple<Integer, String, Integer>> deps, CoreMap sentence)
+			List<Triple<Integer, String, Integer>> deps, CoreMap sentence, boolean includeNAs, double NAFracs)
 			throws IOException {
 		ArrayList<Relation> res = new ArrayList<Relation>();
 
@@ -219,14 +219,23 @@ public class RuleBasedDriver {
 		ArrayList<Pair<Country, Number>> pairs = getPairs(depGraph, sentence);
 
 		// Step 4 : Extract the relations that exists in these pairs
-		res.addAll(getSpots(depGraph, pairs));
+		res.addAll(getSpots(depGraph, pairs, includeNAs, NAFracs));
 
 		return res;
 
 	}
 
+	/**
+	 * Returns a list of relations spotted by using the Numberule
+	 * @param depGraph
+	 * @param pairs
+	 * @param includeNA whether to include the No attachment class or not
+	 * @param NAFraction the fraction of spots that are no attachments in the instances file
+	 * @return The list of relations
+	 * @throws IOException
+	 */
 	ArrayList<Relation> getSpots(Graph depGraph,
-			ArrayList<Pair<Country, Number>> pairs) throws IOException {
+			ArrayList<Pair<Country, Number>> pairs, boolean includeNA, double NAFraction) throws IOException {
 
 		ArrayList<Relation> result = new ArrayList<Relation>();
 		for (Pair<Country, Number> pair : pairs) {
@@ -235,7 +244,11 @@ public class RuleBasedDriver {
 			boolean modified = ExtractFromPath.isModified(depGraph, pair,
 					wordsOnDependencyGraphPath);
 			if (modified) {
+				
 				continue;
+			}
+			if(includeNA && (Math.random() <= NAFraction)) {
+				result.add(new Relation(pair.first, pair.second, null, "NA"));
 			}
 			/**
 			 * every relation for which the units are compatible is a
